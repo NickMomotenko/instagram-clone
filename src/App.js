@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import { Switch, Route } from "react-router-dom";
+
+import { v4 as uuid } from "uuid";
+
+import styled from "styled-components";
+
+import Login from "./pages/Login/Login";
+import Main from "./pages/Main/Main";
+
+const AppWrapp = styled.div``;
+
+const routes = [
+  {
+    id: uuid(),
+    path: "/",
+    component: <Login />,
+  },
+  {
+    id: uuid(),
+    path: "/main",
+    component: <Main />,
+  },
+];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapp>
+      <Switch>
+        {routes.map((route) => (
+          <Route
+            exact
+            key={route.id}
+            path={route.path}
+            components={route.component}
+          />
+        ))}
+      </Switch>
+      <Main />
+    </AppWrapp>
   );
-}
+};
 
 export default App;
