@@ -8,8 +8,14 @@ import styled from "styled-components";
 
 import Login from "./pages/Login/Login";
 import Main from "./pages/Main/Main";
+import SideBar from "./components/SideBar";
+import Avatar from "./UI/Avatar";
+import Text from "./UI/Text";
+import Button from "./UI/Button";
 
-const AppWrapp = styled.div``;
+const AppWrapp = styled.div`
+  display: flex;
+`;
 
 const routes = [
   {
@@ -27,16 +33,15 @@ const routes = [
 const App = () => {
   return (
     <AppWrapp>
-      <Switch>
+      {/* <Switch>
         {routes.map((route) => (
           <Route
-            exact
             key={route.id}
             path={route.path}
             components={route.component}
           />
         ))}
-      </Switch>
+      </Switch> */}
       <Main />
     </AppWrapp>
   );

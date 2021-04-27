@@ -115,14 +115,14 @@ const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
 
   return (
     <PostWrapp {...rest}>
-      <PostRow center style={{ padding: "0 15px" }}>
-        <Column style={{ marginRight: 10 }}>
-          <Avatar url={avatar} />
-        </Column>
-        <Column>
+      <PostRow style={{ padding: "0 15px" }}>
+        <Block style={{ marginRight: 11 }}>
+          <Avatar as="button" url={avatar} size={40} />
+        </Block>
+        <Block>
           <Text text={fullname} bold />
           <Text text={city} color="#76777E" />
-        </Column>
+        </Block>
         <Button icon={dots} style={{ marginLeft: "auto" }} />
       </PostRow>
       <PostRow>
