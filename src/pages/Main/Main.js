@@ -6,6 +6,8 @@ import styled from "styled-components";
 
 import { useText } from "../../hooks/useText";
 
+import { withData } from "../../context/data";
+
 import SideBar from "../../components/SideBar";
 
 import { Block, Row } from "../../UI/Layout";
@@ -74,23 +76,20 @@ const DefaultButton = styled(Button)`
   font-weight: 600;
 `;
 
-const Main = React.memo(({ data }) => {
-  const stories = [
-    { id: uuid(), title: "Featured", icon: "" },
-    { id: uuid(), title: "Paris", icon: "" },
-    { id: uuid(), title: "Food", icon: "" },
-    { id: uuid(), title: "India", icon: "" },
-  ];
-
-  const text = `Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end.`;
-
+const Main = React.memo((props) => {
   const userText = useText();
+
+  let { posts } = props;
+
+  let {
+    userData: { user, stories },
+  } = props;
 
   return (
     <MainWrapp>
       <Row>
         <MainList>
-          {data?.map((post) => (
+          {posts?.map((post) => (
             <Post as="li" key={post.id} {...post} />
           ))}
         </MainList>
@@ -99,40 +98,43 @@ const Main = React.memo(({ data }) => {
             <Avatar
               size={90}
               as="button"
-              url="https://media-exp1.licdn.com/dms/image/C4E03AQGi0swkMYXGPQ/profile-displayphoto-shrink_800_800/0/1613669311997?e=1625097600&v=beta&t=3sv_UEFRa75vHsd3CGPPnSpHdshFK1R4XqNcv_Bo9uA"
+              url={user?.avatar}
               style={{ marginBottom: 16 }}
             />
             <Text
-              text="nkchaudhary01"
+              text={user?.nickname}
               bold
               style={{ fontSize: 20, marginBottom: 5 }}
             />
-            <Text text="Wildlife Photographer" color="#76777E" />{" "}
+            <Text text={user?.doing} color="#76777E" />
           </Block>
           <DefaultButton text="Edit" />
           <Block style={{ textAlign: "left" }}>
             <Text
-              text="Neelesh Chaudhary"
+              text={user?.fullname}
               bold
               style={{ fontSize: 16, marginBottom: 12 }}
             />
             <TextOpenOrClose
-              text={text}
+              text={user?.description}
               boolFlag={userText.isOpen}
               buttonText={userText.isOpen ? "(Close)" : "(Read More)"}
               buttonTextColor="#76777e"
               buttonClick={() => userText.setIsOpen(!userText.isOpen)}
               buttonPosition="flex-start"
             />
-            <Text
-              text="www.dribbble.com/nkchaudhary01"
-              as="a"
-              target="_blank"
-              href="https://www.linkedin.com/in/nick-momotenko-b3963b189/"
-              color="#338DF7"
-              bold
-              style={{ fontSize: 16 }}
-            />
+            {user?.links.map((link) => (
+              <Text
+                key={link.id}
+                text={link.title}
+                as="a"
+                target="_blank"
+                href={link.link}
+                color="#338DF7"
+                bold
+                style={{ fontSize: 16, display: "inline-block" }}
+              />
+            ))}
           </Block>
           <Block style={{ margin: "45px 0", textAlign: "left" }}>
             <Text
@@ -147,7 +149,7 @@ const Main = React.memo(({ data }) => {
                   as="li"
                   style={{ width: `25%`, textAlign: "center" }}
                 >
-                  <Avatar size={60} noGradient />
+                  <Avatar as="button" size={60} noGradient url={storie.image} />
                   <Text text={storie.title} bold style={{ fontSize: "12px" }} />
                 </Block>
               ))}
@@ -160,26 +162,4 @@ const Main = React.memo(({ data }) => {
   );
 });
 
-export default Main;
-
-const Test = () => {
-  const test =
-    "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end.";
-
-  let userDescText = useText();
-  return (
-    <Block>
-      <Text text={test} color="#4f5160" bold />
-      <Text
-        as="button"
-        text={userDescText.isOpen ? "(Read More)" : "(Close)"}
-        color="#3737d8"
-        bold
-        onClick={(e) => {
-          e.preventDefault();
-          userDescText.setIsOpen(!userDescText.isOpen);
-        }}
-      />
-    </Block>
-  );
-};
+export default withData(Main);
