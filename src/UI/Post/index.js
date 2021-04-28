@@ -4,20 +4,22 @@ import { v4 as uuid } from "uuid";
 
 import styled, { css } from "styled-components";
 
+import { useText } from "../../hooks/useText";
+
 import Avatar from "../Avatar";
 import AvatarMultiRow from "../AvatarMultiRow";
 import Text from "../Text";
 import Button from "../Button";
-
 import { Row, Column, Block } from "../Layout";
 
-import _1 from "../../assets/icons/1.svg";
-import _2 from "../../assets/icons/2.svg";
-import _3 from "../../assets/icons/3.svg";
-import _4 from "../../assets/icons/4.svg";
+import shareIcon from "../../assets/icons/1.svg";
+import saveIcon from "../../assets/icons/2.svg";
+import commentIcon from "../../assets/icons/3.svg";
+import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
 import kavIcon from "../../assets/icons/kav.svg";
+import TextOpenOrClose from "../TextOpenOrClose";
 
 const PostWrapp = styled.div`
   background: #ffffff;
@@ -53,42 +55,13 @@ const PostRow = styled(Row)`
   }
 `;
 
-const PostText = styled(Text)`
-  ${(props) =>
-    props.visible === true &&
-    css`
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `}
-`;
+const PostButton = styled(Button)`
+  margin-right: 9px;
 
-const options = [
-  {
-    id: uuid(),
-    title: "like",
-    onClick: () => {},
-    icon: _4,
-  },
-  {
-    id: uuid(),
-    title: "comment",
-    onClick: () => {},
-    icon: _3,
-  },
-  {
-    id: uuid(),
-    title: "share",
-    onClick: () => {},
-    icon: _1,
-  },
-  {
-    id: uuid(),
-    title: "save",
-    onClick: () => {},
-    icon: _2,
-  },
-];
+  &:last-child {
+    margin-right: 0;
+  }
+`;
 
 const avatars = [
   {
@@ -107,9 +80,12 @@ const avatars = [
 ];
 
 const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
-  const [like, setLike] = useState(true);
+  const [like, setLike] = useState(false);
+  const [comment, setComment] = useState(false);
   const [share, setShare] = useState(false);
-  const [isVisibleText, setIsVisibleText] = useState(true);
+  const [save, setSave] = useState(false);
+
+  const postText = useText();
 
   let count = 100;
 
@@ -130,13 +106,27 @@ const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
       </PostRow>
       <Block style={{ padding: "0 15px" }}>
         <PostRow>
-          {options.map((button, index) => (
-            <Button
-              key={button.id}
-              icon={button.icon}
-              style={{ marginLeft: options.length === ++index && "auto" }}
-            />
-          ))}
+          <PostButton
+            icon={likeIcon}
+            active={like}
+            onClick={() => setLike(!like)}
+          />
+          <PostButton
+            icon={commentIcon}
+            active={comment}
+            onClick={() => setComment(!comment)}
+          />
+          <PostButton
+            icon={shareIcon}
+            active={share}
+            onClick={() => setShare(!share)}
+          />
+          <PostButton
+            icon={saveIcon}
+            active={save}
+            onClick={() => setSave(!save)}
+            style={{ marginLeft: "auto" }}
+          />
         </PostRow>
         <PostRow center btw>
           <Row center>
@@ -149,19 +139,13 @@ const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
           <AvatarMultiRow data={avatars} />
         </PostRow>
         <Block>
-          <PostText text={text} color="#4f5160" bold visible={isVisibleText} />
-          <Row style={{ justifyContent: "flex-end" }}>
-            <Text
-              text={isVisibleText ? "(More)" : "(Close)"}
-              color="#3737d8"
-              bold
-              style={{
-                cursor: "pointer",
-                display: "inline-block",
-              }}
-              onClick={() => setIsVisibleText(!isVisibleText)}
-            />
-          </Row>
+          <TextOpenOrClose
+            text={text}
+            boolFlag={postText.isOpen}
+            buttonText={postText.isOpen ? "(Close)" : "(More)"}
+            buttonTextColor="#3737d8"
+            buttonClick={() => postText.setIsOpen(!postText.isOpen)}
+          />
         </Block>
         <PostRow>
           <Text text={date} color="#76777E" style={{ fontSize: 12 }} />

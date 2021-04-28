@@ -4,6 +4,8 @@ import { v4 as uuid } from "uuid";
 
 import styled from "styled-components";
 
+import { useText } from "../../hooks/useText";
+
 import SideBar from "../../components/SideBar";
 
 import { Block, Row } from "../../UI/Layout";
@@ -11,6 +13,7 @@ import Post from "../../UI/Post";
 import Text from "../../UI/Text";
 import Button from "../../UI/Button";
 import Avatar from "../../UI/Avatar";
+import TextOpenOrClose from "../../UI/TextOpenOrClose";
 
 const MainWrapp = styled.div``;
 
@@ -71,50 +74,17 @@ const DefaultButton = styled(Button)`
   font-weight: 600;
 `;
 
-const Main = () => {
-  const data = [
-    {
-      id: uuid(),
-      fullname: "Vidovik Rouse",
-      city: "Banī Khaddāsh",
-      country: "Tunisia",
-      date: "Wed, 26 January 2021",
-      text:
-        "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
-      avatar:
-        "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
-      photo: "https://kor.ill.in.ua/m/610x385/2445521.jpg",
-    },
-    {
-      id: uuid(),
-      fullname: "Caleb Pontin",
-      city: "Bokong Timur",
-      country: "Indonesia",
-      date: "Wed, 26 January 2021",
-      text:
-        "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
-      avatar: "https://robohash.org/sititaquedolores.png?size=50x50&set=set1",
-      photo: "https://deadbees.net/wp-content/uploads/2016/07/200716_41.jpg",
-    },
-    {
-      id: uuid(),
-      fullname: "Orelia Highnam",
-      city: "Novodvinsk",
-      country: "Russia",
-      date: "Wed, 26 January 2021",
-      text:
-        "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
-      avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
-      photo: "https://gorvesti.ru/files/1/2018/62278-118929-14504-1vebfhf.jpg",
-    },
-  ];
-
+const Main = React.memo(({ data }) => {
   const stories = [
     { id: uuid(), title: "Featured", icon: "" },
     { id: uuid(), title: "Paris", icon: "" },
     { id: uuid(), title: "Food", icon: "" },
     { id: uuid(), title: "India", icon: "" },
   ];
+
+  const text = `Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end.`;
+
+  const userText = useText();
 
   return (
     <MainWrapp>
@@ -124,7 +94,7 @@ const Main = () => {
             <Post as="li" key={post.id} {...post} />
           ))}
         </MainList>
-        <SideBar>
+        <SideBar style={{ textAlign: "center", paddingTop: 120 }}>
           <Block style={{ marginBottom: 12 }}>
             <Avatar
               size={90}
@@ -140,8 +110,20 @@ const Main = () => {
             <Text text="Wildlife Photographer" color="#76777E" />{" "}
           </Block>
           <DefaultButton text="Edit" />
-          <Block>
-            <Text text="Neelesh Chaudhary" bold style={{ fontSize: 16 }} />
+          <Block style={{ textAlign: "left" }}>
+            <Text
+              text="Neelesh Chaudhary"
+              bold
+              style={{ fontSize: 16, marginBottom: 12 }}
+            />
+            <TextOpenOrClose
+              text={text}
+              boolFlag={userText.isOpen}
+              buttonText={userText.isOpen ? "(Close)" : "(Read More)"}
+              buttonTextColor="#76777e"
+              buttonClick={() => userText.setIsOpen(!userText.isOpen)}
+              buttonPosition="flex-start"
+            />
             <Text
               text="www.dribbble.com/nkchaudhary01"
               as="a"
@@ -152,7 +134,7 @@ const Main = () => {
               style={{ fontSize: 16 }}
             />
           </Block>
-          <Block style={{ margin: "45px 0" }}>
+          <Block style={{ margin: "45px 0", textAlign: "left" }}>
             <Text
               text="Your stories"
               bold
@@ -176,6 +158,28 @@ const Main = () => {
       </Row>
     </MainWrapp>
   );
-};
+});
 
 export default Main;
+
+const Test = () => {
+  const test =
+    "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end.";
+
+  let userDescText = useText();
+  return (
+    <Block>
+      <Text text={test} color="#4f5160" bold />
+      <Text
+        as="button"
+        text={userDescText.isOpen ? "(Read More)" : "(Close)"}
+        color="#3737d8"
+        bold
+        onClick={(e) => {
+          e.preventDefault();
+          userDescText.setIsOpen(!userDescText.isOpen);
+        }}
+      />
+    </Block>
+  );
+};

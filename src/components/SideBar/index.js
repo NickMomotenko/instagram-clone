@@ -7,7 +7,7 @@ const SideBarWrapp = styled.div`
 `;
 
 const SideBar = (props) => {
-  return <SideBarWrapp>{props.children}</SideBarWrapp>;
+  return <SideBarWrapp {...props}>{props.children}</SideBarWrapp>;
 };
 
 export default SideBar;
