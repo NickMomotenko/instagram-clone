@@ -2,56 +2,6 @@ import React from "react";
 
 import styled, { css } from "styled-components";
 
-// const AvatarWrapp = styled.div`
-//   display: inline-block;
-//   width: ${(props) => (props.size ? `${props.size}px` : "40px")};
-//   height: ${(props) => (props.size ? `${props.size}px` : "40px")};
-//   border-radius: 50%;
-//   border-image-slice: 20;
-
-//   background-image: ${(props) => `url(${props.url})`};
-//   background-size: cover;
-//   background-position: center;
-
-//   position: relative;
-
-//   &:before {
-//     content: "";
-//     position: absolute;
-//     top: -5px;
-//     right: -5px;
-//     bottom: -5px;
-//     left: -5px;
-//     border-radius: 50%;
-//     background-image: radial-gradient(
-//       circle at 30% 107%,
-//       #fdf497 0%,
-//       #fdf497 5%,
-//       #fd5949 45%,
-//       #d6249f 60%,
-//       #285aeb 90%
-//     );
-//     z-index: -1;
-//     transition: transform 5s ease-in-out;
-//   }
-
-//   &:after {
-//     content: "";
-//     position: absolute;
-//     top: -3px;
-//     right: -3px;
-//     bottom: -3px;
-//     left: -3px;
-//     border-radius: 50%;
-//     background: #fff;
-//     z-index: -1;
-//   }
-
-//   &:hover:before {
-//     transform: rotate(888deg);
-//   }
-// `;
-
 const AvatarWrapp = styled.div`
   display: inline-block;
   width: ${(props) => (props.size ? `${props.size}px` : "40px")};
@@ -96,6 +46,17 @@ const AvatarWrapp = styled.div`
   &:hover:before {
     transform: rotate(888deg);
   }
+
+  ${(props) =>
+    props.noGradient &&
+    css`
+      box-shadow: 0 0 2px #202091;
+
+      &:before,
+      &:after {
+        display: none;
+      }
+    `}
 `;
 
 const AvatarImg = styled.img.attrs(({ url }) => ({

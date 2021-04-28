@@ -149,11 +149,10 @@ const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
           <AvatarMultiRow data={avatars} />
         </PostRow>
         <Block>
-          {/* <PostText visible={isVisibleText}>{text}</PostText> */}
-          <PostText text={text} bold visible={isVisibleText} />
+          <PostText text={text} color="#4f5160" bold visible={isVisibleText} />
           <Row style={{ justifyContent: "flex-end" }}>
             <Text
-              text="(More)"
+              text={isVisibleText ? "(More)" : "(Close)"}
               color="#3737d8"
               bold
               style={{

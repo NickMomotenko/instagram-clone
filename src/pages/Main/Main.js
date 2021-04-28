@@ -15,7 +15,6 @@ import Avatar from "../../UI/Avatar";
 const MainWrapp = styled.div``;
 
 const MainList = styled.ul`
-  /* columns: 3; */
   width: 1000px;
 `;
 
@@ -141,6 +140,18 @@ const Main = () => {
             <Text text="Wildlife Photographer" color="#76777E" />{" "}
           </Block>
           <DefaultButton text="Edit" />
+          <Block>
+            <Text text="Neelesh Chaudhary" bold style={{ fontSize: 16 }} />
+            <Text
+              text="www.dribbble.com/nkchaudhary01"
+              as="a"
+              target="_blank"
+              href="https://www.linkedin.com/in/nick-momotenko-b3963b189/"
+              color="#338DF7"
+              bold
+              style={{ fontSize: 16 }}
+            />
+          </Block>
           <Block style={{ margin: "45px 0" }}>
             <Text
               text="Your stories"
@@ -154,7 +165,7 @@ const Main = () => {
                   as="li"
                   style={{ width: `25%`, textAlign: "center" }}
                 >
-                  <Avatar size={60} />
+                  <Avatar size={60} noGradient />
                   <Text text={storie.title} bold style={{ fontSize: "12px" }} />
                 </Block>
               ))}
