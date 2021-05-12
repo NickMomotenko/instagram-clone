@@ -2,10 +2,27 @@ import React from "react";
 
 import styled from "styled-components";
 
-const LoginWrapp = styled.div``;
+import LogoBanner from "../../components/LogoBanner/LogoBanner";
+
+import loginBg from "../../assets/bg/login-bg.png";
+import LoginForm from "../../components/LoginForm/LoginForm";
+
+const LoginWrapp = styled.div`
+  background: url(${loginBg}) center no-repeat;
+
+  background-size: cover;
+
+  height: 100%;
+  width: 100%;
+`;
 
 const Login = () => {
-  return <LoginWrapp></LoginWrapp>;
+  return (
+    <LoginWrapp>
+      <LogoBanner />
+      <LoginForm />
+    </LoginWrapp>
+  );
 };
 
 export default Login;

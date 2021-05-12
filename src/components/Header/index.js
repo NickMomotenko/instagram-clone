@@ -11,7 +11,6 @@ import { useInput } from "../../hooks/useInput";
 
 import searchIcon from "../../assets/icons/search.svg";
 
-
 const HeaderWrapp = styled.header`
   min-height: 90px;
   background: #ffffff;

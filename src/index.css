@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
-
 @font-face {
   font-family: Avenir;
   src: url("./fonts/AvenirNextCyr-Regular.woff");
@@ -22,25 +21,27 @@
   box-sizing: border-box;
 }
 
-body,
-html {
+body, html {
   height: 100%;
   width: 100%;
   margin: 0;
   font-family: "Avenir", sans-serif;
 }
 
-ul,
-li {
+ul, li {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-button,
-input {
+button, input, textarea {
   outline: none;
   border: 1px solid transparent;
+}
+
+textarea {
+  display: block;
+  resize: none;
 }
 
 button {
@@ -53,7 +54,11 @@ a {
   text-decoration: none;
 }
 
-button #root {
+video {
+  object-fit: cover;
+}
+
+#root {
   height: 100%;
   width: 100%;
 }

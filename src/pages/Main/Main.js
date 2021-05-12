@@ -1,8 +1,8 @@
-import React from "react";
-
-import { v4 as uuid } from "uuid";
+import React, { useState } from "react";
 
 import styled from "styled-components";
+
+import { Link } from "react-router-dom";
 
 import { useText } from "../../hooks/useText";
 
@@ -10,17 +10,30 @@ import { withData } from "../../context/data";
 
 import SideBar from "../../components/SideBar";
 
-import { Block, Row } from "../../UI/Layout";
+import { Block, Paper, Row } from "../../UI/Layout";
 import Post from "../../UI/Post";
 import Text from "../../UI/Text";
 import Button from "../../UI/Button";
 import Avatar from "../../UI/Avatar";
 import TextOpenOrClose from "../../UI/TextOpenOrClose";
+import DefaultButton from "../../UI/DefaultButton";
+import Icon from "../../UI/Icon";
+import Input from "../../UI/Input";
 
-const MainWrapp = styled.div``;
+import { useInput } from "../../hooks/useInput";
+
+import send from "../../assets/icons/send-1.svg";
+import bell from "../../assets/icons/bell.svg";
+import Textarea from "../../UI/Textarea";
+
+const MainWrapp = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 const MainList = styled.ul`
-  width: 1000px;
+  width: 100%;
+  background-color: #fcfcfd;
 `;
 
 const GradientButton = styled(Button)`
@@ -67,16 +80,35 @@ const GradientButton = styled(Button)`
   }
 `;
 
-const DefaultButton = styled(Button)`
-  padding: 7px 27px;
-  background-color: #000000;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
+const ButtonWithLink = styled(Link)``;
+
+const MainPopup = styled(Paper)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 500px;
+
+  padding: 20px;
 `;
 
 const Main = React.memo((props) => {
+  const [notifications, setNotifications] = useState(false);
+  const [createPost, setCreatePost] = useState(false);
+
+  React.useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (notifications) setNotifications(false);
+    });
+
+    return () => {
+      document.removeEventListener("click", (e) => {
+        if (notifications) setNotifications(false);
+      });
+    };
+  });
+
   const userText = useText();
 
   let { posts } = props;
@@ -85,15 +117,43 @@ const Main = React.memo((props) => {
     userData: { user, stories },
   } = props;
 
+  const postData = useInput();
+
   return (
     <MainWrapp>
       <Row>
         <MainList>
           {posts?.map((post) => (
-            <Post as="li" key={post.id} {...post} />
+            <Post as="li" key={post.id} post={post} />
           ))}
         </MainList>
-        <SideBar style={{ textAlign: "center", paddingTop: 120 }}>
+        <SideBar style={{ textAlign: "center" }}>
+          <Row center btw style={{ marginBottom: 60 }}>
+            <Block style={{ position: "relative" }}>
+              <Button
+                icon={bell}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setNotifications(!notifications);
+                }}
+              />
+              {notifications ? (
+                <Paper style={{ position: "absolute" }}>
+                  <Text
+                    text="No notifications ..."
+                    style={{ whiteSpace: "nowrap" }}
+                  />
+                </Paper>
+              ) : (
+                <></>
+              )}
+            </Block>
+            <Block>
+              <ButtonWithLink to="/direct">
+                <Icon url={send} />
+              </ButtonWithLink>
+            </Block>
+          </Row>
           <Block style={{ marginBottom: 12 }}>
             <Avatar
               size={90}
@@ -155,9 +215,60 @@ const Main = React.memo((props) => {
               ))}
             </Row>
           </Block>
-          <GradientButton text="Create post" />
+          <GradientButton text="Create post" onClick={() => setCreatePost(true)} />
         </SideBar>
       </Row>
+
+      {createPost ? (
+        <MainPopup style={{ zIndex: 10 }}>
+          <Row style={{ padding: "0 15px" }} center>
+            <Block style={{ marginRight: 11 }}>
+              <Avatar as="button" url={user.avatar} size={40} />
+            </Block>
+            <Block>
+              <Text text={user.fullname} bold />
+            </Block>
+          </Row>
+          <Block>
+            <Textarea
+              value={postData.value}
+              onChange={postData.onChange}
+              placeholder="post text"
+              style={{ marginTop: 20 }}
+            />
+            <Row
+              as="button"
+              style={{
+                height: 50,
+                width: "100%",
+                background: "#e3eefb",
+                justifyContent: "center",
+                marginTop: 25,
+              }}
+              center
+            >
+              <Text text="Add image or video" color="#673b3b" />
+            </Row>
+            <Row style={{ marginTop: 20 }}>
+              <DefaultButton
+                text="Create"
+                fullWidth
+                bgColor="#0095f6"
+                style={{ marginRight: 20 }}
+                onClick={() => setCreatePost(true)}
+              />
+              <DefaultButton
+                text="Cancel"
+                fullWidth
+                bgColor="#58a0cf"
+                onClick={() => setCreatePost(false)}
+              />
+            </Row>
+          </Block>
+        </MainPopup>
+      ) : (
+        <></>
+      )}
     </MainWrapp>
   );
 });

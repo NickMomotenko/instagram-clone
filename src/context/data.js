@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 const posts = [
   {
     id: uuid(),
+    postType: "text",
     fullname: "Vidovik Rouse",
     city: "Banī Khaddāsh",
     country: "Tunisia",
@@ -17,6 +18,7 @@ const posts = [
   },
   {
     id: uuid(),
+    postType: "text",
     fullname: "Caleb Pontin",
     city: "Bokong Timur",
     country: "Indonesia",
@@ -28,6 +30,7 @@ const posts = [
   },
   {
     id: uuid(),
+    postType: "text",
     fullname: "Orelia Highnam",
     city: "Novodvinsk",
     country: "Russia",
@@ -36,6 +39,18 @@ const posts = [
       "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
     photo: "https://gorvesti.ru/files/1/2018/62278-118929-14504-1vebfhf.jpg",
+  },
+  {
+    id: uuid(),
+    postType: "video",
+    videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    fullname: "Orelia Highnam",
+    city: "Novodvinsk",
+    country: "Russia",
+    date: "Wed, 26 January 2021",
+    text:
+      "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+    avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
   },
 ];
 

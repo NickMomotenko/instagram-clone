@@ -18,20 +18,21 @@ const InputWrapp = styled.div`
 `;
 
 const InputChanger = styled.input`
-  font-size: 20px;
+  font-size: 15px;
   color: #afc1d9;
   background-color: transparent;
 
   &::placeholder {
-    font-size: 20px;
+    font-size: 15px;
     line-height: 20px;
+    font-weight:400;
     color: #afc1d9;
   }
 `;
 
-const Input = ({ value, onChange, onFocus, placeholder, icon }) => {
+const Input = ({ value, onChange, onFocus, placeholder, icon , ...props }) => {
   return (
-    <InputWrapp>
+    <InputWrapp {...props}>
       {icon && <Icon url={icon} style={{ marginRight: 10 }} />}
       <InputChanger
         value={value}

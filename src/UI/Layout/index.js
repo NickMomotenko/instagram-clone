@@ -13,11 +13,9 @@ const RowWrapp = styled.div`
 
 const PaperWrapp = styled.div`
   background: #ffffff;
-  box-shadow: 0px 0px 42px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 5px #7979de;
+  padding: 10px;
   border-radius: 12px;
-
-  height: 100%;
-  width: 100%;
 `;
 
 const BlockWrapp = styled.div``;

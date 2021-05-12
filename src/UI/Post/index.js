@@ -20,6 +20,7 @@ import likeIcon from "../../assets/icons/4.svg";
 import dots from "../../assets/icons/dots.svg";
 import kavIcon from "../../assets/icons/kav.svg";
 import TextOpenOrClose from "../TextOpenOrClose";
+import Video from "../Video";
 
 const PostWrapp = styled.div`
   background: #ffffff;
@@ -79,18 +80,20 @@ const avatars = [
   },
 ];
 
-const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
+const Post = ({ post, ...props }) => {
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState(false);
   const [share, setShare] = useState(false);
   const [save, setSave] = useState(false);
+
+  let { avatar, fullname, city, text, photo, date, ...rest } = post;
 
   const postText = useText();
 
   let count = 100;
 
   return (
-    <PostWrapp {...rest}>
+    <PostWrapp {...props}>
       <PostRow style={{ padding: "0 15px" }}>
         <Block style={{ marginRight: 11 }}>
           <Avatar as="button" url={avatar} size={40} />
@@ -102,7 +105,11 @@ const Post = ({ avatar, fullname, city, text, photo, date, ...rest }) => {
         <Button icon={dots} style={{ marginLeft: "auto" }} />
       </PostRow>
       <PostRow>
-        <PostImage url={photo} />
+        {post.postType === "video" ? (
+          <Video url={post.videoUrl} />
+        ) : (
+          <PostImage url={photo} />
+        )}
       </PostRow>
       <Block style={{ padding: "0 15px" }}>
         <PostRow>

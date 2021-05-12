@@ -12,9 +12,9 @@ const LogoIcon = styled.img.attrs(({ url }) => ({
   src: url,
 }))``;
 
-const Logo = () => {
+const Logo = (props) => {
   return (
-    <LogorWrapp href="#">
+    <LogorWrapp href="#" {...props}>
       <LogoIcon url={logoIcon} />
     </LogorWrapp>
   );
