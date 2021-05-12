@@ -119,6 +119,13 @@ const StoriesNoActive = styled(Block)`
   text-align: center;
 `;
 
+const StoriesMain = styled.img.attrs(({ url }) => ({
+  src: url,
+}))`
+  flex: 1;
+  margin-top: 10px;
+`;
+
 const data = [
   {
     id: 1,
@@ -126,15 +133,34 @@ const data = [
     stories: [
       {
         id: 1,
-        duration: 4,
+        duration: 2,
+        data: "https://images.unsplash.com/photo-1533561797500-4fad4750814e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
       },
       {
         id: 2,
-        duration: 10,
+        duration: 2,
+        data: "https://images.unsplash.com/photo-1610023050964-dead08b285a2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
       },
       {
         id: 3,
         duration: 2,
+        data: "https://images.unsplash.com/photo-1582554234327-81cf83c36141?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "",
+    stories: [
+      {
+        id: 1,
+        duration: 2,
+        data: "https://images.unsplash.com/photo-1533561797500-4fad4750814e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80",
+      },
+      {
+        id: 2,
+        duration: 2,
+        data: "https://images.unsplash.com/photo-1610023050964-dead08b285a2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
       },
     ],
   },
@@ -144,6 +170,7 @@ const Stories = () => {
   const [active, setActive] = useState(data[0]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeStorie, setActiveStorie] = useState(null);
+  const [duration, setDuration] = useState(null);
 
   React.useEffect(() => {
     setActiveStorie(
@@ -152,16 +179,33 @@ const Stories = () => {
   }, [activeIndex]);
 
   React.useEffect(() => {
-    setTimeout(
-      () => setActiveIndex((prev) => prev + 1),
-      activeStorie?.duration * 1000
-    );
-  });
+    setDuration(activeStorie?.duration);
+  }, [activeStorie]);
 
   let storiesInput = useInput();
 
   const changeActive = (item) => {
     setActive(item);
+  };
+
+  const goNext = () => {
+    let length = active?.stories.length;
+
+    if (activeIndex === --length) {
+      setActiveIndex(activeIndex);
+    } else {
+      setActiveIndex((prev) => prev + 1);
+    }
+  };
+
+  const goPrev = () => {
+    if (activeIndex === 0) {
+      setActiveIndex(-1);
+
+      setTimeout(() => setActiveIndex(0), 0);
+    } else {
+      setActiveIndex((prev) => prev - 1);
+    }
   };
 
   return (
@@ -174,7 +218,13 @@ const Stories = () => {
             onClick={() => changeActive(item)}
           >
             {item.id === active.id ? (
-              <Block>
+              <Block
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
                 <StoriesItemHeader>
                   <Row>
                     {active?.stories.map((storie, index) => {
@@ -207,6 +257,7 @@ const Stories = () => {
                     </Row>
                   </Row>
                 </StoriesItemHeader>
+                <StoriesMain url={activeStorie?.data} />
                 <StoriesBottomBar>
                   <Textarea
                     value={storiesInput.value}
@@ -223,12 +274,12 @@ const Stories = () => {
                       transform: "rotate(180deg)",
                       top: -3,
                     }}
-                    onClick={() => setActiveIndex(activeIndex - 1)}
+                    onClick={() => goPrev()}
                   />
                   <StoriesButtonControl
                     icon={next}
                     style={{ left: "auto", right: -30 }}
-                    onClick={() => setActiveIndex(activeIndex + 1)}
+                    onClick={() => goNext()}
                   />
                 </StoriesControls>
               </Block>

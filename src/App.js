@@ -3,7 +3,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import styled from "styled-components";
-// import Stories from "react-insta-stories";
 
 import { withData } from "./context/data";
 
@@ -13,7 +12,6 @@ import Stories from "./pages/Stories";
 
 import Direct from "./components/Direct";
 import Header from "./components/Header";
-import { Block } from "./UI/Layout";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -22,17 +20,6 @@ const AppWrapp = styled.div`
 
 const App = (props) => {
   const { posts } = props;
-  const stories = [
-    {
-      duration: 5000,
-      content: (props) => (
-        <div style={{ background: "pink", padding: 20 }}>
-          <h1 style={{ marginTop: "100%", marginBottom: 0 }}>🌝</h1>
-          <h1 style={{ marginTop: 5 }}>A custom title can go here.</h1>
-        </div>
-      ),
-    },
-  ];
 
   return (
     <AppWrapp>
