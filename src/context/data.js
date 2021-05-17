@@ -10,11 +10,14 @@ const posts = [
     city: "Banī Khaddāsh",
     country: "Tunisia",
     date: "Wed, 26 January 2021",
-    text:
-      "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+    text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar:
       "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
-    photo: "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+    photo: [
+      "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+      "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+      "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+    ],
   },
   {
     id: uuid(),
@@ -23,10 +26,9 @@ const posts = [
     city: "Bokong Timur",
     country: "Indonesia",
     date: "Wed, 26 January 2021",
-    text:
-      "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+    text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/sititaquedolores.png?size=50x50&set=set1",
-    photo: "https://deadbees.net/wp-content/uploads/2016/07/200716_41.jpg",
+    photo: ["https://deadbees.net/wp-content/uploads/2016/07/200716_41.jpg"],
   },
   {
     id: uuid(),
@@ -35,21 +37,20 @@ const posts = [
     city: "Novodvinsk",
     country: "Russia",
     date: "Wed, 26 January 2021",
-    text:
-      "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+    text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
-    photo: "https://gorvesti.ru/files/1/2018/62278-118929-14504-1vebfhf.jpg",
+    photo: ["https://gorvesti.ru/files/1/2018/62278-118929-14504-1vebfhf.jpg"],
   },
   {
     id: uuid(),
     postType: "video",
-    videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    videoUrl:
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     fullname: "Orelia Highnam",
     city: "Novodvinsk",
     country: "Russia",
     date: "Wed, 26 January 2021",
-    text:
-      "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+    text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
   },
 ];
@@ -77,8 +78,7 @@ export const DataProvider = ({ children }) => {
     posts: [
       {
         id: uuid(),
-        text:
-          "If you've ever seen text-only images on other people's Instagram stories or or posts, you may have wondered exactly how they made those. Are those images made by a third-party app? Or are they something you can do within Instagram?",
+        text: "If you've ever seen text-only images on other people's Instagram stories or or posts, you may have wondered exactly how they made those. Are those images made by a third-party app? Or are they something you can do within Instagram?",
         comments: [
           {
             id: uuid(),
@@ -88,8 +88,7 @@ export const DataProvider = ({ children }) => {
       },
       {
         id: uuid(),
-        text:
-          "Do greatest at in learning steepest. Breakfast extremity suffering one who all otherwise suspected. He at no nothing forbade up moments. Wholly uneasy at missed be of pretty whence. John way sir high than law who week. Surrounded prosperous introduced it if is up dispatched. Improved so strictly produced answered elegance is. ",
+        text: "Do greatest at in learning steepest. Breakfast extremity suffering one who all otherwise suspected. He at no nothing forbade up moments. Wholly uneasy at missed be of pretty whence. John way sir high than law who week. Surrounded prosperous introduced it if is up dispatched. Improved so strictly produced answered elegance is. ",
         comments: [
           {
             id: uuid(),

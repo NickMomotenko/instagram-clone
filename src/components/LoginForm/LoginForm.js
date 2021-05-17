@@ -45,6 +45,8 @@ const LoginForm = (props) => {
   let email = useInput();
   let password = useInput();
 
+  const { login } = props;
+
   return (
     <LoginFormWrapp {...props}>
       <Block style={{ textAlign: "center" }}>
@@ -67,6 +69,7 @@ const LoginForm = (props) => {
         fullWidth
         bgColor="#0095f6"
         style={{ marginTop: 25 }}
+        onClick={() => login("test", 1444114)}
       />
       <Row center style={{ marginTop: 20 }}>
         <Div />

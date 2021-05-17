@@ -24,9 +24,13 @@ export const Column = ({ children, ...props }) => {
   return <ColumnWrapp {...props}>{children}</ColumnWrapp>;
 };
 
-export const Row = ({ children, ...props }) => {
-  return <RowWrapp {...props}>{children}</RowWrapp>;
-};
+export const Row = React.forwardRef((props, ref) => {
+  return (
+    <RowWrapp ref={ref} {...props}>
+      {props.children}
+    </RowWrapp>
+  );
+});
 
 export const Block = ({ children, ...props }) => {
   return <BlockWrapp {...props}>{children}</BlockWrapp>;

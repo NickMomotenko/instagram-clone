@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-import { v4 as uuid } from "uuid";
-
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { useText } from "../../hooks/useText";
 
@@ -10,7 +8,11 @@ import Avatar from "../Avatar";
 import AvatarMultiRow from "../AvatarMultiRow";
 import Text from "../Text";
 import Button from "../Button";
-import { Row, Column, Block } from "../Layout";
+import { Row, Block } from "../Layout";
+import Video from "../Video";
+import TextOpenOrClose from "../TextOpenOrClose";
+
+import CustomSlider from "../../components/CustomSlider";
 
 import shareIcon from "../../assets/icons/1.svg";
 import saveIcon from "../../assets/icons/2.svg";
@@ -18,9 +20,6 @@ import commentIcon from "../../assets/icons/3.svg";
 import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
-import kavIcon from "../../assets/icons/kav.svg";
-import TextOpenOrClose from "../TextOpenOrClose";
-import Video from "../Video";
 
 const PostWrapp = styled.div`
   background: #ffffff;
@@ -107,8 +106,10 @@ const Post = ({ post, ...props }) => {
       <PostRow>
         {post.postType === "video" ? (
           <Video url={post.videoUrl} />
+        ) : photo.length > 1 ? (
+          <CustomSlider slides={photo} />
         ) : (
-          <PostImage url={photo} />
+          <PostImage url={photo[0]} />
         )}
       </PostRow>
       <Block style={{ padding: "0 15px" }}>

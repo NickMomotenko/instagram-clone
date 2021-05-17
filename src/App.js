@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 
 import styled from "styled-components";
 
+import { useSwipeable } from "react-swipeable";
+
 import { withData } from "./context/data";
 
 import Login from "./pages/Login/Login";
@@ -24,6 +26,7 @@ const App = (props) => {
   return (
     <AppWrapp>
       {/* <Header /> */}
+
       <Switch>
         <Route exact path="/stories">
           <Stories />

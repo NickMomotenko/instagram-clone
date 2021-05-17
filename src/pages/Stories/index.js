@@ -138,12 +138,12 @@ const data = [
       },
       {
         id: 2,
-        duration: 2,
+        duration: 3,
         data: "https://images.unsplash.com/photo-1610023050964-dead08b285a2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
       },
       {
         id: 3,
-        duration: 2,
+        duration: 4,
         data: "https://images.unsplash.com/photo-1582554234327-81cf83c36141?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",
       },
     ],
@@ -173,14 +173,28 @@ const Stories = () => {
   const [duration, setDuration] = useState(null);
 
   React.useEffect(() => {
+    if (activeIndex === active.stories.length) {
+      setActive(data[1]);
+      setActiveIndex(0);
+    }
     setActiveStorie(
-      active?.stories.find((item, index) => index === activeIndex)
+      active?.stories.find((item, index) => {
+        if (index === activeIndex) {
+          setDuration(item?.duration);
+
+          return item;
+        }
+      })
     );
   }, [activeIndex]);
 
   React.useEffect(() => {
-    setDuration(activeStorie?.duration);
-  }, [activeStorie]);
+    if (duration) {
+      setTimeout(() => {
+        setActiveIndex(activeIndex + 1);
+      }, duration * 1000);
+    }
+  }, [duration]);
 
   let storiesInput = useInput();
 

@@ -9,6 +9,7 @@ import { useText } from "../../hooks/useText";
 import { withData } from "../../context/data";
 
 import SideBar from "../../components/SideBar";
+import Container from "../../components/Container";
 
 import { Block, Paper, Row } from "../../UI/Layout";
 import Post from "../../UI/Post";
@@ -19,12 +20,12 @@ import TextOpenOrClose from "../../UI/TextOpenOrClose";
 import DefaultButton from "../../UI/DefaultButton";
 import Icon from "../../UI/Icon";
 import Input from "../../UI/Input";
+import Textarea from "../../UI/Textarea";
 
 import { useInput } from "../../hooks/useInput";
 
 import send from "../../assets/icons/send-1.svg";
 import bell from "../../assets/icons/bell.svg";
-import Textarea from "../../UI/Textarea";
 
 const MainWrapp = styled.div`
   height: 100%;
@@ -121,154 +122,167 @@ const Main = React.memo((props) => {
 
   return (
     <MainWrapp>
-      <Row>
-        <MainList>
-          {posts?.map((post) => (
-            <Post as="li" key={post.id} post={post} />
-          ))}
-        </MainList>
-        <SideBar style={{ textAlign: "center" }}>
-          <Row center btw style={{ marginBottom: 60 }}>
-            <Block style={{ position: "relative" }}>
-              <Button
-                icon={bell}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setNotifications(!notifications);
-                }}
-              />
-              {notifications ? (
-                <Paper style={{ position: "absolute" }}>
-                  <Text
-                    text="No notifications ..."
-                    style={{ whiteSpace: "nowrap" }}
-                  />
-                </Paper>
-              ) : (
-                <></>
-              )}
-            </Block>
-            <Block>
-              <ButtonWithLink to="/direct">
-                <Icon url={send} />
-              </ButtonWithLink>
-            </Block>
-          </Row>
-          <Block style={{ marginBottom: 12 }}>
-            <Avatar
-              size={90}
-              as="button"
-              url={user?.avatar}
-              style={{ marginBottom: 16 }}
-            />
-            <Text
-              text={user?.nickname}
-              bold
-              style={{ fontSize: 20, marginBottom: 5 }}
-            />
-            <Text text={user?.doing} color="#76777E" />
-          </Block>
-          <DefaultButton text="Edit" />
-          <Block style={{ textAlign: "left" }}>
-            <Text
-              text={user?.fullname}
-              bold
-              style={{ fontSize: 16, marginBottom: 12 }}
-            />
-            <TextOpenOrClose
-              text={user?.description}
-              boolFlag={userText.isOpen}
-              buttonText={userText.isOpen ? "(Close)" : "(Read More)"}
-              buttonTextColor="#76777e"
-              buttonClick={() => userText.setIsOpen(!userText.isOpen)}
-              buttonPosition="flex-start"
-            />
-            {user?.links.map((link) => (
-              <Text
-                key={link.id}
-                text={link.title}
-                as="a"
-                target="_blank"
-                href={link.link}
-                color="#338DF7"
-                bold
-                style={{ fontSize: 16, display: "inline-block" }}
-              />
+      <Container>
+        <Row>
+          <MainList>
+            {posts?.map((post) => (
+              <Post as="li" key={post.id} post={post} />
             ))}
-          </Block>
-          <Block style={{ margin: "45px 0", textAlign: "left" }}>
-            <Text
-              text="Your stories"
-              bold
-              style={{ fontSize: "16px", marginBottom: 25 }}
-            />
-            <Row as="ul">
-              {stories?.map((storie) => (
-                <Block
-                  key={storie.id}
-                  as="li"
-                  style={{ width: `25%`, textAlign: "center" }}
-                >
-                  <Avatar as="button" size={60} noGradient url={storie.image} />
-                  <Text text={storie.title} bold style={{ fontSize: "12px" }} />
-                </Block>
+          </MainList>
+          <SideBar style={{ textAlign: "center" }}>
+            <Row center btw style={{ marginBottom: 60 }}>
+              <Block style={{ position: "relative" }}>
+                <Button
+                  icon={bell}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setNotifications(!notifications);
+                  }}
+                />
+                {notifications ? (
+                  <Paper style={{ position: "absolute" }}>
+                    <Text
+                      text="No notifications ..."
+                      style={{ whiteSpace: "nowrap" }}
+                    />
+                  </Paper>
+                ) : (
+                  <></>
+                )}
+              </Block>
+              <Block>
+                <ButtonWithLink to="/direct">
+                  <Icon url={send} />
+                </ButtonWithLink>
+              </Block>
+            </Row>
+            <Block style={{ marginBottom: 12 }}>
+              <Avatar
+                size={90}
+                as="button"
+                url={user?.avatar}
+                style={{ marginBottom: 16 }}
+              />
+              <Text
+                text={user?.nickname}
+                bold
+                style={{ fontSize: 20, marginBottom: 5 }}
+              />
+              <Text text={user?.doing} color="#76777E" />
+            </Block>
+            <DefaultButton text="Edit" />
+            <Block style={{ textAlign: "left" }}>
+              <Text
+                text={user?.fullname}
+                bold
+                style={{ fontSize: 16, marginBottom: 12 }}
+              />
+              <TextOpenOrClose
+                text={user?.description}
+                boolFlag={userText.isOpen}
+                buttonText={userText.isOpen ? "(Close)" : "(Read More)"}
+                buttonTextColor="#76777e"
+                buttonClick={() => userText.setIsOpen(!userText.isOpen)}
+                buttonPosition="flex-start"
+              />
+              {user?.links.map((link) => (
+                <Text
+                  key={link.id}
+                  text={link.title}
+                  as="a"
+                  target="_blank"
+                  href={link.link}
+                  color="#338DF7"
+                  bold
+                  style={{ fontSize: 16, display: "inline-block" }}
+                />
               ))}
-            </Row>
-          </Block>
-          <GradientButton text="Create post" onClick={() => setCreatePost(true)} />
-        </SideBar>
-      </Row>
-
-      {createPost ? (
-        <MainPopup style={{ zIndex: 10 }}>
-          <Row style={{ padding: "0 15px" }} center>
-            <Block style={{ marginRight: 11 }}>
-              <Avatar as="button" url={user.avatar} size={40} />
             </Block>
-            <Block>
-              <Text text={user.fullname} bold />
+            <Block style={{ margin: "45px 0", textAlign: "left" }}>
+              <Text
+                text="Your stories"
+                bold
+                style={{ fontSize: "16px", marginBottom: 25 }}
+              />
+              <Row as="ul">
+                {stories?.map((storie) => (
+                  <Block
+                    key={storie.id}
+                    as="li"
+                    style={{ width: `25%`, textAlign: "center" }}
+                  >
+                    <Avatar
+                      as="button"
+                      size={60}
+                      noGradient
+                      url={storie.image}
+                    />
+                    <Text
+                      text={storie.title}
+                      bold
+                      style={{ fontSize: "12px" }}
+                    />
+                  </Block>
+                ))}
+              </Row>
             </Block>
-          </Row>
-          <Block>
-            <Textarea
-              value={postData.value}
-              onChange={postData.onChange}
-              placeholder="post text"
-              style={{ marginTop: 20 }}
+            <GradientButton
+              text="Create post"
+              onClick={() => setCreatePost(true)}
             />
-            <Row
-              as="button"
-              style={{
-                height: 50,
-                width: "100%",
-                background: "#e3eefb",
-                justifyContent: "center",
-                marginTop: 25,
-              }}
-              center
-            >
-              <Text text="Add image or video" color="#673b3b" />
+          </SideBar>
+        </Row>
+        {createPost ? (
+          <MainPopup style={{ zIndex: 10 }}>
+            <Row style={{ padding: "0 15px" }} center>
+              <Block style={{ marginRight: 11 }}>
+                <Avatar as="button" url={user.avatar} size={40} />
+              </Block>
+              <Block>
+                <Text text={user.fullname} bold />
+              </Block>
             </Row>
-            <Row style={{ marginTop: 20 }}>
-              <DefaultButton
-                text="Create"
-                fullWidth
-                bgColor="#0095f6"
-                style={{ marginRight: 20 }}
-                onClick={() => setCreatePost(true)}
+            <Block>
+              <Textarea
+                value={postData.value}
+                onChange={postData.onChange}
+                placeholder="post text"
+                style={{ marginTop: 20 }}
               />
-              <DefaultButton
-                text="Cancel"
-                fullWidth
-                bgColor="#58a0cf"
-                onClick={() => setCreatePost(false)}
-              />
-            </Row>
-          </Block>
-        </MainPopup>
-      ) : (
-        <></>
-      )}
+              <Row
+                as="button"
+                style={{
+                  height: 50,
+                  width: "100%",
+                  background: "#e3eefb",
+                  justifyContent: "center",
+                  marginTop: 25,
+                }}
+                center
+              >
+                <Text text="Add image or video" color="#673b3b" />
+              </Row>
+              <Row style={{ marginTop: 20 }}>
+                <DefaultButton
+                  text="Create"
+                  fullWidth
+                  bgColor="#0095f6"
+                  style={{ marginRight: 20 }}
+                  onClick={() => setCreatePost(true)}
+                />
+                <DefaultButton
+                  text="Cancel"
+                  fullWidth
+                  bgColor="#58a0cf"
+                  onClick={() => setCreatePost(false)}
+                />
+              </Row>
+            </Block>
+          </MainPopup>
+        ) : (
+          <></>
+        )}
+      </Container>
     </MainWrapp>
   );
 });
