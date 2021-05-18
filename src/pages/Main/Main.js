@@ -112,7 +112,7 @@ const Main = React.memo((props) => {
 
   const userText = useText();
 
-  let { posts } = props;
+  let { posts, postAction } = props;
 
   let {
     userData: { user, stories },
@@ -126,7 +126,7 @@ const Main = React.memo((props) => {
         <Row>
           <MainList>
             {posts?.map((post) => (
-              <Post as="li" key={post.id} post={post} />
+              <Post as="li" key={post.id} post={post} postAction={postAction} />
             ))}
           </MainList>
           <SideBar style={{ textAlign: "center" }}>

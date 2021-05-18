@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
@@ -20,10 +20,16 @@ const LoginWrapp = styled.div`
 const Login = () => {
   const { login } = useAuth();
 
+  const [forgotPassword, setForgotPassword] = useState(false);
+
   return (
     <LoginWrapp>
       <LogoBanner />
-      <LoginForm login={login} />
+      <LoginForm
+        login={login}
+        forgotPassword={forgotPassword}
+        setForgotPassword={setForgotPassword}
+      />
     </LoginWrapp>
   );
 };

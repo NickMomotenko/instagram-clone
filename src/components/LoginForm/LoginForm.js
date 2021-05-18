@@ -32,6 +32,7 @@ const LoginTextWithLine = styled(Text)`
 
 const LoginRow = styled(Row)`
   justify-content: center;
+  margin-top: 18px;
 `;
 
 const Div = styled.div`
@@ -44,44 +45,89 @@ const Div = styled.div`
 const LoginForm = (props) => {
   let email = useInput();
   let password = useInput();
+  let forgotPasswordInput = useInput();
 
-  const { login } = props;
+  const { login, forgotPassword, setForgotPassword } = props;
 
   return (
     <LoginFormWrapp {...props}>
-      <Block style={{ textAlign: "center" }}>
-        <Logo style={{ marginBottom: 20 }} />
-      </Block>
-
-      <Input
-        value={email.value}
-        onChange={email.onChange}
-        placeholder="username"
-        style={{ marginBottom: 20 }}
-      />
-      <Input
-        value={password.value}
-        onChange={password.onChange}
-        placeholder="password"
-      />
-      <DefaultButton
-        text="Login"
-        fullWidth
-        bgColor="#0095f6"
-        style={{ marginTop: 25 }}
-        onClick={() => login("test", 1444114)}
-      />
-      <Row center style={{ marginTop: 20 }}>
-        <Div />
-        <LoginTextWithLine text="or" bold color="#917777" />
-        <Div />
-      </Row>
-      <LoginRow style={{ marginTop: 18 }}>
-        <Text as="button" text="Log in with Facebook" color="#385185" />
-      </LoginRow>
-      <LoginRow style={{ marginTop: 18 }}>
-        <Text as="a" href="#" text="Forgot password?" color="#00376b" />
-      </LoginRow>
+      {forgotPassword ? (
+        <Block style={{ textAlign: "center" }}>
+          <Text
+            text="Trouble Logging In?"
+            bold
+            center
+            style={{ fontSize: 17, marginBottom: 15 }}
+          />
+          <Text
+            text="Enter your email, phone, or username and we'll send you a link to get back into your account."
+            style={{ marginBottom: 15 }}
+          />
+          <Input
+            value={forgotPasswordInput.value}
+            onChange={forgotPasswordInput.onChange}
+            placeholder="Email , phone or username"
+          />
+          <DefaultButton
+            text="Send Login Link"
+            fullWidth
+            bgColor="#0095f6"
+            style={{ marginTop: 25 }}
+            onClick={() => login("test", 1444114)}
+          />
+          <Row center style={{ marginTop: 20 }}>
+            <Div />
+            <LoginTextWithLine text="or" bold color="#917777" />
+            <Div />
+          </Row>
+          <LoginRow>
+            <Text as="button" text="Create New Account" color="#385185" />
+          </LoginRow>
+          <LoginRow>
+            <Text as="button" text="Back to Login" color="#385185" />
+          </LoginRow>
+        </Block>
+      ) : (
+        <>
+          <Block style={{ textAlign: "center" }}>
+            <Logo style={{ marginBottom: 20 }} />
+          </Block>
+          <Input
+            value={email.value}
+            onChange={email.onChange}
+            placeholder="username"
+            style={{ marginBottom: 20 }}
+          />
+          <Input
+            value={password.value}
+            onChange={password.onChange}
+            placeholder="password"
+          />
+          <DefaultButton
+            text="Login"
+            fullWidth
+            bgColor="#0095f6"
+            style={{ marginTop: 25 }}
+            onClick={() => login("test", 1444114)}
+          />
+          <Row center style={{ marginTop: 20 }}>
+            <Div />
+            <LoginTextWithLine text="or" bold color="#917777" />
+            <Div />
+          </Row>
+          <LoginRow>
+            <Text as="button" text="Log in with Facebook" color="#385185" />
+          </LoginRow>
+          <LoginRow>
+            <Text
+              as="button"
+              text="Forgot password?"
+              color="#00376b"
+              onClick={() => setForgotPassword(true)}
+            />
+          </LoginRow>
+        </>
+      )}
     </LoginFormWrapp>
   );
 };

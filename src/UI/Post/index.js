@@ -33,6 +33,10 @@ const PostWrapp = styled.div`
   vertical-align: top;
 
   margin-right: 25px;
+  margin-bottom: 20px;
+
+  position: relative;
+  overflow: hidden;
 
   &:last-child {
     margin-right: 0;
@@ -63,6 +67,21 @@ const PostButton = styled(Button)`
   }
 `;
 
+const PostComments = styled.div`
+  position: absolute;
+  left: ${(props) => (props.active ? "0" : "-100%")};
+  top: 0;
+  opacity: ${(props) => (props.active ? "1" : "0")};
+
+  z-index: 20;
+  transition: left 0.4s, opacity 0.6s;
+
+  height: 100%;
+  width: 100%;
+  padding: 30px 20px 15px;
+  background-color: #221818de;
+`;
+
 const avatars = [
   {
     id: 1,
@@ -79,13 +98,15 @@ const avatars = [
   },
 ];
 
-const Post = ({ post, ...props }) => {
+const Post = ({ post, postAction, ...props }) => {
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState(false);
   const [share, setShare] = useState(false);
   const [save, setSave] = useState(false);
 
-  let { avatar, fullname, city, text, photo, date, ...rest } = post;
+  const [isActiveComments, setIsActiveComments] = useState(false);
+
+  let { avatar, fullname, city, text, photo, date, comments } = post;
 
   const postText = useText();
 
@@ -117,12 +138,21 @@ const Post = ({ post, ...props }) => {
           <PostButton
             icon={likeIcon}
             active={like}
-            onClick={() => setLike(!like)}
+            onClick={() => {
+              setLike((prev) => {
+                if (!prev) {
+                  postAction("like", "add", post);
+                } else {
+                  postAction("like", "remove", post);
+                }
+                return !like;
+              });
+            }}
           />
           <PostButton
             icon={commentIcon}
             active={comment}
-            onClick={() => setComment(!comment)}
+            onClick={() => setComment(!share)}
           />
           <PostButton
             icon={shareIcon}
@@ -132,7 +162,17 @@ const Post = ({ post, ...props }) => {
           <PostButton
             icon={saveIcon}
             active={save}
-            onClick={() => setSave(!save)}
+            onClick={() =>
+              setSave((prev) => {
+                if (!prev) {
+                  postAction("save", "add", post);
+                } else {
+                  postAction("save", "remove", post);
+                }
+
+                return !save;
+              })
+            }
             style={{ marginLeft: "auto" }}
           />
         </PostRow>
@@ -156,9 +196,52 @@ const Post = ({ post, ...props }) => {
           />
         </Block>
         <PostRow>
+          <Text
+            as="a"
+            href="#"
+            text={`View all comments (${comments.length})`}
+            color="#76777E"
+            bold
+            style={{ fontSize: 12 }}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsActiveComments(true);
+            }}
+          />
+        </PostRow>
+        <PostRow>
           <Text text={date} color="#76777E" style={{ fontSize: 12 }} />
         </PostRow>
       </Block>
+      <PostComments
+        active={isActiveComments}
+        onClick={() => setIsActiveComments(false)}
+      >
+        {comments.length === 0 ? (
+          <Block>
+            <Text text="No comments.. Be first ;)" color="#fff" />
+          </Block>
+        ) : (
+          <>
+            {comments.map(({ id, user, text }) => (
+              <PostRow key={id}>
+                <Block style={{ marginRight: 11 }}>
+                  <Avatar as="button" url={user.avatar} size={20} />
+                </Block>
+                <Block style={{ marginTop: -7 }}>
+                  <Text
+                    text={user.fullname}
+                    color="#ffcdcd"
+                    as="a"
+                    href="/post"
+                  />
+                  <Text text={text} color="#fff" />
+                </Block>
+              </PostRow>
+            ))}
+          </>
+        )}
+      </PostComments>
     </PostWrapp>
   );
 };

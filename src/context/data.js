@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { v4 as uuid } from "uuid";
 
+import store from "store";
+
 const posts = [
   {
     id: uuid(),
@@ -18,6 +20,18 @@ const posts = [
       "https://kor.ill.in.ua/m/610x385/2445521.jpg",
       "https://kor.ill.in.ua/m/610x385/2445521.jpg",
     ],
+    comments: [
+      {
+        id: uuid(),
+        user: {
+          fullname: "Vidovik Rouse",
+          city: "Banī Khaddāsh",
+          avatar:
+            "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        },
+        text: "Looking like a good comment",
+      },
+    ],
   },
   {
     id: uuid(),
@@ -29,6 +43,7 @@ const posts = [
     text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/sititaquedolores.png?size=50x50&set=set1",
     photo: ["https://deadbees.net/wp-content/uploads/2016/07/200716_41.jpg"],
+    comments: [],
   },
   {
     id: uuid(),
@@ -40,6 +55,7 @@ const posts = [
     text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
     photo: ["https://gorvesti.ru/files/1/2018/62278-118929-14504-1vebfhf.jpg"],
+    comments: [],
   },
   {
     id: uuid(),
@@ -52,6 +68,7 @@ const posts = [
     date: "Wed, 26 January 2021",
     text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/deseruntoditcum.png?size=50x50&set=set1",
+    comments: [],
   },
 ];
 
@@ -125,8 +142,47 @@ export const DataProvider = ({ children }) => {
     likes: [],
   });
 
+  React.useEffect(() => {
+    if (store.get("userData")) {
+      if (JSON.stringify(store.get("userData")) == JSON.stringify(userData)) {
+        console.log("совпдаюат");
+        // store.set("userData", userData);
+      } else {
+        console.log("когда else");
+        // setUserData(store.get("userData"));
+      }
+    } else {
+      store.set("userData", userData);
+      setUserData(store.get("userData"));
+    }
+  }, [userData]);
+
+  const postAction = (action, status, post) => {
+    if (action === "like") {
+      if (status === "add") {
+        setUserData({ ...userData, likes: [...userData.likes, post] });
+      } else if (status === "remove") {
+        setUserData({
+          ...userData,
+          likes: userData.likes.filter((item) => item.id !== post.id),
+        });
+      }
+    }
+
+    if (action === "save") {
+      if (status === "add") {
+        setUserData({ ...userData, saved: [...userData.saved, post] });
+      } else if (status === "remove") {
+        setUserData({
+          ...userData,
+          saved: userData.saved.filter((item) => item.id !== post.id),
+        });
+      }
+    }
+  };
+
   return (
-    <DataContext.Provider value={{ userData, setUserData, posts }}>
+    <DataContext.Provider value={{ userData, setUserData, posts, postAction }}>
       {children}
     </DataContext.Provider>
   );
