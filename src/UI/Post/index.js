@@ -12,6 +12,8 @@ import { Row, Block } from "../Layout";
 import Video from "../Video";
 import TextOpenOrClose from "../TextOpenOrClose";
 
+import PostComments from "./PostComments";
+
 import CustomSlider from "../../components/CustomSlider";
 
 import shareIcon from "../../assets/icons/1.svg";
@@ -67,21 +69,6 @@ const PostButton = styled(Button)`
   }
 `;
 
-const PostComments = styled.div`
-  position: absolute;
-  left: ${(props) => (props.active ? "0" : "-100%")};
-  top: 0;
-  opacity: ${(props) => (props.active ? "1" : "0")};
-
-  z-index: 20;
-  transition: left 0.4s, opacity 0.6s;
-
-  height: 100%;
-  width: 100%;
-  padding: 30px 20px 15px;
-  background-color: #221818de;
-`;
-
 const avatars = [
   {
     id: 1,
@@ -106,14 +93,32 @@ const Post = ({ post, postAction, ...props }) => {
 
   const [isActiveComments, setIsActiveComments] = useState(false);
 
+  const commentRef = React.useRef(null);
+
   let { avatar, fullname, city, text, photo, date, comments } = post;
 
   const postText = useText();
 
   let count = 100;
 
+  React.useEffect(() => {
+    document.addEventListener("click", handleClickOutsidePost);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutsidePost);
+    };
+  }, []);
+
+  const handleClickOutsidePost = (e) => {
+    if (commentRef.current.contains(e.target)) {
+      return;
+    } else {
+      setIsActiveComments(false);
+    }
+  };
+
   return (
-    <PostWrapp {...props}>
+    <PostWrapp ref={commentRef} {...props}>
       <PostRow style={{ padding: "0 15px" }}>
         <Block style={{ marginRight: 11 }}>
           <Avatar as="button" url={avatar} size={40} />
@@ -214,34 +219,11 @@ const Post = ({ post, postAction, ...props }) => {
         </PostRow>
       </Block>
       <PostComments
+        comments={comments}
         active={isActiveComments}
+        setIsActiveComments={setIsActiveComments}
         onClick={() => setIsActiveComments(false)}
-      >
-        {comments.length === 0 ? (
-          <Block>
-            <Text text="No comments.. Be first ;)" color="#fff" />
-          </Block>
-        ) : (
-          <>
-            {comments.map(({ id, user, text }) => (
-              <PostRow key={id}>
-                <Block style={{ marginRight: 11 }}>
-                  <Avatar as="button" url={user.avatar} size={20} />
-                </Block>
-                <Block style={{ marginTop: -7 }}>
-                  <Text
-                    text={user.fullname}
-                    color="#ffcdcd"
-                    as="a"
-                    href="/post"
-                  />
-                  <Text text={text} color="#fff" />
-                </Block>
-              </PostRow>
-            ))}
-          </>
-        )}
-      </PostComments>
+      />
     </PostWrapp>
   );
 };

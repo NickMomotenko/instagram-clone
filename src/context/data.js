@@ -43,7 +43,18 @@ const posts = [
     text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
     avatar: "https://robohash.org/sititaquedolores.png?size=50x50&set=set1",
     photo: ["https://deadbees.net/wp-content/uploads/2016/07/200716_41.jpg"],
-    comments: [],
+    comments: [
+      {
+        id: uuid(),
+        user: {
+          fullname: "Vidovik Rouse",
+          city: "Banī Khaddāsh",
+          avatar:
+            "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        },
+        text: "Looking like a good comment",
+      },
+    ],
   },
   {
     id: uuid(),
