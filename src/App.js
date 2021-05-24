@@ -6,7 +6,9 @@ import styled from "styled-components";
 
 import { withData } from "./context/data";
 
-import Login from "./pages/Login/Login";
+import { useAuth } from "./hooks/auth";
+
+import Login from "./pages/Login";
 import Main from "./pages/Main/Main";
 import Stories from "./pages/Stories";
 
@@ -20,6 +22,8 @@ const AppWrapp = styled.div`
 
 const App = (props) => {
   const { posts } = props;
+
+  const { login } = useAuth();
 
   return (
     <AppWrapp>
@@ -36,7 +40,7 @@ const App = (props) => {
           <Main posts={posts} />
         </Route>
         <Route exact path="/">
-          <Login />
+          <Login login={login} />
         </Route>
       </Switch>
     </AppWrapp>

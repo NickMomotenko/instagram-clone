@@ -10,7 +10,7 @@ import DefaultButton from "../../UI/DefaultButton";
 import { Block, Row } from "../../UI/Layout";
 
 const ForgotPassword = (props) => {
-  const { login, setForgotPassword } = props;
+  const { login, setForgotPassword, setCreateNewAccount } = props;
 
   let forgotPasswordInput = useInput();
 
@@ -44,7 +44,15 @@ const ForgotPassword = (props) => {
         <Div />
       </Row>
       <LoginRow>
-        <Text as="button" text="Create New Account" color="#385185" />
+        <Text
+          as="button"
+          text="Create New Account"
+          color="#385185"
+          onClick={(e) => {
+            e.preventDefault();
+            setCreateNewAccount(true);
+          }}
+        />
       </LoginRow>
       <LoginRow>
         <Text

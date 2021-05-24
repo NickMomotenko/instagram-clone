@@ -11,18 +11,27 @@ import Text from "../../UI/Text";
 
 import Logo from "../Logo";
 import ForgotPassword from "./ForgotPassword";
+import CreateNewAccount from "./CreateNewAccount";
 
 const LoginForm = (props) => {
   let email = useInput();
   let password = useInput();
 
-  const { login, forgotPassword, setForgotPassword } = props;
+  const {
+    login,
+    forgotPassword,
+    setForgotPassword,
+    createNewAccount,
+    setCreateNewAccount,
+  } = props;
 
-  return (
-    <LoginFormWrapp {...props}>
-      {forgotPassword ? (
-        <ForgotPassword {...props} />
-      ) : (
+  const renderComponent = () => {
+    if (createNewAccount) {
+      return <CreateNewAccount {...props} />;
+    } else if (forgotPassword) {
+      return <ForgotPassword {...props} />;
+    } else {
+      return (
         <>
           <Block style={{ textAlign: "center" }}>
             <Logo style={{ marginBottom: 20 }} />
@@ -72,9 +81,11 @@ const LoginForm = (props) => {
             />
           </LoginRow>
         </>
-      )}
-    </LoginFormWrapp>
-  );
+      );
+    }
+  };
+
+  return <LoginFormWrapp {...props}>{renderComponent()}</LoginFormWrapp>;
 };
 
 export default LoginForm;

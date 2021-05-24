@@ -1,37 +1,32 @@
 import React, { useState } from "react";
 
-import styled from "styled-components";
+import { LoginWrapp } from "./styles";
 
 import LogoBanner from "../../components/LogoBanner/LogoBanner";
 
-import loginBg from "../../assets/bg/login-bg.png";
 import LoginForm from "../../components/LoginForm";
 import { useAuth } from "../../hooks/auth";
 
-const LoginWrapp = styled.div`
-  background: url(${loginBg}) center no-repeat;
-
-  background-size: cover;
-
-  height: 100%;
-  width: 100%;
-`;
-
-const Login = () => {
-  const { login } = useAuth();
-
+const Login = React.memo((props) => {
   const [forgotPassword, setForgotPassword] = useState(false);
+  const [createNewAccount, setCreateNewAccount] = useState(false);
+
+  React.useEffect(() => {
+    console.log(111);
+  });
 
   return (
     <LoginWrapp>
       <LogoBanner />
       <LoginForm
-        login={login}
+        login={props.login}
         forgotPassword={forgotPassword}
         setForgotPassword={setForgotPassword}
+        createNewAccount={createNewAccount}
+        setCreateNewAccount={setCreateNewAccount}
       />
     </LoginWrapp>
   );
-};
+});
 
 export default Login;
