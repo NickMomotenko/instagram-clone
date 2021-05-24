@@ -90,7 +90,7 @@ const Post = ({ post, postAction, ...props }) => {
   }, []);
 
   const handleClickOutsidePost = (e) => {
-    if (commentRef.current.contains(e.target)) {
+    if (commentRef?.current?.contains(e.target)) {
       return;
     } else {
       commentsBar.setIsActive(false);

@@ -9,7 +9,7 @@ import {
 
 const PostOptions = ({ options, active, onClick }) => {
   return (
-    <PostOptionsWrapp active={active}>
+    <PostOptionsWrapp active={active} onClick={onClick}>
       <PostOptionsList as="ul">
         {options.map((item) => (
           <PostOptionsItem key={item.id} as="li">
