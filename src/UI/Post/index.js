@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-import styled from "styled-components";
+import { PostWrapp, PostImage, PostRow, PostButton } from "./PostStyles";
 
 import { useText } from "../../hooks/useText";
+import { usePostBar } from "../../hooks/usePostBar";
 
 import Avatar from "../Avatar";
 import AvatarMultiRow from "../AvatarMultiRow";
@@ -22,52 +23,7 @@ import commentIcon from "../../assets/icons/3.svg";
 import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
-
-const PostWrapp = styled.div`
-  background: #ffffff;
-  border: 1px solid #f0f6fd;
-  box-shadow: 0px 10px 40px rgba(222, 230, 237, 0.4);
-  border-radius: 30px;
-  padding: 15px 5px;
-  max-width: 300px;
-
-  display: inline-block;
-  vertical-align: top;
-
-  margin-right: 25px;
-  margin-bottom: 20px;
-
-  position: relative;
-  overflow: hidden;
-
-  &:last-child {
-    margin-right: 0;
-  }
-`;
-
-const PostImage = styled.img.attrs(({ url }) => ({
-  src: url,
-}))`
-  display: block;
-  max-width: 100%;
-  border-radius: 15px;
-`;
-
-const PostRow = styled(Row)`
-  margin-bottom: 15px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const PostButton = styled(Button)`
-  margin-right: 9px;
-
-  &:last-child {
-    margin-right: 0;
-  }
-`;
+import PostOptions from "./PostOptions";
 
 const avatars = [
   {
@@ -85,19 +41,43 @@ const avatars = [
   },
 ];
 
+const postOptions = [
+  {
+    id: 1,
+    title: "Report",
+    onClick: () => {},
+  },
+  {
+    id: 2,
+    title: "Share to",
+    onClick: () => {},
+  },
+  {
+    id: 3,
+    title: "Copy link",
+    onClick: () => {},
+  },
+  {
+    id: 4,
+    title: "Cancel",
+    onClick: () => {},
+  },
+];
+
 const Post = ({ post, postAction, ...props }) => {
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState(false);
   const [share, setShare] = useState(false);
   const [save, setSave] = useState(false);
 
-  const [isActiveComments, setIsActiveComments] = useState(false);
-
   const commentRef = React.useRef(null);
 
   let { avatar, fullname, city, text, photo, date, comments } = post;
 
   const postText = useText();
+
+  const commentsBar = usePostBar();
+  const optionsBar = usePostBar();
 
   let count = 100;
 
@@ -113,7 +93,8 @@ const Post = ({ post, postAction, ...props }) => {
     if (commentRef.current.contains(e.target)) {
       return;
     } else {
-      setIsActiveComments(false);
+      commentsBar.setIsActive(false);
+      optionsBar.setIsActive(false);
     }
   };
 
@@ -127,7 +108,11 @@ const Post = ({ post, postAction, ...props }) => {
           <Text text={fullname} bold />
           <Text text={city} color="#76777E" />
         </Block>
-        <Button icon={dots} style={{ marginLeft: "auto" }} />
+        <Button
+          icon={dots}
+          style={{ marginLeft: "auto" }}
+          onClick={() => optionsBar.setIsActive(true)}
+        />
       </PostRow>
       <PostRow>
         {post.postType === "video" ? (
@@ -210,7 +195,7 @@ const Post = ({ post, postAction, ...props }) => {
             style={{ fontSize: 12 }}
             onClick={(e) => {
               e.preventDefault();
-              setIsActiveComments(true);
+              commentsBar.setIsActive(true);
             }}
           />
         </PostRow>
@@ -220,9 +205,13 @@ const Post = ({ post, postAction, ...props }) => {
       </Block>
       <PostComments
         comments={comments}
-        active={isActiveComments}
-        setIsActiveComments={setIsActiveComments}
-        onClick={() => setIsActiveComments(false)}
+        active={commentsBar.isActive}
+        onClick={() => commentsBar.setIsActive(false)}
+      />
+      <PostOptions
+        options={postOptions}
+        active={optionsBar.isActive}
+        onClick={() => optionsBar.setIsActive(false)}
       />
     </PostWrapp>
   );

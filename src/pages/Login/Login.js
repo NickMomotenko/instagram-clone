@@ -5,7 +5,7 @@ import styled from "styled-components";
 import LogoBanner from "../../components/LogoBanner/LogoBanner";
 
 import loginBg from "../../assets/bg/login-bg.png";
-import LoginForm from "../../components/LoginForm/LoginForm";
+import LoginForm from "../../components/LoginForm";
 import { useAuth } from "../../hooks/auth";
 
 const LoginWrapp = styled.div`
