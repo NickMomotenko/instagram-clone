@@ -20,6 +20,7 @@ import Direct from "./components/Direct";
 import { baseRoutes } from "./helpers/base-routes";
 
 import { DataContext } from "./context/data";
+import { useSelector } from "react-redux";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -27,10 +28,11 @@ const AppWrapp = styled.div`
 `;
 
 const App = () => {
+  const posts = useSelector((state) => state.posts.posts);
+
   const isPreloaderActive = useActive();
 
   const {
-    globalData,
     postAction,
     userData: { user, stories },
   } = React.useContext(DataContext);
@@ -56,7 +58,7 @@ const App = () => {
         <Route path={baseRoutes.base} element={<Main />}>
           <Route
             path={baseRoutes.posts}
-            element={<Posts posts={globalData} postAction={postAction} />}
+            element={<Posts posts={posts} postAction={postAction} />}
           />
           <Route
             path={baseRoutes.profile}

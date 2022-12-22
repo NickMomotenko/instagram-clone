@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useDispatch } from "react-redux";
+
 import {
   PostWrapp,
   PostImage,
@@ -30,6 +32,7 @@ import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
 import PostOptions from "./PostOptions";
+import { DISLIKE_POST, LIKE_POST } from "../../redux/posts/types";
 
 const avatars = [
   {
@@ -75,6 +78,8 @@ const POST_TYPES = {
 };
 
 const Post = ({ post, postAction, isMyPost, userId, ...props }) => {
+  const dispath = useDispatch();
+
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState(false);
   const [share, setShare] = useState(false);
@@ -132,9 +137,11 @@ const Post = ({ post, postAction, isMyPost, userId, ...props }) => {
     if (!like) {
       setLike(true);
       postAction("like_post", { post, status: "add" });
+      dispath({ type: LIKE_POST, id: post.id });
     } else {
       setLike(false);
       postAction("like_post", { post, status: "remove" });
+      dispath({ type: DISLIKE_POST, id: post.id });
     }
   };
 

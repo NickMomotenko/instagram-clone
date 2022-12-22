@@ -150,6 +150,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+
   return (
     <DataContext.Provider
       value={{ userData, setUserData, globalData, postAction, allUsers }}

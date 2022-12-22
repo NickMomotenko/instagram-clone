@@ -8,16 +8,16 @@ export const useAuth = () => {
   const [isAuth, setIsAuth] = useLocalStorage("isAuth", false);
   const [register, setRegister] = useState(false);
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    // if (isAuth) {
-    //   history(baseRoutes.posts);
-    //   // setIsAuth(true);
-    // } else {
-    //   history(baseRoutes.login);
-    //   // setIsAuth(false);
-    // }
+    if (isAuth) {
+      navigate(baseRoutes.posts);
+      setIsAuth(true);
+    } else {
+      navigate(baseRoutes.login);
+      setIsAuth(false);
+    }
   }, [isAuth]);
 
   const login = (username, password) => {
