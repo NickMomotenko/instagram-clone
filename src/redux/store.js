@@ -4,7 +4,7 @@ import { userReducer } from "./user/reducer";
 
 const reducer = combineReducers({
   posts: postsReducer,
-  user: userReducer,
+  authUser: userReducer,
 });
 
 export const store = createStore(

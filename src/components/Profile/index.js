@@ -23,6 +23,10 @@ const Profile = ({ user, popup, stories, posts }) => {
     );
   };
 
+  const createPost = () => {
+    popup.setIsActive(true);
+  };
+
   return (
     <ProfileWrapp>
       <ProfileHeader>
@@ -72,7 +76,7 @@ const Profile = ({ user, popup, stories, posts }) => {
               <GradientButton
                 text="Create post"
                 name="test"
-                onClick={() => popup.setIsActive(true)}
+                onClick={createPost}
               />
             </Row>
           </Block>

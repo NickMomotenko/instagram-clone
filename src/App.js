@@ -4,9 +4,12 @@ import styled from "styled-components";
 
 import { Route, Routes } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 import { withData } from "./context/data";
 
 import { useActive } from "./hooks/useActive";
+import { usePopup } from "./hooks/popup";
 
 import Login from "./pages/Login";
 import Main from "./pages/Main/Main";
@@ -20,7 +23,7 @@ import Direct from "./components/Direct";
 import { baseRoutes } from "./helpers/base-routes";
 
 import { DataContext } from "./context/data";
-import { useSelector } from "react-redux";
+
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -31,6 +34,7 @@ const App = () => {
   const posts = useSelector((state) => state.posts.posts);
 
   const isPreloaderActive = useActive();
+  const popup = usePopup();
 
   const {
     postAction,
@@ -55,14 +59,16 @@ const App = () => {
           path={baseRoutes.login}
           element={<Login isPreloaderActive={isPreloaderActive.isActive} />}
         />
-        <Route path={baseRoutes.base} element={<Main />}>
+        <Route path={baseRoutes.base} element={<Main popup={popup} />}>
           <Route
             path={baseRoutes.posts}
             element={<Posts posts={posts} postAction={postAction} />}
           />
           <Route
             path={baseRoutes.profile}
-            element={<Profile user={user} posts={[]} stories={stories} />}
+            element={
+              <Profile user={user} posts={[]} stories={stories} popup={popup} />
+            }
           />
         </Route>
       </Routes>

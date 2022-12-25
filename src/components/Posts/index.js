@@ -4,6 +4,7 @@ import { PostsWrapp } from "./styled";
 
 import Post from "../../UI/Post";
 import { DataContext } from "../../context/data";
+import { useSelector } from "react-redux";
 
 const Posts = ({ posts, postAction }) => {
   const {
@@ -11,6 +12,10 @@ const Posts = ({ posts, postAction }) => {
       user: { id: userId },
     },
   } = React.useContext(DataContext);
+
+  const { authUser } = useSelector((state) => state.authUser);
+
+  const updateAuthUserData = () => {};
 
   return (
     <PostsWrapp as="ul" style={{ marginBottom: -20 }}>
@@ -25,6 +30,7 @@ const Posts = ({ posts, postAction }) => {
             postAction={postAction}
             isMyPost={isMyPost}
             userId={userId}
+            authUser={authUser}
           />
         );
       })}

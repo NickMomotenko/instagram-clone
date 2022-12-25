@@ -9,11 +9,23 @@ import Textarea from "../../UI/Textarea";
 import DefaultButton from "../../UI/DefaultButton";
 
 import { useInput } from "../../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { CREATE_POST } from "../../redux/posts/types";
 
 const Popup = ({ user, isActive, postAction, setIsActive }) => {
-  const postInput = useInput({option:{ symbolLimit: 255 }});
+  const dispath = useDispatch();
+
+  const postInput = useInput({ option: { symbolLimit: 255 } });
 
   const isCreateButtonDisabled = postInput?.value.length === 0;
+
+  const createPopup = () => {
+    setIsActive(true);
+    postAction("create", { text: postInput?.value });
+    dispath({ type: CREATE_POST, text: postInput?.value });
+    setIsActive(false);
+    postInput.clearValue();
+  };
 
   return (
     <PopupWrapp active={isActive}>
@@ -64,12 +76,7 @@ const Popup = ({ user, isActive, postAction, setIsActive }) => {
               fullWidth
               disabled={isCreateButtonDisabled}
               style={{ marginRight: 20 }}
-              onClick={() => {
-                setIsActive(true);
-                postAction("create", { text: postInput?.value });
-                setIsActive(false);
-                postInput.clearValue();
-              }}
+              onClick={createPopup}
             />
             <DefaultButton
               text="Cancel"

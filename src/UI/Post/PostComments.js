@@ -15,6 +15,8 @@ import Text from "../Text";
 
 import Input from "../../UI/Input";
 import DefaultButton from "../../UI/DefaultButton";
+import { useDispatch } from "react-redux";
+import { ADD_COMMENT, CHANGE_COMMENT } from "../../redux/posts/types";
 
 const PostComments = ({
   post,
@@ -25,6 +27,8 @@ const PostComments = ({
 }) => {
   const [isChangeComment, setIsChangeComment] = useState(false);
   const [currentComment, setCurrentComment] = useState(null);
+
+  const dispath = useDispatch();
 
   const commentInput = useInput();
 
@@ -53,7 +57,12 @@ const PostComments = ({
   const addComment = () => {
     if (!commentInput.value) return;
 
-    postAction("add_comment", { post, text: commentInput.value });
+    // postAction("add_comment", { post, text: commentInput.value });
+    dispath({
+      type: ADD_COMMENT,
+      data: { id: post.id, text: commentInput.value },
+    });
+
     commentInput.clearValue();
   };
 
@@ -72,6 +81,7 @@ const PostComments = ({
     const updatedPost = { ...post, comments: updatedCommentsArr };
 
     postAction("change_comment", updatedPost);
+    dispath({type:CHANGE_COMMENT , updatedPost})
     setIsChangeComment(false);
     setCurrentComment(null);
     commentInput.clearValue();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   PostWrapp,
@@ -32,7 +32,8 @@ import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
 import PostOptions from "./PostOptions";
-import { DISLIKE_POST, LIKE_POST } from "../../redux/posts/types";
+import { DISLIKE_POST, LIKE_POST, SAVE_POST } from "../../redux/posts/types";
+import { UPDATE_USER } from "../../redux/user/types";
 
 const avatars = [
   {
@@ -77,7 +78,7 @@ const POST_TYPES = {
   VIDEO: "video",
 };
 
-const Post = ({ post, postAction, isMyPost, userId, ...props }) => {
+const Post = ({ post, postAction, authUser, isMyPost, userId, ...props }) => {
   const dispath = useDispatch();
 
   const [like, setLike] = useState(false);
@@ -152,10 +153,25 @@ const Post = ({ post, postAction, isMyPost, userId, ...props }) => {
   const savePost = (post) => {
     if (!save) {
       setSave(true);
-      postAction("save_post", { post, status: "add" });
+
+      if (!authUser.saved.includes(post)) {
+        const updatedUserData = {
+          ...authUser,
+          saved: [...authUser.saved, post],
+        };
+
+        dispath({ type: UPDATE_USER, updatedUserData });
+      }
     } else {
       setSave(false);
-      postAction("save_post", { post, status: "remove" });
+
+      const updatedUserSaved = authUser.saved.filter(
+        (savedPost) => savedPost.id !== post.id
+      );
+
+      const updatedUserData = { ...authUser, saved: [...updatedUserSaved] };
+
+      dispath({ type: UPDATE_USER, updatedUserData });
     }
   };
 
