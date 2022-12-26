@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
 import { useActive } from "./hooks/useActive";
 import { usePopup } from "./hooks/popup";
@@ -20,6 +20,7 @@ import ForgotPassword from "./components/LoginForm/ForgotPassword";
 import CreateNewAccount from "./components/LoginForm/CreateNewAccount";
 
 import { baseRoutes, authRoutes } from "./helpers/base-routes";
+import { useSelector } from "react-redux";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -27,8 +28,21 @@ const AppWrapp = styled.div`
 `;
 
 const App = () => {
+  const { isAuth } = useSelector((state) => state.auth);
+
   const isPreloaderActive = useActive();
   const popup = usePopup();
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (isAuth) {
+      navigate(`${baseRoutes.base}`);
+    } else {
+      // navigate(`${baseRoutes.base}`);
+      navigate(`${baseRoutes.login}`);
+    }
+  }, [isAuth]);
 
   // delay timer in sec
   const delayTimer = 3;
@@ -48,20 +62,18 @@ const App = () => {
           path={baseRoutes.login}
           element={<Login isPreloaderActive={isPreloaderActive.isActive} />}
         >
-          <Route
-            path=''
-            element={<LoginBlock login={() => {}} />}
-          />
+          <Route path="" element={<LoginBlock login={() => {}} />} />
           <Route path={authRoutes.create} element={<CreateNewAccount />} />
           <Route path={authRoutes.forgot} element={<ForgotPassword />} />
         </Route>
         <Route path={baseRoutes.base} element={<Main popup={popup} />}>
-          <Route path={baseRoutes.posts} element={<Posts />} />
+          <Route path="" element={<Posts />} />
           <Route
             path={baseRoutes.profile}
             element={<Profile popup={popup} />}
           />
         </Route>
+        <Route path="*" element={<Navigate to={baseRoutes.login} replace />} />
       </Routes>
     </AppWrapp>
   );

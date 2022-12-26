@@ -7,16 +7,18 @@ import {
   NavigationLink,
 } from "./styled";
 
+import { baseRoutes } from "../../helpers/base-routes";
+
 const navigationList = [
   {
     id: 1,
     title: "Main",
-    link: "/posts",
+    link: baseRoutes.base,
   },
   {
     id: 2,
     title: "Profile",
-    link: "/profile",
+    link: baseRoutes.profile,
   },
 ];
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useDispatch } from "react-redux";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import { LoginWrapp, DemoButton, LoginFormWrapp } from "./styles";
 
@@ -10,17 +10,9 @@ import LogoBanner from "../../components/LogoBanner/LogoBanner";
 import Text from "../../UI/Text";
 import DefaultButton from "../../UI/DefaultButton";
 
-import { useAuth } from "../../hooks/auth";
+import { LOGIN } from "../../redux/auth/types";
 
-export const loginRoutes = {
-  login: "/login",
-  create: "/create_account",
-  forgot: "/forgot_password",
-};
-
-const Login = React.memo(({ isPreloaderActive }) => {
-  const { login } = useAuth();
-
+const Login = ({ isPreloaderActive }) => {
   const dispath = useDispatch();
 
   return (
@@ -30,7 +22,7 @@ const Login = React.memo(({ isPreloaderActive }) => {
       <LoginFormWrapp>
         <Outlet />
       </LoginFormWrapp>
-      
+
       <DemoButton>
         <Text text="If you are here first time" bold />
         <Text
@@ -41,14 +33,13 @@ const Login = React.memo(({ isPreloaderActive }) => {
           text="Try Demo Version"
           onClick={(e) => {
             e.preventDefault();
-            // login("demo", "demo");
 
-            dispath({ type: "AUTH/LOGIN", data: ["test@mail.ru", "11241414"] });
+            dispath({ type: LOGIN, data: ["test@mail.ru", "11241414"] });
           }}
         />
       </DemoButton>
     </LoginWrapp>
   );
-});
+};
 
 export default Login;

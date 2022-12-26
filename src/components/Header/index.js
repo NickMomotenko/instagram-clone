@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
+import { useDispatch } from "react-redux";
+
 import { HeaderWrapp, HeaderAllUser, HeaderAllUserItem } from "./styled";
 
 import { allDbUsers } from "../../redux/mockData";
 
 import { useInput } from "../../hooks/useInput";
 import { useActive } from "../../hooks/useActive";
-import { useAuth } from "../../hooks/auth";
 
 import Container from "../Container";
 import Navigation from "../Navigation";
@@ -21,6 +22,8 @@ import DefaultButton from "../../UI/DefaultButton";
 
 import searchIcon from "../../assets/icons/search.svg";
 
+import { LOGUT } from "../../redux/auth/types";
+
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
 
@@ -28,7 +31,7 @@ const Header = () => {
   const isSearchBlock = useActive();
   const isBurgerActive = useActive();
 
-  const { logOut } = useAuth();
+  const dispath = useDispatch();
 
   React.useEffect(() => {
     searchInput?.value.length === 0
@@ -97,7 +100,8 @@ const Header = () => {
             text="Log out"
             onClick={(e) => {
               e.preventDefault();
-              logOut();
+              // logOut();
+              dispath({ type: LOGUT });
             }}
           />
         </Row>

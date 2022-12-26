@@ -23,6 +23,8 @@ import { useForm } from "../../hooks/useForm";
 import { useStepper } from "../../hooks/useStepper";
 
 import { baseRoutes } from "../../helpers/base-routes";
+import { useDispatch } from "react-redux";
+import { SIGNUP } from "../../redux/auth/types";
 
 const CreateNewAccount = () => {
   const { step, stepRef, incrementStep, decrementStep } = useStepper({
@@ -33,7 +35,9 @@ const CreateNewAccount = () => {
   const nickname = useInput();
   const info = useInput();
 
-  const { signUp } = useAuth();
+  const dispath = useDispatch();
+
+  // const { signUp } = useAuth();
 
   const { handleSubmit } = useForm(generateSubmitFunction());
 
@@ -56,7 +60,8 @@ const CreateNewAccount = () => {
       case 1:
         return incrementStep;
       case 2:
-        return () => signUp([email, password, nickname, info]);
+        return () =>
+          dispath({ type: SIGNUP, data: [email, password, nickname, info] });
     }
   }
 
