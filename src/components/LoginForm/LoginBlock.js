@@ -18,7 +18,7 @@ import { checkUpperCase, checkValueLength } from "../../helpers/validate-input";
 import { authRoutes } from "../../helpers/base-routes";
 import { Link } from "react-router-dom";
 
-const LoginBlock = ({ login, changeRoute }) => {
+const LoginBlock = ({ login }) => {
   let email = useInput({
     validityFunctions: [checkUpperCase, checkValueLength],
   });

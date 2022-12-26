@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { LoginRow, CreateNewAccountForm } from "./styles";
-
-import Text from "../../UI/Text";
-import Input from "../../UI/Input";
-import DefaultButton from "../../UI/DefaultButton";
-import { Block, Row } from "../../UI/Layout";
+import { Link } from "react-router-dom";
 
 import {
+  LoginRow,
+  CreateNewAccountForm,
   Div,
   LoginTextWithLine,
   StepperItem,
@@ -15,14 +12,19 @@ import {
   StepperContent,
 } from "./styles";
 
+import Text from "../../UI/Text";
+import Input from "../../UI/Input";
+import DefaultButton from "../../UI/DefaultButton";
+import { Block, Row } from "../../UI/Layout";
+
 import { useInput } from "../../hooks/useInput";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "../../hooks/useForm";
-import { authRoutes, baseRoutes } from "../../helpers/base-routes";
 import { useStepper } from "../../hooks/useStepper";
-import { Link } from "react-router-dom";
 
-const CreateNewAccount = ({ changeRoute }) => {
+import { baseRoutes } from "../../helpers/base-routes";
+
+const CreateNewAccount = () => {
   const { step, stepRef, incrementStep, decrementStep } = useStepper({
     finishStep: 2,
   });

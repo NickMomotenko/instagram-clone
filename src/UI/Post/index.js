@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   PostWrapp,
@@ -9,6 +9,9 @@ import {
   PostButton,
   PostLikedText,
 } from "./PostStyles";
+
+import { DISLIKE_POST, LIKE_POST, SAVE_POST } from "../../redux/posts/types";
+import { UPDATE_USER } from "../../redux/user/types";
 
 import { useText } from "../../hooks/useText";
 import { useActive } from "../../hooks/useActive";
@@ -22,6 +25,7 @@ import Video from "../Video";
 import TextOpenOrClose from "../TextOpenOrClose";
 
 import PostComments from "./PostComments";
+import PostOptions from "./PostOptions";
 
 import CustomSlider from "../../components/CustomSlider";
 
@@ -31,25 +35,7 @@ import commentIcon from "../../assets/icons/3.svg";
 import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
-import PostOptions from "./PostOptions";
-import { DISLIKE_POST, LIKE_POST, SAVE_POST } from "../../redux/posts/types";
-import { UPDATE_USER } from "../../redux/user/types";
 
-const avatars = [
-  {
-    id: 1,
-    avatar:
-      "https://robohash.org/consequaturlaudantiumquas.png?size=50x50&set=set1",
-  },
-  {
-    id: 2,
-    avatar: "https://robohash.org/consequaturmaximehic.png?size=50x50&set=set1",
-  },
-  {
-    id: 3,
-    avatar: "https://robohash.org/voluptasesteius.png?size=50x50&set=set1",
-  },
-];
 
 const postOptions = [
   {
