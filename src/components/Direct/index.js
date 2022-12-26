@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import { withDirect } from "../../context/messages";
-import { DataContext } from "../../context/data";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   DirectWrapp,
@@ -14,13 +13,15 @@ import {
 import { Block, Row } from "../../UI/Layout";
 import Text from "../../UI/Text";
 import Avatar from "../../UI/Avatar";
+import Input from "../../UI/Input";
+import DefaultButton from "../../UI/DefaultButton";
 
 import Container from "../Container";
 import Header from "../Header";
-import Input from "../../UI/Input";
-import DefaultButton from "../../UI/DefaultButton";
+
 import { useInput } from "../../hooks/useInput";
-import { useSelector } from "react-redux";
+
+import { ADD_MESSAGE } from "../../redux/direct/types";
 
 const Direct = () => {
   const { messages } = useSelector((state) => state.direct);
@@ -31,6 +32,22 @@ const Direct = () => {
   const [activeChat, setActiveChat] = useState(messages[0]);
 
   const sendInput = useInput();
+
+  const dispatch = useDispatch();
+
+  const onChatItemClick = (id) => {
+    const searchableChat = messages.find((chat) => chat.id === id);
+
+    if (!searchableChat) return;
+
+    setActiveChat(searchableChat);
+  };
+
+  const handleSend = ({ chatId, text }) => {
+    if (!text) return;
+
+    dispatch({ type: ADD_MESSAGE, payload: { chatId, text } });
+  };
 
   return (
     <DirectWrapp>
@@ -44,6 +61,7 @@ const Direct = () => {
                 <Row
                   key={id}
                   as="li"
+                  onClick={() => onChatItemClick(id)}
                   style={{
                     marginBottom: 20,
                     cursor: "pointer",
@@ -112,9 +130,19 @@ const Direct = () => {
                     value={sendInput.value}
                     onChange={sendInput.onChange}
                     placeholder="Your message"
+                    noError
                     style={{ flex: 1 }}
                   />
-                  <DefaultButton text="Send" style={{ marginLeft: 21 }} />
+                  <DefaultButton
+                    text="Send"
+                    onClick={() =>
+                      handleSend({
+                        chatId: activeChat?.id,
+                        text: sendInput.value,
+                      })
+                    }
+                    style={{ marginLeft: 21 }}
+                  />
                 </Row>
               </Block>
             </DirectContentSidebar>
