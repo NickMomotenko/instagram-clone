@@ -20,15 +20,15 @@ import Header from "../Header";
 import Input from "../../UI/Input";
 import DefaultButton from "../../UI/DefaultButton";
 import { useInput } from "../../hooks/useInput";
+import { useSelector } from "react-redux";
 
-const Direct = (props) => {
-  const { messages } = props;
+const Direct = () => {
+  const { messages } = useSelector((state) => state.direct);
+  const {
+    authUser: { user },
+  } = useSelector((state) => state.authUser);
 
   const [activeChat, setActiveChat] = useState(messages[0]);
-
-  const {
-    userData: { user },
-  } = React.useContext(DataContext);
 
   const sendInput = useInput();
 
@@ -125,4 +125,4 @@ const Direct = (props) => {
   );
 };
 
-export default withDirect(Direct);
+export default Direct;

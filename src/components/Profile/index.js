@@ -16,6 +16,8 @@ import DefaultButton from "../../UI/DefaultButton";
 import Avatar from "../../UI/Avatar";
 
 import Posts from "../Posts";
+import { Link } from "react-router-dom";
+import { baseRoutes } from "../../helpers/base-routes";
 
 const Profile = ({ popup }) => {
   const {
@@ -50,7 +52,12 @@ const Profile = ({ popup }) => {
                 borderColor: "#7751518a",
               }}
             />
-            <DefaultButton text="Direct" style={{ marginLeft: 15 }} />
+            <DefaultButton
+              as={Link}
+              to={baseRoutes.direct}
+              text="Direct"
+              style={{ marginLeft: 15 }}
+            />
           </Block>
         </Row>
         <Row>

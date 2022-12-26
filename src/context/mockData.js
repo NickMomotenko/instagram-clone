@@ -422,3 +422,126 @@ export const allDbUsers = [
     },
   },
 ];
+
+export const messagesDb = [
+  {
+    id: uuid(),
+    user: {
+      id: uuid(),
+      fullname: "Annet Black",
+      avatar: "",
+    },
+    data: [
+      {
+        id: uuid(),
+        isMe: false,
+        text: "Test text 1",
+        date: "24.05.2021",
+        time: "19:17",
+      },
+      {
+        id: uuid(),
+        isMe: true,
+        text: "Test text 2 Ffaf fafar fff faqfafa",
+        date: "24.05.2021",
+        time: "19:18",
+      },
+    ],
+  },
+  {
+    id: uuid(),
+    user: {
+      id: uuid(),
+      fullname: "Annet Black2",
+      avatar: "",
+    },
+    data: [
+      {
+        id: uuid(),
+        isMe: false,
+        text: "Test text 1",
+        date: "24.05.2021",
+        time: "19:17",
+      },
+      {
+        id: uuid(),
+        isMe: true,
+        text: "Test text 2",
+        date: "24.05.2021",
+        time: "19:18",
+      },
+    ],
+  },
+  {
+    id: uuid(),
+    user: {
+      id: uuid(),
+      fullname: "Annet Black3",
+      avatar: "",
+    },
+    data: [
+      {
+        id: uuid(),
+        isMe: false,
+        text: "Test text 1",
+        date: "24.05.2021",
+        time: "19:17",
+      },
+      {
+        id: uuid(),
+        isMe: true,
+        text: "Test text 2",
+        date: "24.05.2021",
+        time: "19:18",
+      },
+    ],
+  },
+  {
+    id: uuid(),
+    user: {
+      id: uuid(),
+      fullname: "Annet Black5",
+      avatar: "",
+    },
+    data: [
+      {
+        id: uuid(),
+        isMe: false,
+        text: "Test text 1",
+        date: "24.05.2021",
+        time: "19:17",
+      },
+      {
+        id: uuid(),
+        isMe: true,
+        text: "Test text 2",
+        date: "24.05.2021",
+        time: "19:18",
+      },
+    ],
+  },
+  {
+    id: uuid(),
+    user: {
+      id: uuid(),
+      fullname: "Annet Black5",
+      avatar: "",
+    },
+    data: [
+      {
+        id: uuid(),
+        isMe: false,
+        text: "Test text 1",
+        date: "24.05.2021",
+        time: "19:17",
+      },
+      {
+        id: uuid(),
+        isMe: true,
+        text: "Test text 2",
+        date: "24.05.2021",
+        time: "19:18",
+      },
+    ],
+  },
+];

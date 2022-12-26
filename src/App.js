@@ -39,8 +39,8 @@ const App = () => {
     if (isAuth) {
       navigate(`${baseRoutes.base}`);
     } else {
-      // navigate(`${baseRoutes.base}`);
-      navigate(`${baseRoutes.login}`);
+      navigate(`${baseRoutes.direct}`);
+      // navigate(`${baseRoutes.login}`);
     }
   }, [isAuth]);
 
@@ -62,7 +62,7 @@ const App = () => {
           path={baseRoutes.login}
           element={<Login isPreloaderActive={isPreloaderActive.isActive} />}
         >
-          <Route path="" element={<LoginBlock login={() => {}} />} />
+          <Route path="" element={<LoginBlock />} />
           <Route path={authRoutes.create} element={<CreateNewAccount />} />
           <Route path={authRoutes.forgot} element={<ForgotPassword />} />
         </Route>

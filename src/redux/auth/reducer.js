@@ -1,4 +1,4 @@
-import { LOGIN, LOGUT , SIGNUP } from "./types";
+import { LOGIN, LOGUT, SIGNUP } from "./types";
 
 const initialState = {
   isAuth: false,
@@ -7,7 +7,17 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN: {
-      const [login, password] = action.data;
+      const {
+        data: [login, password],
+        isPreview,
+      } = action.payload;
+
+      if (!isPreview) {
+        alert(`Твои данные:
+      Логин: ${login} , password: ${password}
+      Welcome ;)
+      `);
+      }
 
       return { ...state, isAuth: true };
     }
@@ -17,7 +27,7 @@ export const authReducer = (state = initialState, action) => {
       // return state;
     }
 
-    case SIGNUP:{
+    case SIGNUP: {
       return state;
     }
 

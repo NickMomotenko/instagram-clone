@@ -8,17 +8,13 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
 
-import { DirectProvider } from "./context/messages";
-
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <DirectProvider>
-        <App />
-      </DirectProvider>
+      <App />
     </Provider>
   </BrowserRouter>
 );

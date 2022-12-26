@@ -34,7 +34,13 @@ const Login = ({ isPreloaderActive }) => {
           onClick={(e) => {
             e.preventDefault();
 
-            dispath({ type: LOGIN, data: ["test@mail.ru", "11241414"] });
+            dispath({
+              type: LOGIN,
+              payload: {
+                data: ["test@mail.ru", "11241414"],
+                isPreview: true,
+              },
+            });
           }}
         />
       </DemoButton>

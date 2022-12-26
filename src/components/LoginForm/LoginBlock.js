@@ -17,14 +17,20 @@ import { checkUpperCase, checkValueLength } from "../../helpers/validate-input";
 
 import { authRoutes } from "../../helpers/base-routes";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LOGIN } from "../../redux/auth/types";
 
-const LoginBlock = ({ login }) => {
+const LoginBlock = () => {
   let email = useInput({
     validityFunctions: [checkUpperCase, checkValueLength],
   });
   let password = useInput();
 
-  const { handleSubmit } = useForm(login);
+  const dispatch = useDispatch();
+
+  const { handleSubmit } = useForm(() => {
+    dispatch({ type: LOGIN, payload: { data: [email.value, password.value] } });
+  });
 
   return (
     <Form onSubmit={(e) => handleSubmit(e, [email, password])}>
