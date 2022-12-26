@@ -1,4 +1,4 @@
-import { authUser } from "../posts/mockData";
+import { authUser } from "../mockData";
 import { UPDATE_USER } from "./types";
 
 export const initialState = {

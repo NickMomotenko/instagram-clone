@@ -15,7 +15,8 @@ import Logo from "../Logo";
 
 import { checkUpperCase, checkValueLength } from "../../helpers/validate-input";
 
-import { routes } from "./index";
+import { authRoutes } from "../../helpers/base-routes";
+import { Link } from "react-router-dom";
 
 const LoginBlock = ({ login, changeRoute }) => {
   let email = useInput({
@@ -63,23 +64,18 @@ const LoginBlock = ({ login, changeRoute }) => {
 
       <LoginRow style={{ marginTop: 20 }}>
         <DefaultButton
+          as={Link}
+          to={authRoutes.create}
           text="Create a new account"
           bgColor="#0095f6"
-          onClick={(event) => {
-            event.preventDefault();
-            changeRoute(routes.create);
-          }}
         />
       </LoginRow>
       <LoginRow style={{ marginTop: 10 }}>
         <Text
-          as="button"
+          as={Link}
+          to={authRoutes.forgot}
           text="Forgot password?"
           color="#00376b"
-          onClick={(e) => {
-            e.preventDefault();
-            changeRoute(routes.forgot);
-          }}
         />
       </LoginRow>
     </Form>

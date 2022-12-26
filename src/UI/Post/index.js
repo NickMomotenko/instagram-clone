@@ -78,7 +78,7 @@ const POST_TYPES = {
   VIDEO: "video",
 };
 
-const Post = ({ post, postAction, authUser, isMyPost, userId, ...props }) => {
+const Post = ({ post, authUser, isMyPost, userId, ...props }) => {
   const dispath = useDispatch();
 
   const [like, setLike] = useState(false);
@@ -137,11 +137,9 @@ const Post = ({ post, postAction, authUser, isMyPost, userId, ...props }) => {
   const likePost = (post) => {
     if (!like) {
       setLike(true);
-      postAction("like_post", { post, status: "add" });
       dispath({ type: LIKE_POST, id: post.id });
     } else {
       setLike(false);
-      postAction("like_post", { post, status: "remove" });
       dispath({ type: DISLIKE_POST, id: post.id });
     }
   };
@@ -161,6 +159,7 @@ const Post = ({ post, postAction, authUser, isMyPost, userId, ...props }) => {
         };
 
         dispath({ type: UPDATE_USER, updatedUserData });
+        dispath({ type: SAVE_POST });
       }
     } else {
       setSave(false);
@@ -258,7 +257,6 @@ const Post = ({ post, postAction, authUser, isMyPost, userId, ...props }) => {
         </PostRow>
       </Block>
       <PostComments
-        postAction={postAction}
         post={post}
         isCommentsBarActive={isCommentsBarActive}
         userId={userId}

@@ -150,7 +150,6 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-
   return (
     <DataContext.Provider
       value={{ userData, setUserData, globalData, postAction, allUsers }}
@@ -158,18 +157,4 @@ export const DataProvider = ({ children }) => {
       {children}
     </DataContext.Provider>
   );
-};
-
-export const withData = (WrappedComponent) => {
-  return class extends React.Component {
-    render() {
-      return (
-        <DataContext.Consumer>
-          {(value) => {
-            return <WrappedComponent {...value} {...this.props} />;
-          }}
-        </DataContext.Consumer>
-      );
-    }
-  };
 };

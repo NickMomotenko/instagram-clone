@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import { PopupWrapp, PopupContent } from "./styles";
 
 import { Row, Block } from "../../UI/Layout";
@@ -9,11 +11,14 @@ import Textarea from "../../UI/Textarea";
 import DefaultButton from "../../UI/DefaultButton";
 
 import { useInput } from "../../hooks/useInput";
-import { useDispatch } from "react-redux";
+
 import { CREATE_POST } from "../../redux/posts/types";
 
-const Popup = ({ user, isActive, postAction, setIsActive }) => {
+const Popup = ({ isActive, setIsActive }) => {
   const dispath = useDispatch();
+  const {
+    authUser: { user },
+  } = useSelector((state) => state.authUser);
 
   const postInput = useInput({ option: { symbolLimit: 255 } });
 
@@ -21,7 +26,6 @@ const Popup = ({ user, isActive, postAction, setIsActive }) => {
 
   const createPopup = () => {
     setIsActive(true);
-    postAction("create", { text: postInput?.value });
     dispath({ type: CREATE_POST, text: postInput?.value });
     setIsActive(false);
     postInput.clearValue();

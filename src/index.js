@@ -8,7 +8,6 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
 
-import { DataProvider } from "./context/data";
 import { DirectProvider } from "./context/messages";
 
 const container = document.getElementById("root");
@@ -17,11 +16,9 @@ const root = createRoot(container);
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <DataProvider>
-        <DirectProvider>
-          <App />
-        </DirectProvider>
-      </DataProvider>
+      <DirectProvider>
+        <App />
+      </DirectProvider>
     </Provider>
   </BrowserRouter>
 );

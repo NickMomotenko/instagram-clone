@@ -1,4 +1,4 @@
-import { posts as postsData, authUser } from "./mockData";
+import { posts as postsData, authUser } from "../mockData";
 
 import {
   LIKE_POST,
@@ -71,6 +71,8 @@ export const postsReducer = (state = initialState, action) => {
       // const { id } = action;
 
       // const searchablePost = posts.find((post) => post.id === id);
+
+      console.log(state);
 
       return state;
     }

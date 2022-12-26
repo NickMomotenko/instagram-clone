@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 import { HeaderWrapp, HeaderAllUser, HeaderAllUserItem } from "./styled";
 
+import { allDbUsers } from "../../redux/mockData";
+
 import { useInput } from "../../hooks/useInput";
 import { useActive } from "../../hooks/useActive";
-
-import { DataContext } from "../../context/data";
+import { useAuth } from "../../hooks/auth";
 
 import Container from "../Container";
 import Navigation from "../Navigation";
@@ -16,10 +17,9 @@ import Avatar from "../../UI/Avatar";
 import Text from "../../UI/Text";
 import { Block, Row } from "../../UI/Layout";
 import Input from "../../UI/Input";
+import DefaultButton from "../../UI/DefaultButton";
 
 import searchIcon from "../../assets/icons/search.svg";
-import { useAuth } from "../../hooks/auth";
-import DefaultButton from "../../UI/DefaultButton";
 
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
@@ -30,14 +30,12 @@ const Header = () => {
 
   const { logOut } = useAuth();
 
-  const { allUsers } = React.useContext(DataContext);
-
   React.useEffect(() => {
     searchInput?.value.length === 0
       ? isSearchBlock.setIsActive(false)
       : isSearchBlock.setIsActive(true);
 
-    const userWithMatchedNameOrLastName = allUsers.filter(({ user }) => {
+    const userWithMatchedNameOrLastName = allDbUsers.filter(({ user }) => {
       const lowerCaseFullname = user?.fullname?.toLowerCase();
       return lowerCaseFullname.includes(searchInput?.value.toLowerCase());
     });

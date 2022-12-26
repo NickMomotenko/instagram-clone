@@ -10,9 +10,10 @@ import Input from "../../UI/Input";
 import DefaultButton from "../../UI/DefaultButton";
 import { Block, Row } from "../../UI/Layout";
 import Form from "../../UI/Form";
-import { routes } from ".";
+import { authRoutes, baseRoutes } from "../../helpers/base-routes";
+import { Link } from "react-router-dom";
 
-const ForgotPassword = ({ changeRoute }) => {
+const ForgotPassword = () => {
   const password = useInput();
   const { handleSubmit } = useForm(() =>
     console.log("forgot pass is ready to submit")
@@ -51,26 +52,20 @@ const ForgotPassword = ({ changeRoute }) => {
           <LoginTextWithLine text="or" bold color="#917777" />
           <Div />
         </Row>
-        <LoginRow style={{marginTop:15}}>
+        <LoginRow style={{ marginTop: 15 }}>
           <Text
-            as="button"
+            as={Link}
+            to={`${baseRoutes.login}/${authRoutes.create}`}
             text="Create New Account"
             color="#385185"
-            onClick={(e) => {
-              e.preventDefault();
-              changeRoute(routes.create);
-            }}
           />
         </LoginRow>
-        <LoginRow style={{marginTop:15}}>
+        <LoginRow style={{ marginTop: 15 }}>
           <Text
-            as="button"
+            as={Link}
+            to={baseRoutes.login}
             text="Back to Login"
             color="#385185"
-            onClick={(e) => {
-              e.preventDefault();
-              changeRoute(routes.login);
-            }}
           />
         </LoginRow>
       </Block>

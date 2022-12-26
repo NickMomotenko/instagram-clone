@@ -1,35 +1,27 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 import { PostsWrapp } from "./styled";
 
 import Post from "../../UI/Post";
-import { DataContext } from "../../context/data";
-import { useSelector } from "react-redux";
 
-const Posts = ({ posts, postAction }) => {
-  const {
-    userData: {
-      user: { id: userId },
-    },
-  } = React.useContext(DataContext);
-
+const Posts = () => {
   const { authUser } = useSelector((state) => state.authUser);
-
-  const updateAuthUserData = () => {};
+  const { posts } = useSelector((state) => state.posts);
 
   return (
     <PostsWrapp as="ul" style={{ marginBottom: -20 }}>
       {posts?.map((post) => {
-        const isMyPost = userId === post.user.id;
+        const isMyPost = authUser.user.userId === post.user.id;
 
         return (
           <Post
             as="li"
             key={post.id}
             post={post}
-            postAction={postAction}
             isMyPost={isMyPost}
-            userId={userId}
+            userId={authUser.user.id}
             authUser={authUser}
           />
         );

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 import {
   ProfileWrapp,
   GradientButton,
@@ -12,9 +14,14 @@ import { Row, Block } from "../../UI/Layout";
 import Text from "../../UI/Text";
 import DefaultButton from "../../UI/DefaultButton";
 import Avatar from "../../UI/Avatar";
+
 import Posts from "../Posts";
 
-const Profile = ({ user, popup, stories, posts }) => {
+const Profile = ({ popup }) => {
+  const {
+    authUser: { user, stories, posts },
+  } = useSelector((state) => state.authUser);
+
   const renderPostsOrText = () => {
     return posts?.length ? (
       <Posts posts={posts} />

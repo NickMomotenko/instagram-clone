@@ -4,22 +4,14 @@ import { Outlet } from "react-router-dom";
 
 import { MainWrapp } from "./styled";
 
-import { usePopup } from "../../hooks/popup";
-
-import { withData } from "../../context/data";
-
 import Container from "../../components/Container";
 import Header from "../../components/Header";
 import Popup from "../../components/Popup";
 
 import { Row } from "../../UI/Layout";
 
-const Main = React.memo((props) => {
-  let {
-    postAction,
-    userData: { user },
-    popup,
-  } = props;
+const Main = (props) => {
+  let { popup } = props;
 
   return (
     <MainWrapp>
@@ -29,9 +21,9 @@ const Main = React.memo((props) => {
           <Outlet />
         </Row>
       </Container>
-      <Popup user={user} postAction={postAction} {...popup} />
+      <Popup {...popup} />
     </MainWrapp>
   );
-});
+};
 
-export default withData(Main);
+export default Main;

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useDispatch } from "react-redux";
+
 import {
   PostCommentsWrapp,
   PostRow,
@@ -15,16 +17,10 @@ import Text from "../Text";
 
 import Input from "../../UI/Input";
 import DefaultButton from "../../UI/DefaultButton";
-import { useDispatch } from "react-redux";
+
 import { ADD_COMMENT, CHANGE_COMMENT } from "../../redux/posts/types";
 
-const PostComments = ({
-  post,
-  isCommentsBarActive,
-  userId,
-  postAction,
-  onClick,
-}) => {
+const PostComments = ({ post, isCommentsBarActive, userId, onClick }) => {
   const [isChangeComment, setIsChangeComment] = useState(false);
   const [currentComment, setCurrentComment] = useState(null);
 
@@ -80,8 +76,7 @@ const PostComments = ({
 
     const updatedPost = { ...post, comments: updatedCommentsArr };
 
-    postAction("change_comment", updatedPost);
-    dispath({type:CHANGE_COMMENT , updatedPost})
+    dispath({ type: CHANGE_COMMENT, updatedPost });
     setIsChangeComment(false);
     setCurrentComment(null);
     commentInput.clearValue();

@@ -4,25 +4,6 @@ import Text from "../../UI/Text";
 import { Row, Block } from "../../UI/Layout";
 import { FormWrapp } from "../../UI/Form";
 
-export const LoginFormWrapp = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  background: #ffffff;
-  box-shadow: 0 15px 20px #bcbcef;
-  border-radius: 35px;
-  display: inline-block;
-  padding: 30px;
-  width: 350px;
-  max-width: 100%;
-
-  @media screen and (max-width: 290px) {
-    padding: 30px 15px;
-  }
-`;
-
 export const LoginTextWithLine = styled(Text)`
   display: inline-block;
   margin: 0 18px;

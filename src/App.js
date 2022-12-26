@@ -1,12 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
-
 import { Route, Routes } from "react-router-dom";
-
-import { useSelector } from "react-redux";
-
-import { withData } from "./context/data";
 
 import { useActive } from "./hooks/useActive";
 import { usePopup } from "./hooks/popup";
@@ -20,10 +15,11 @@ import Profile from "./components/Profile";
 import Posts from "./components/Posts";
 import Direct from "./components/Direct";
 
-import { baseRoutes } from "./helpers/base-routes";
+import LoginBlock from "./components/LoginForm/LoginBlock";
+import ForgotPassword from "./components/LoginForm/ForgotPassword";
+import CreateNewAccount from "./components/LoginForm/CreateNewAccount";
 
-import { DataContext } from "./context/data";
-
+import { baseRoutes, authRoutes } from "./helpers/base-routes";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -31,15 +27,8 @@ const AppWrapp = styled.div`
 `;
 
 const App = () => {
-  const posts = useSelector((state) => state.posts.posts);
-
   const isPreloaderActive = useActive();
   const popup = usePopup();
-
-  const {
-    postAction,
-    userData: { user, stories },
-  } = React.useContext(DataContext);
 
   // delay timer in sec
   const delayTimer = 3;
@@ -58,17 +47,19 @@ const App = () => {
         <Route
           path={baseRoutes.login}
           element={<Login isPreloaderActive={isPreloaderActive.isActive} />}
-        />
-        <Route path={baseRoutes.base} element={<Main popup={popup} />}>
+        >
           <Route
-            path={baseRoutes.posts}
-            element={<Posts posts={posts} postAction={postAction} />}
+            path=''
+            element={<LoginBlock login={() => {}} />}
           />
+          <Route path={authRoutes.create} element={<CreateNewAccount />} />
+          <Route path={authRoutes.forgot} element={<ForgotPassword />} />
+        </Route>
+        <Route path={baseRoutes.base} element={<Main popup={popup} />}>
+          <Route path={baseRoutes.posts} element={<Posts />} />
           <Route
             path={baseRoutes.profile}
-            element={
-              <Profile user={user} posts={[]} stories={stories} popup={popup} />
-            }
+            element={<Profile popup={popup} />}
           />
         </Route>
       </Routes>
@@ -76,4 +67,4 @@ const App = () => {
   );
 };
 
-export default withData(App);
+export default App;

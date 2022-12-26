@@ -18,8 +18,9 @@ import {
 import { useInput } from "../../hooks/useInput";
 import { useAuth } from "../../hooks/auth";
 import { useForm } from "../../hooks/useForm";
-import { routes } from ".";
+import { authRoutes, baseRoutes } from "../../helpers/base-routes";
 import { useStepper } from "../../hooks/useStepper";
+import { Link } from "react-router-dom";
 
 const CreateNewAccount = ({ changeRoute }) => {
   const { step, stepRef, incrementStep, decrementStep } = useStepper({
@@ -184,13 +185,10 @@ const CreateNewAccount = ({ changeRoute }) => {
           </Row>
           <LoginRow style={{ marginTop: 15 }}>
             <Text
-              as="button"
+              as={Link}
+              to={baseRoutes.login}
               text="Back to Login"
               color="#385185"
-              onClick={(e) => {
-                e.preventDefault();
-                changeRoute(routes.login);
-              }}
             />
           </LoginRow>
         </Block>
