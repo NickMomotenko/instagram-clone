@@ -1,6 +1,6 @@
 import { messagesDb } from "../../context/mockData";
 
-import { ADD_MESSAGE } from "./types";
+import { ADD_MESSAGE , DELETE_MESSAGE, CHANGE_MESSAGE } from "./types";
 
 const initialState = {
   messages: messagesDb,
@@ -37,6 +37,10 @@ export const directReducer = (state = initialState, action) => {
 
       return { ...state, messages: [...updatedData] };
     }
+
+    case DELETE_MESSAGE:{}
+
+    case CHANGE_MESSAGE:{}
 
     default:
       return state;

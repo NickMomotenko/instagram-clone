@@ -25,11 +25,18 @@ import { ADD_MESSAGE } from "../../redux/direct/types";
 
 const Direct = () => {
   const { messages } = useSelector((state) => state.direct);
+
   const {
     authUser: { user },
   } = useSelector((state) => state.authUser);
 
   const [activeChat, setActiveChat] = useState(messages[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  React.useEffect(() => {
+    const index = messages.indexOf(activeChat);
+    setActiveIndex(index);
+  }, [activeChat]);
 
   const sendInput = useInput();
 
@@ -47,6 +54,7 @@ const Direct = () => {
     if (!text) return;
 
     dispatch({ type: ADD_MESSAGE, payload: { chatId, text } });
+    sendInput.clearValue();
   };
 
   return (
@@ -99,7 +107,7 @@ const Direct = () => {
             </DirectContentSidebar>
             <DirectContentSidebar style={{ maxWidth: "100%", flex: 1 }}>
               <Block>
-                {activeChat?.data.map(({ id, text, time, isMe }) => (
+                {messages[activeIndex]?.data.map(({ id, text, time, isMe }) => (
                   <DirectMessage key={id} position={isMe}>
                     <Block
                       style={{

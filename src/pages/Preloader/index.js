@@ -9,7 +9,7 @@ import {
 
 const Preloader = ({ isActive }) => {
   return (
-    <PreloaderWrapp activeStatus={true}>
+    <PreloaderWrapp activeStatus={isActive}>
       <PreloaderLogoBg>
         <PreloaderContent>
           <PreloaderLogo />

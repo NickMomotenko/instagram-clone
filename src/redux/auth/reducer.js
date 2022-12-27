@@ -24,7 +24,6 @@ export const authReducer = (state = initialState, action) => {
 
     case LOGUT: {
       return { ...state, isAuth: false };
-      // return state;
     }
 
     case SIGNUP: {

@@ -13,9 +13,9 @@ export const useInput = (val = {}) => {
 
   const ref = React.useRef(null);
 
-  // React.useEffect(() => {
-  //   symbolLimit && setCurrentLimit(symbolLimit - value.length);
-  // }, [value]);
+  React.useEffect(() => {
+    symbolLimit && setCurrentLimit(symbolLimit - value.length);
+  }, [value]);
 
   const onChange = (e) => setValue(e.target.value);
 

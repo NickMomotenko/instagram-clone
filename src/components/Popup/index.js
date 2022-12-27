@@ -25,10 +25,15 @@ const Popup = ({ isActive, setIsActive }) => {
   const isCreateButtonDisabled = postInput?.value.length === 0;
 
   const createPopup = () => {
-    setIsActive(true);
+    // setIsActive(true);
     dispath({ type: CREATE_POST, text: postInput?.value });
     setIsActive(false);
     postInput.clearValue();
+  };
+
+  const cancelClick = () => {
+    postInput.clearValue();
+    setIsActive(false);
   };
 
   return (
@@ -86,7 +91,7 @@ const Popup = ({ isActive, setIsActive }) => {
               text="Cancel"
               fullWidth
               bgColor="#0095f6"
-              onClick={() => setIsActive(false)}
+              onClick={cancelClick}
             />
           </Row>
         </Block>

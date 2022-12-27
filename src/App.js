@@ -39,21 +39,21 @@ const App = () => {
     if (isAuth) {
       navigate(`${baseRoutes.base}`);
     } else {
-      navigate(`${baseRoutes.direct}`);
-      // navigate(`${baseRoutes.login}`);
+      // navigate(`${baseRoutes.direct}`);
+      navigate(`${baseRoutes.login}`);
     }
   }, [isAuth]);
 
   // delay timer in sec
-  // const delayTimer = 3;
+  const delayTimer = 3;
 
-  // React.useEffect(() => {
-  //   setTimeout(() => isPreloaderActive.setIsActive(true), delayTimer * 1000);
-  // }, []);
+  React.useEffect(() => {
+    setTimeout(() => isPreloaderActive.setIsActive(true), delayTimer * 1000);
+  }, []);
 
   return (
     <AppWrapp>
-      {/* <Preloader isActive={isPreloaderActive.isActive} /> */}
+      <Preloader isActive={isPreloaderActive.isActive} />
 
       <Routes>
         <Route path={baseRoutes.stories} element={<Stories />} />
