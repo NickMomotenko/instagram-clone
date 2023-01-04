@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
   ProfileWrapp,
@@ -16,13 +17,16 @@ import DefaultButton from "../../UI/DefaultButton";
 import Avatar from "../../UI/Avatar";
 
 import Posts from "../Posts";
-import { Link } from "react-router-dom";
+import Edit from "../Edit";
+
 import { baseRoutes } from "../../helpers/base-routes";
 
 const Profile = ({ popup }) => {
   const {
     authUser: { user, stories, posts },
   } = useSelector((state) => state.authUser);
+
+  const [isEdit, setIsEdit] = useState(true);
 
   const renderPostsOrText = () => {
     return posts?.length ? (
@@ -36,6 +40,10 @@ const Profile = ({ popup }) => {
     popup.setIsActive(true);
   };
 
+  const toggleEditClick = () => {
+    setIsEdit(!isEdit);
+  };
+
   return (
     <ProfileWrapp>
       <ProfileHeader>
@@ -46,6 +54,7 @@ const Profile = ({ popup }) => {
           <Block>
             <DefaultButton
               text="Edit"
+              onClick={toggleEditClick}
               style={{
                 background: "transparent",
                 color: "#7751518a",
@@ -130,6 +139,7 @@ const Profile = ({ popup }) => {
         </Row>
       </ProfileHeader>
       <ProfileContent>{/* {renderPostsOrText()} */}</ProfileContent>
+      <Edit />
     </ProfileWrapp>
   );
 };

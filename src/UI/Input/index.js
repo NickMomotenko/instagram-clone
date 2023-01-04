@@ -1,6 +1,6 @@
 import React from "react";
 
-import { InputWrapp, InputChanger } from "./styled";
+import { InputWrapp, InputChanger, InputLabel } from "./styled";
 
 import Icon from "../Icon";
 import Text from "../Text";
@@ -13,8 +13,10 @@ const Input = React.forwardRef(
       error,
       onChange,
       onFocus,
-      placeholder,name,
+      placeholder,
+      name,
       icon,
+      labelName,
       noError,
       required,
       ...props
@@ -24,6 +26,7 @@ const Input = React.forwardRef(
     return (
       <InputWrapp {...props}>
         {/* {icon && <Icon url={icon} style={{ marginRight: 10 }} />} */}
+        {labelName && <InputLabel>{labelName}</InputLabel>}
         <InputChanger
           ref={ref}
           value={value}

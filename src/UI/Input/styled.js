@@ -31,3 +31,8 @@ export const InputChanger = styled.input`
     border-bottom-color: red;
   }
 `;
+
+export const InputLabel = styled.div`
+  font-size: 14px;
+  margin-bottom: 4px;
+`;

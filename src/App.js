@@ -40,7 +40,7 @@ const App = () => {
       navigate(`${baseRoutes.base}`);
     } else {
       // navigate(`${baseRoutes.direct}`);
-      navigate(`${baseRoutes.login}`);
+      navigate(`${baseRoutes.profile}`);
     }
   }, [isAuth]);
 
@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <AppWrapp>
-      <Preloader isActive={isPreloaderActive.isActive} />
+      {/* <Preloader isActive={isPreloaderActive.isActive} /> */}
 
       <Routes>
         <Route path={baseRoutes.stories} element={<Stories />} />

@@ -36,6 +36,10 @@ export const Block = ({ children, ...props }) => {
   return <BlockWrapp {...props}>{children}</BlockWrapp>;
 };
 
-export const Paper = ({ children, ...props }) => {
-  return <PaperWrapp {...props}>{children}</PaperWrapp>;
-};
+export const Paper = React.forwardRef(({ children, ...props }, ref) => {
+  return (
+    <PaperWrapp ref={ref} {...props}>
+      {children}
+    </PaperWrapp>
+  );
+});

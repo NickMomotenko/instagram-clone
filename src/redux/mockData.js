@@ -40,7 +40,7 @@ export const posts = [
           avatar:
             "https://media-exp1.licdn.com/dms/image/C4E03AQGi0swkMYXGPQ/profile-displayphoto-shrink_800_800/0/1613669311997?e=1625097600&v=beta&t=3sv_UEFRa75vHsd3CGPPnSpHdshFK1R4XqNcv_Bo9uA",
         },
-        text: "хуета",
+        text: ";)",
       },
       {
         id: uuid(),
@@ -51,7 +51,7 @@ export const posts = [
           avatar:
             "https://media-exp1.licdn.com/dms/image/C4E03AQGi0swkMYXGPQ/profile-displayphoto-shrink_800_800/0/1613669311997?e=1625097600&v=beta&t=3sv_UEFRa75vHsd3CGPPnSpHdshFK1R4XqNcv_Bo9uA",
         },
-        text: "хуета 2",
+        text: "ganstaa....",
       },
     ],
     liked: [
