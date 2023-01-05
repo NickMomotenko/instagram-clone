@@ -1,11 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
-import Avatar from "../../UI/Avatar";
+import { profileEditRoutes } from "../../helpers/base-routes";
+
 import DefaultButton from "../../UI/DefaultButton";
-import Input from "../../UI/Input";
-import { Block, Row } from "../../UI/Layout";
 import Text from "../../UI/Text";
 
 import {
@@ -14,66 +12,50 @@ import {
   EditOptions,
   EditOptionsItem,
   EditMain,
-  EditButtons,
-  EditMore,
 } from "./styled";
 
-const inputs = [
-  { placeholder: "Nickname", viewIndex: 2 },
-  { placeholder: "Fullname", viewIndex: 2 },
-  { placeholder: "Description", viewIndex: 2 },
-  { placeholder: "Avatar", viewIndex: 2 },
-  { placeholder: "Job", viewIndex: 1 },
-  { placeholder: "City", viewIndex: 1 },
-  { placeholder: "Links", viewIndex: 1 },
+const editOptions = [
+  {
+    title: "General",
+    path: `${profileEditRoutes.general}`,
+  },
+  {
+    title: "Posts",
+    path: `${profileEditRoutes.posts}`,
+  },
+  {
+    title: "Saved",
+    path: `${profileEditRoutes.saved}`,
+  },
+  {
+    title: "Liked",
+    path: `${profileEditRoutes.liked}`,
+  },
 ];
 
-const editOptions = ["General", "Posts", "Saved", "Liked"];
-
 const Edit = () => {
-  const [isActive, setIsActive] = React.useState(true);
-  const [displayedInputs, setDisplayedInputs] = React.useState(
-    inputs.filter((input) => input.viewIndex === 2)
-  );
-  const [isFullInputDisplay, setIsFullInputDisplay] = React.useState(false);
+  const [isEditActive, setIsEditActive] = React.useState(false);
 
-  const { authUser } = useSelector((state) => state.authUser);
   const editContentRef = React.useRef(null);
 
   const pathName = useLocation().pathname;
 
-  const moreButtonText = isFullInputDisplay ? "Close" : "More";
-
-  const { user } = authUser;
-
   React.useEffect(() => {
-    const editContent = editContentRef.current;
+    // const editContent = editContentRef.current;
 
-    switch (pathName) {
-      case "/profile/edit/general":
-        editContent.style.width = "55vw";
-        break;
+    const pathArr = [
+      "/profile/edit",
+      "/profile/edit/general",
+      "/profile/edit/posts",
+    ];
 
-      default:
-        break;
+    if (pathArr.includes(pathName)) {
+      setIsEditActive(true);
     }
   }, [pathName]);
 
-  React.useEffect(() => {
-    if (!isFullInputDisplay) {
-      setDisplayedInputs(inputs.filter((input) => input.viewIndex === 2));
-      return;
-    }
-
-    setDisplayedInputs(inputs);
-  }, [isFullInputDisplay]);
-
-  const onMoreButtonClick = () => {
-    setIsFullInputDisplay(!isFullInputDisplay);
-  };
-
   return (
-    <EditWrapp active={isActive}>
+    <EditWrapp active={isEditActive}>
       <EditContent ref={editContentRef} style={{ width: "55vw" }}>
         <Text
           text="Edit profile"
@@ -81,65 +63,25 @@ const Edit = () => {
           style={{ fontSize: 18, marginBottom: 20 }}
         />
         <EditOptions as="ul" style={{ marginBottom: 30 }}>
-          {editOptions.map((opt, ind) => (
+          {editOptions.map(({ title, path }, ind) => (
             <EditOptionsItem key={ind} as="li">
               <DefaultButton
-                text={opt}
+                text={title}
+                as={Link}
+                to={path}
                 style={{
                   background: "transparent",
                   color: "#7751518a",
                   borderColor: "#7751518a",
+                  border: "1px solid",
                 }}
               />
             </EditOptionsItem>
           ))}
         </EditOptions>
         <EditMain>
-          <Row>
-            <Block style={{ textAlign: "center" }}>
-              <Avatar
-                size={90}
-                textSize={22}
-                {...user}
-                style={{ marginBottom: 20 }}
-              />
-              <DefaultButton
-                text="Загрузить"
-                style={{
-                  display: "block",
-                  background: "transparent",
-                  color: "#7751518a",
-                  borderColor: "#7751518a",
-                }}
-              />
-            </Block>
-            <Block style={{ flex: 1, marginLeft: 30 }}>
-              {displayedInputs.map(({ placeholder }, ind) => (
-                <Input
-                  key={ind}
-                  labelName={placeholder}
-                  placeholder={placeholder}
-                  style={{ marginBottom: 10 }}
-                  noError
-                />
-              ))}
-              <EditMore>
-                <DefaultButton
-                  onClick={() => {
-                    onMoreButtonClick();
-                  }}
-                  text={moreButtonText}
-                  bgColor="#f8fbff"
-                  style={{ color: "#afc1d9", border: "1px solid #afc1d9" }}
-                />
-              </EditMore>
-            </Block>
-          </Row>
+          <Outlet />
         </EditMain>
-        <EditButtons>
-          <DefaultButton text="Save" style={{ marginRight: 20 }} />
-          <DefaultButton text="Cancel" />
-        </EditButtons>
       </EditContent>
     </EditWrapp>
   );

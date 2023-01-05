@@ -9,6 +9,7 @@ const DefaultButtonWrapp = styled.button`
   color: #fff;
   font-size: 14px;
   font-weight: 600;
+  display:inline-block;
 
   &:disabled {
     background-color: #eceaea;

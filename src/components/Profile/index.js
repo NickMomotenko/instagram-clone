@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 
 import {
   ProfileWrapp,
@@ -20,13 +20,14 @@ import Posts from "../Posts";
 import Edit from "../Edit";
 
 import { baseRoutes } from "../../helpers/base-routes";
+import EditGeneral from "../Edit/EditGeneral";
 
 const Profile = ({ popup }) => {
   const {
     authUser: { user, stories, posts },
   } = useSelector((state) => state.authUser);
 
-  const [isEdit, setIsEdit] = useState(true);
+  const navigate = useNavigate();
 
   const renderPostsOrText = () => {
     return posts?.length ? (
@@ -41,7 +42,8 @@ const Profile = ({ popup }) => {
   };
 
   const toggleEditClick = () => {
-    setIsEdit(!isEdit);
+    // setIsEditActive(!isEditActive);
+    // navigate("/profile/edit/general");
   };
 
   return (

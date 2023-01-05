@@ -21,6 +21,9 @@ import CreateNewAccount from "./components/LoginForm/CreateNewAccount";
 
 import { baseRoutes, authRoutes } from "./helpers/base-routes";
 import { useSelector } from "react-redux";
+import Edit from "./components/Edit";
+import EditGeneral from "./components/Edit/EditGeneral";
+import EditPosts from "./components/Edit/EditPosts";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -37,10 +40,10 @@ const App = () => {
 
   React.useEffect(() => {
     if (isAuth) {
-      navigate(`${baseRoutes.base}`);
+      // navigate(`${baseRoutes.base}`);
     } else {
       // navigate(`${baseRoutes.direct}`);
-      navigate(`${baseRoutes.profile}`);
+      // navigate(`${baseRoutes.profile}`);
     }
   }, [isAuth]);
 
@@ -68,12 +71,16 @@ const App = () => {
         </Route>
         <Route path={baseRoutes.base} element={<Main popup={popup} />}>
           <Route path="" element={<Posts />} />
-          <Route
-            path={baseRoutes.profile}
-            element={<Profile popup={popup} />}
-          />
+          <Route path={baseRoutes.profile} element={<Profile popup={popup} />}>
+            <Route path="edit" element={<Edit />}>
+              <Route path="general" element={<EditGeneral />} />
+              <Route path="posts" element={<EditPosts />} />
+              <Route path="saved" element={<EditGeneral />} />
+              <Route path="liked" element={<EditGeneral />} />
+            </Route>
+          </Route>
         </Route>
-        <Route path="*" element={<Navigate to={baseRoutes.login} replace />} />
+        {/* <Route path="*" element={<Navigate to={baseRoutes.login} replace />} /> */}
       </Routes>
     </AppWrapp>
   );

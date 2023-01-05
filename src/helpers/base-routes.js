@@ -14,8 +14,8 @@ export const authRoutes = {
 };
 
 export const profileEditRoutes = {
-  general: `${baseRoutes.profile}/${baseRoutes.edit}/general`,
-  posts: `${baseRoutes.profile}/${baseRoutes.edit}/posts`,
-  saved: `${baseRoutes.profile}/${baseRoutes.edit}/saved`,
-  liked: `${baseRoutes.profile}/${baseRoutes.edit}/liked`,
+  general: `${baseRoutes.profile}${baseRoutes.edit}/general`,
+  posts: `${baseRoutes.profile}${baseRoutes.edit}/posts`,
+  saved: `${baseRoutes.profile}${baseRoutes.edit}/saved`,
+  liked: `${baseRoutes.profile}${baseRoutes.edit}/liked`,
 };
