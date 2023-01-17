@@ -8,17 +8,20 @@ import { Block, Row } from "../../UI/Layout";
 import Avatar from "../../UI/Avatar";
 import DefaultButton from "../../UI/DefaultButton";
 
-import { EditMore, EditButtons } from "./styled";
+import { EditGeneralWrapp, EditMore, EditButtons } from "./styled";
 
 import { useInput } from "../../hooks/useInput";
+import { useNavigate } from "react-router-dom";
+import { baseRoutes } from "../../helpers/base-routes";
+import { InputLabel } from "../../UI/Input/styled";
 
 const inputs = [
-  //   { placeholder: "Nickname", viewIndex: 2 },
+  { placeholder: "Nickname", viewIndex: 2 },
   { placeholder: "Fullname", viewIndex: 2 },
-  //   { placeholder: "Description", viewIndex: 2 },
-  //   { placeholder: "Job", viewIndex: 1 },
-  //   { placeholder: "City", viewIndex: 1 },
-  //   { placeholder: "Links", viewIndex: 1 },
+  { placeholder: "Description", viewIndex: 2 },
+  { placeholder: "Job", viewIndex: 1 },
+  { placeholder: "City", viewIndex: 1 },
+  { placeholder: "Links", viewIndex: 1 },
 ];
 
 const EditGeneral = () => {
@@ -29,6 +32,7 @@ const EditGeneral = () => {
   );
 
   const fullname = useInput();
+  const navigate = useNavigate();
 
   const moreButtonText = isFullInputDisplay ? "Close" : "More";
   const { user } = authUser;
@@ -58,8 +62,14 @@ const EditGeneral = () => {
     });
   }
 
+  const onCancelButton = () => {
+    navigate(baseRoutes.profile);
+  };
+
+  const onSaveButton = () => {};
+
   return (
-    <div>
+    <EditGeneralWrapp>
       <Row>
         <Block style={{ textAlign: "center" }}>
           <Avatar
@@ -81,7 +91,13 @@ const EditGeneral = () => {
         <Block style={{ flex: 1, marginLeft: 30 }}>
           {displayedInputs.map(({ placeholder, value, onChange }, ind) => {
             return placeholder === "Description" ? (
-              <Textarea value={value} style={{ marginBottom: 10 }} />
+              <Block>
+                <InputLabel>{placeholder}</InputLabel>
+                <Textarea
+                  value={value}
+                  style={{ marginBottom: 10, minHeight: 120 }}
+                />
+              </Block>
             ) : (
               <Input
                 key={ind}
@@ -105,12 +121,12 @@ const EditGeneral = () => {
             />
           </EditMore>
         </Block>
-        <EditButtons>
-          <DefaultButton text="Save" style={{ marginRight: 20 }} />
-          <DefaultButton text="Cancel" />
-        </EditButtons>
       </Row>
-    </div>
+      <EditButtons>
+        <DefaultButton text="Save" style={{ marginRight: 20 }} />
+        <DefaultButton text="Cancel" onClick={onCancelButton} />
+      </EditButtons>
+    </EditGeneralWrapp>
   );
 };
 

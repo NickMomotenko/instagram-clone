@@ -19,7 +19,7 @@ import Avatar from "../../UI/Avatar";
 import Posts from "../Posts";
 import Edit from "../Edit";
 
-import { baseRoutes } from "../../helpers/base-routes";
+import { baseRoutes, profileEditRoutes } from "../../helpers/base-routes";
 import EditGeneral from "../Edit/EditGeneral";
 
 const Profile = ({ popup }) => {
@@ -41,9 +41,8 @@ const Profile = ({ popup }) => {
     popup.setIsActive(true);
   };
 
-  const toggleEditClick = () => {
-    // setIsEditActive(!isEditActive);
-    // navigate("/profile/edit/general");
+  const onEditClick = () => {
+    navigate(profileEditRoutes.general);
   };
 
   return (
@@ -56,7 +55,7 @@ const Profile = ({ popup }) => {
           <Block>
             <DefaultButton
               text="Edit"
-              onClick={toggleEditClick}
+              onClick={onEditClick}
               style={{
                 background: "transparent",
                 color: "#7751518a",

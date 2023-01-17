@@ -74,7 +74,7 @@ const App = () => {
           <Route path={baseRoutes.profile} element={<Profile popup={popup} />}>
             <Route path="edit" element={<Edit />}>
               <Route path="general" element={<EditGeneral />} />
-              <Route path="posts" element={<EditPosts />} />
+              <Route path="posts" element={<EditGeneral />} />
               <Route path="saved" element={<EditGeneral />} />
               <Route path="liked" element={<EditGeneral />} />
             </Route>

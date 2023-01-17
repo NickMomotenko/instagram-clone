@@ -4,6 +4,8 @@ import { PopupContent, PopupWrapp } from "../Popup/styles";
 
 export const EditWrapp = styled(PopupWrapp)``;
 
+export const EditGeneralWrapp = styled.div``;
+
 export const EditContent = styled(PopupContent)``;
 
 export const EditOptions = styled.div`

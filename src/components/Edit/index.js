@@ -47,11 +47,13 @@ const Edit = () => {
       "/profile/edit",
       "/profile/edit/general",
       "/profile/edit/posts",
+      "/profile/edit/liked",
+      "/profile/edit/saved",
     ];
 
     if (pathArr.includes(pathName)) {
       setIsEditActive(true);
-    }
+    } else setIsEditActive(false);
   }, [pathName]);
 
   return (
