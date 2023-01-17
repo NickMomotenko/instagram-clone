@@ -18,9 +18,10 @@ import Avatar from "../../UI/Avatar";
 import Text from "../../UI/Text";
 import { Block, Row } from "../../UI/Layout";
 import Input from "../../UI/Input";
-import DefaultButton from "../../UI/DefaultButton";
+import LogoutButton from "../../UI/LogoutButton";
 
 import searchIcon from "../../assets/icons/search.svg";
+import logoutIcon from "../../assets/icons/logout.png";
 
 import { LOGUT } from "../../redux/auth/types";
 
@@ -91,19 +92,23 @@ const Header = () => {
               </HeaderAllUser>
             )}
           </Block>
-          <Burger
-            isActive={isBurgerActive.isActive}
-            onClick={() => isBurgerActive.setIsActive(!isBurgerActive.isActive)}
-            style={{ marginLeft: 5 }}
-          />
-          <DefaultButton
-            text="Log out"
-            onClick={(e) => {
-              e.preventDefault();
-              // logOut();
-              dispath({ type: LOGUT });
-            }}
-          />
+          <Row center>
+            <LogoutButton
+              icon={logoutIcon}
+              onClick={(e) => {
+                e.preventDefault();
+                // logOut();
+                dispath({ type: LOGUT });
+              }}
+            />
+            <Burger
+              isActive={isBurgerActive.isActive}
+              onClick={() =>
+                isBurgerActive.setIsActive(!isBurgerActive.isActive)
+              }
+              style={{ marginLeft: 18 }}
+            />
+          </Row>
         </Row>
       </Container>
     </HeaderWrapp>
