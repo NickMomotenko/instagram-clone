@@ -1,12 +1,76 @@
 import styled from "styled-components";
-
+import { Row, Block } from "../../UI/Layout";
 import { PopupContent, PopupWrapp } from "../Popup/styles";
 
 export const EditWrapp = styled(PopupWrapp)``;
 
 export const EditGeneralWrapp = styled.div``;
 
-export const EditContent = styled(PopupContent)``;
+export const EditGeneralContent = styled(Row)`
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+  }
+`;
+
+export const EditGeneralAvatar = styled(Block)`
+  text-align: center;
+
+  @media screen and (max-width: 550px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 15px;
+  }
+`;
+
+export const EditGeneralInputs = styled(Block)`
+  flex: 1;
+  margin-left: 30px;
+
+  @media screen and (max-width: 550px) {
+    margin-left: 0;
+  }
+`;
+
+export const EditGeneralButtons = styled.div`
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 25px;
+  background:#fff;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+
+    button {
+      flex: 1;
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    flex-direction: column;
+
+    button {
+      margin-right: 0 !important;
+
+      &:first-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+`;
+
+export const EditContent = styled(PopupContent)`
+  @media screen and (max-width: 768px) {
+    margin: 0 3%;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 10px;
+  }
+`;
 
 export const EditOptions = styled.div`
   display: flex;
@@ -22,11 +86,6 @@ export const EditOptionsItem = styled.div`
 `;
 
 export const EditMain = styled.div``;
-
-export const EditButtons = styled.div`
-  text-align: center;
-  margin-top: 40px;
-`;
 
 export const EditMore = styled.div`
   text-align: center;

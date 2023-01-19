@@ -3,8 +3,8 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 import { profileEditRoutes } from "../../helpers/base-routes";
 
-import DefaultButton from "../../UI/DefaultButton";
 import Text from "../../UI/Text";
+import DefaultButton from "../../UI/DefaultButton";
 
 import {
   EditWrapp,
@@ -13,6 +13,7 @@ import {
   EditOptionsItem,
   EditMain,
   EditHeader,
+  EditOptionsButton,
 } from "./styled";
 
 const editOptions = [
@@ -34,6 +35,10 @@ const Edit = () => {
   const pathName = useLocation().pathname;
 
   React.useEffect(() => {
+    if (isEditActive) document.body.style.overflow = "hidden";
+  }, [isEditActive]);
+
+  React.useEffect(() => {
     const pathArr = [
       "/profile/edit",
       "/profile/edit/general",
@@ -53,7 +58,7 @@ const Edit = () => {
       pathName === "/profile/edit/posts"
     ) {
       wrapperBlock.style.maxWidth = "767px";
-      wrapperBlock.style.minWidth = "767px";
+      wrapperBlock.style.width = "100%";
     }
   }, [pathName]);
 
@@ -61,7 +66,12 @@ const Edit = () => {
     <EditWrapp active={isEditActive}>
       <EditContent
         ref={editContentRef}
-        style={{ overflowY: "auto", paddingTop: 0, maxHeight: "100%" }}
+        style={{
+          overflowY: "auto",
+          paddingTop: 0,
+          paddingBottom: 0,
+          maxHeight: "100%",
+        }}
       >
         <EditHeader>
           <Text

@@ -9,7 +9,14 @@ import { Block, Row } from "../../UI/Layout";
 import Avatar from "../../UI/Avatar";
 import DefaultButton from "../../UI/DefaultButton";
 
-import { EditGeneralWrapp, EditMore, EditButtons } from "./styled";
+import {
+  EditGeneralWrapp,
+  EditMore,
+  EditGeneralButtons,
+  EditGeneralContent,
+  EditGeneralAvatar,
+  EditGeneralInputs,
+} from "./styled";
 
 import { useInput } from "../../hooks/useInput";
 
@@ -66,8 +73,8 @@ const EditGeneral = () => {
 
   return (
     <EditGeneralWrapp>
-      <Row>
-        <Block style={{ textAlign: "center" }}>
+      <EditGeneralContent>
+        <EditGeneralAvatar>
           <Avatar
             size={90}
             textSize={22}
@@ -83,8 +90,8 @@ const EditGeneral = () => {
               borderColor: "#7751518a",
             }}
           />
-        </Block>
-        <Block style={{ flex: 1, marginLeft: 30 }}>
+        </EditGeneralAvatar>
+        <EditGeneralInputs>
           <Input
             labelName="Nickname"
             value={nickname.value}
@@ -145,16 +152,16 @@ const EditGeneral = () => {
               style={{ color: "#6d747e", border: "1px solid #6d747e" }}
             />
           </EditMore>
-        </Block>
-      </Row>
-      <EditButtons>
+        </EditGeneralInputs>
+      </EditGeneralContent>
+      <EditGeneralButtons>
         <DefaultButton
           text="Save"
           onClick={onSaveButton}
           style={{ marginRight: 20 }}
         />
         <DefaultButton text="Cancel" onClick={onCancelButton} />
-      </EditButtons>
+      </EditGeneralButtons>
     </EditGeneralWrapp>
   );
 };
