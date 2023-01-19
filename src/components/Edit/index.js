@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { profileEditRoutes } from "../../helpers/base-routes";
+import { baseRoutes, profileEditRoutes } from "../../helpers/base-routes";
 
 import Text from "../../UI/Text";
 import DefaultButton from "../../UI/DefaultButton";
@@ -15,6 +15,7 @@ import {
   EditHeader,
   EditOptionsButton,
 } from "./styled";
+import { Block, Row } from "../../UI/Layout";
 
 const editOptions = [
   {
@@ -33,9 +34,12 @@ const Edit = () => {
   const editContentRef = React.useRef(null);
 
   const pathName = useLocation().pathname;
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (isEditActive) document.body.style.overflow = "hidden";
+    if (isEditActive) {
+      document.body.style.overflow = "hidden";
+    } else document.body.style.overflow = "auto";
   }, [isEditActive]);
 
   React.useEffect(() => {
@@ -62,6 +66,10 @@ const Edit = () => {
     }
   }, [pathName]);
 
+  const onCancelButton = () => {
+    navigate(baseRoutes.profile);
+  };
+
   return (
     <EditWrapp active={isEditActive}>
       <EditContent
@@ -74,11 +82,11 @@ const Edit = () => {
         }}
       >
         <EditHeader>
-          <Text
-            text="Edit profile"
-            bold
-            style={{ fontSize: 18, marginBottom: 20 }}
-          />
+          <Row btw center style={{ marginBottom: 20 }}>
+            <Text text="Edit profile" bold style={{ fontSize: 18 }} />
+            <DefaultButton text="Cancel" onClick={onCancelButton} />
+          </Row>
+
           <EditOptions as="ul">
             {editOptions.map(({ title, path }, ind) => (
               <EditOptionsItem key={ind} as="li">
