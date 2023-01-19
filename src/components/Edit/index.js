@@ -20,17 +20,17 @@ const editOptions = [
     path: `${profileEditRoutes.general}`,
   },
   {
-    title: "Posts",
+    title: "My posts",
     path: `${profileEditRoutes.posts}`,
   },
-  {
-    title: "Saved",
-    path: `${profileEditRoutes.saved}`,
-  },
-  {
-    title: "Liked",
-    path: `${profileEditRoutes.liked}`,
-  },
+  // {
+  //   title: "Saved",
+  //   path: `${profileEditRoutes.saved}`,
+  // },
+  // {
+  //   title: "Liked",
+  //   path: `${profileEditRoutes.liked}`,
+  // },
 ];
 
 const Edit = () => {
@@ -41,8 +41,6 @@ const Edit = () => {
   const pathName = useLocation().pathname;
 
   React.useEffect(() => {
-    // const editContent = editContentRef.current;
-
     const pathArr = [
       "/profile/edit",
       "/profile/edit/general",
@@ -81,6 +79,7 @@ const Edit = () => {
             </EditOptionsItem>
           ))}
         </EditOptions>
+
         <EditMain>
           <Outlet />
         </EditMain>

@@ -2,11 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import styled from "styled-components";
+
 import Post from "../../UI/Post";
 
 import EditItemEx from "./EditItemEx";
 
 const EditPostsWrapp = styled.div``;
+
+const EditPostItem = styled.div``;
 
 const EditPosts = () => {
   const { authUser } = useSelector((state) => state.authUser);
@@ -15,18 +18,18 @@ const EditPosts = () => {
 
   return (
     <EditPostsWrapp>
-      {/* <EditItemEx /> */}
       {authUserPosts?.map((post) => {
-        // const isMyPost = authUser.user.userId === post.user.id;
+        const isMyPost = authUser.user?.id === post.user?.id;
 
         return (
-          <Post
-            post={post}
-            key={post.id}
-            // isMyPost={isMyPost}
-            userId={authUser.user.id}
-            authUser={authUser}
-          />
+          <EditPostItem key={post.id}>
+            <Post
+              post={post}
+              isMyPost={isMyPost}
+              userId={authUser.user.id}
+              authUser={authUser}
+            />
+          </EditPostItem>
         );
       })}
     </EditPostsWrapp>

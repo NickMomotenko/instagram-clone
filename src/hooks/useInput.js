@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import { checkValueLength } from "../helpers/validate-input";
 
-export const useInput = (val = {}) => {
+export const useInput = (initialValue = "", name, val = {}) => {
   const { option, validityFunctions } = val;
   const symbolLimit = option?.symbolLimit;
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialValue);
   const [currentLimit, setCurrentLimit] = useState(symbolLimit);
   const [error, setError] = useState("");
   const [isValidity, setIsValidity] = useState(false);
@@ -50,6 +50,7 @@ export const useInput = (val = {}) => {
     value,
     setValue,
     ref,
+    name,
     currentLimit,
     symbolLimit,
     error,

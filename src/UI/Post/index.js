@@ -36,7 +36,6 @@ import likeIcon from "../../assets/icons/4.svg";
 
 import dots from "../../assets/icons/dots.svg";
 
-
 const postOptions = [
   {
     id: 1,
@@ -65,24 +64,16 @@ const POST_TYPES = {
 };
 
 const Post = ({ post, authUser, isMyPost, userId, ...props }) => {
-  const dispath = useDispatch();
-
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState(false);
   const [share, setShare] = useState(false);
   const [save, setSave] = useState(false);
 
+  const dispath = useDispatch();
+
   const commentRef = React.useRef(null);
 
-  let {
-    user: { avatar, fullname, city },
-    text,
-    videoUrl,
-    photo,
-    date,
-    comments,
-    liked,
-  } = post;
+  let { text, videoUrl, photo, date, comments, liked } = post;
 
   const postText = useText();
   const isCommentsBarActive = useActive();
@@ -102,6 +93,8 @@ const Post = ({ post, authUser, isMyPost, userId, ...props }) => {
     ...postOptions,
     { id: 5, title: "Delete", onClick: () => {} },
   ];
+
+  const user = post.user ? post.user : authUser.user;
 
   React.useEffect(() => {
     document.addEventListener("click", handleClickOutsidePost);
@@ -164,11 +157,16 @@ const Post = ({ post, authUser, isMyPost, userId, ...props }) => {
     <PostWrapp ref={commentRef} {...props}>
       <PostRow style={{ padding: "0 15px" }}>
         <Block style={{ marginRight: 11 }}>
-          <Avatar as="button" url={avatar} fullname={fullname} size={40} />
+          <Avatar
+            as="button"
+            url={user?.avatar}
+            fullname={user?.fullname}
+            size={40}
+          />
         </Block>
         <Block>
-          <Text text={fullname} bold />
-          <Text text={city} color="#76777E" />
+          <Text text={user?.fullname} bold />
+          <Text text={user?.city} color="#76777E" />
         </Block>
         <Button
           icon={dots}
