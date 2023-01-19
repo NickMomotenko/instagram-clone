@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import Input from "../../UI/Input";
@@ -16,14 +16,7 @@ import { useInput } from "../../hooks/useInput";
 import { baseRoutes } from "../../helpers/base-routes";
 import { InputLabel } from "../../UI/Input/styled";
 
-const inputs = [
-  { placeholder: "Nickname", viewIndex: 2 },
-  { placeholder: "Fullname", viewIndex: 2 },
-  { placeholder: "Description", viewIndex: 2 },
-  { placeholder: "Job", viewIndex: 1 },
-  { placeholder: "City", viewIndex: 1 },
-  // { placeholder: "Links", viewIndex: 1 },
-];
+import { UPDATE_USER } from "../../redux/user/types";
 
 const EditGeneral = () => {
   const { authUser } = useSelector((state) => state.authUser);
@@ -35,9 +28,12 @@ const EditGeneral = () => {
   const job = useInput(user["job"], "job");
   const city = useInput(user["city"], "city");
 
+  const usedInputs = [fullname, nickname, description, job, city];
+
   const [isFullInputDisplay, setIsFullInputDisplay] = React.useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const moreButtonText = isFullInputDisplay ? "Close" : "More";
 
@@ -49,7 +45,24 @@ const EditGeneral = () => {
     navigate(baseRoutes.profile);
   };
 
-  const onSaveButton = () => {};
+  const onSaveButton = () => {
+    const { avatar, id, links, ...restUserData } = user;
+
+    Object.keys(restUserData).forEach((key) => {
+      for (const input of usedInputs) {
+        if (input.name === key) {
+          if (input.value !== restUserData[key]) {
+            restUserData[key] = input.value;
+          }
+        }
+      }
+      return key;
+    });
+
+    const updatedUserData = { ...authUser, user: restUserData };
+
+    dispatch({ type: UPDATE_USER, updatedUserData });
+  };
 
   return (
     <EditGeneralWrapp>
@@ -115,6 +128,11 @@ const EditGeneral = () => {
                 style={{ marginBottom: 10 }}
                 noError
               />
+              {/* {user?.links.map(({ id, link, title }) => (
+                <Block key={id}>
+                  <a href={link}>{title}</a>
+                </Block>
+              ))} */}
             </>
           )}
           <EditMore>
@@ -130,7 +148,11 @@ const EditGeneral = () => {
         </Block>
       </Row>
       <EditButtons>
-        <DefaultButton text="Save" style={{ marginRight: 20 }} />
+        <DefaultButton
+          text="Save"
+          onClick={onSaveButton}
+          style={{ marginRight: 20 }}
+        />
         <DefaultButton text="Cancel" onClick={onCancelButton} />
       </EditButtons>
     </EditGeneralWrapp>

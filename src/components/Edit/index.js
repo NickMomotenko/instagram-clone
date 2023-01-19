@@ -4,6 +4,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { profileEditRoutes } from "../../helpers/base-routes";
 
 import DefaultButton from "../../UI/DefaultButton";
+import { Block } from "../../UI/Layout";
 import Text from "../../UI/Text";
 
 import {
@@ -12,6 +13,7 @@ import {
   EditOptions,
   EditOptionsItem,
   EditMain,
+  EditHeader,
 } from "./styled";
 
 const editOptions = [
@@ -23,14 +25,6 @@ const editOptions = [
     title: "My posts",
     path: `${profileEditRoutes.posts}`,
   },
-  // {
-  //   title: "Saved",
-  //   path: `${profileEditRoutes.saved}`,
-  // },
-  // {
-  //   title: "Liked",
-  //   path: `${profileEditRoutes.liked}`,
-  // },
 ];
 
 const Edit = () => {
@@ -56,30 +50,34 @@ const Edit = () => {
 
   return (
     <EditWrapp active={isEditActive}>
-      <EditContent ref={editContentRef} style={{ width: "55vw" }}>
-        <Text
-          text="Edit profile"
-          bold
-          style={{ fontSize: 18, marginBottom: 20 }}
-        />
-        <EditOptions as="ul" style={{ marginBottom: 30 }}>
-          {editOptions.map(({ title, path }, ind) => (
-            <EditOptionsItem key={ind} as="li">
-              <DefaultButton
-                text={title}
-                as={Link}
-                to={path}
-                style={{
-                  background: "transparent",
-                  color: "#7751518a",
-                  borderColor: "#7751518a",
-                  border: "1px solid",
-                }}
-              />
-            </EditOptionsItem>
-          ))}
-        </EditOptions>
-
+      <EditContent
+        ref={editContentRef}
+        style={{ width: "55vw", overflowY: "auto", height: "100%" }}
+      >
+        <EditHeader>
+          <Text
+            text="Edit profile"
+            bold
+            style={{ fontSize: 18, marginBottom: 20 }}
+          />
+          <EditOptions as="ul">
+            {editOptions.map(({ title, path }, ind) => (
+              <EditOptionsItem key={ind} as="li">
+                <DefaultButton
+                  text={title}
+                  as={Link}
+                  to={path}
+                  style={{
+                    background: "transparent",
+                    color: "#7751518a",
+                    borderColor: "#7751518a",
+                    border: "1px solid",
+                  }}
+                />
+              </EditOptionsItem>
+            ))}
+          </EditOptions>
+        </EditHeader>
         <EditMain>
           <Outlet />
         </EditMain>

@@ -31,3 +31,13 @@ export const EditButtons = styled.div`
 export const EditMore = styled.div`
   text-align: center;
 `;
+
+export const EditHeader = styled.div`
+  position: sticky;
+  top: 0px;
+  z-index: 4;
+  background: rgb(255, 255, 255);
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e7dfdf;
+`;
