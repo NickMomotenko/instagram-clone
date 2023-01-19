@@ -363,6 +363,160 @@ export const authUser = {
         // },
       ],
     },
+    {
+      id: uuid(),
+      postType: "text",
+      date: "Mon, 15 January 2022",
+      text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+      photo: ["https://kor.ill.in.ua/m/610x385/2445521.jpg"],
+      comments: [
+        {
+          id: uuid(),
+          user: {
+            fullname: "Vidovik Rouse",
+            city: "Banī Khaddāsh",
+            avatar:
+              "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+          },
+          text: "Looking like a good comment",
+        },
+      ],
+      liked: [
+        // {
+        //   id: uuid(),
+        //   user: {
+        //     fullname: "Vidovik Rouse",
+        //     city: "Banī Khaddāsh",
+        //     avatar:
+        //       "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        //   },
+        // },
+      ],
+    },
+    {
+      id: uuid(),
+      postType: "text",
+      date: "Mon, 16 January 2022",
+      text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+      photo: ["https://kor.ill.in.ua/m/610x385/2445521.jpg"],
+      comments: [
+        {
+          id: uuid(),
+          user: {
+            fullname: "Vidovik Rouse",
+            city: "Banī Khaddāsh",
+            avatar:
+              "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+          },
+          text: "Looking like a good comment",
+        },
+      ],
+      liked: [
+        // {
+        //   id: uuid(),
+        //   user: {
+        //     fullname: "Vidovik Rouse",
+        //     city: "Banī Khaddāsh",
+        //     avatar:
+        //       "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        //   },
+        // },
+      ],
+    },
+    {
+      id: uuid(),
+      postType: "text",
+      date: "Wed, 26 January 2021",
+      text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+      photo: [
+        "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+        "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+        "https://kor.ill.in.ua/m/610x385/2445521.jpg",
+      ],
+      comments: [
+        {
+          id: uuid(),
+          user: {
+            fullname: "Vidovik Rouse",
+            city: "Banī Khaddāsh",
+            avatar:
+              "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+          },
+          text: "Looking like a good comment",
+        },
+      ],
+      liked: [
+        // {
+        //   id: uuid(),
+        //   user: {
+        //     fullname: "Vidovik Rouse",
+        //     city: "Banī Khaddāsh",
+        //     avatar:
+        //       "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        //   },
+        // },
+      ],
+    },
+    {
+      id: uuid(),
+      postType: "text",
+      date: "Mon, 15 January 2022",
+      text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+      photo: ["https://kor.ill.in.ua/m/610x385/2445521.jpg"],
+      comments: [
+        {
+          id: uuid(),
+          user: {
+            fullname: "Vidovik Rouse",
+            city: "Banī Khaddāsh",
+            avatar:
+              "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+          },
+          text: "Looking like a good comment",
+        },
+      ],
+      liked: [
+        // {
+        //   id: uuid(),
+        //   user: {
+        //     fullname: "Vidovik Rouse",
+        //     city: "Banī Khaddāsh",
+        //     avatar:
+        //       "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        //   },
+        // },
+      ],
+    },
+    {
+      id: uuid(),
+      postType: "text",
+      date: "Mon, 16 January 2022",
+      text: "Scarcely on striking packages by so property in delicate. Up or well must less rent read walk so be. Easy sold at do hour sing spot. Any meant has cease too the decay. Since party burst am it match. By or blushes between besides offices noisier as. Sending do brought winding compass in. Paid day till shed only fact age its end. ",
+      photo: ["https://kor.ill.in.ua/m/610x385/2445521.jpg"],
+      comments: [
+        {
+          id: uuid(),
+          user: {
+            fullname: "Vidovik Rouse",
+            city: "Banī Khaddāsh",
+            avatar:
+              "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+          },
+          text: "Looking like a good comment",
+        },
+      ],
+      liked: [
+        // {
+        //   id: uuid(),
+        //   user: {
+        //     fullname: "Vidovik Rouse",
+        //     city: "Banī Khaddāsh",
+        //     avatar:
+        //       "https://robohash.org/quaspraesentiummolestiae.png?size=50x50&set=set1",
+        //   },
+        // },
+      ],
+    },
   ],
   stories: [
     {

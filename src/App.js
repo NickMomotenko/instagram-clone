@@ -75,8 +75,6 @@ const App = () => {
             <Route path="edit" element={<Edit />}>
               <Route path="general" element={<EditGeneral />} />
               <Route path="posts" element={<EditPosts />} />
-              <Route path="saved" element={<EditGeneral />} />
-              <Route path="liked" element={<EditGeneral />} />
             </Route>
           </Route>
         </Route>

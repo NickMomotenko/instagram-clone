@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Row } from "../../UI/Layout";
+
 import { PopupContent, PopupWrapp } from "../Popup/styles";
 
 export const EditWrapp = styled(PopupWrapp)``;
@@ -40,4 +40,5 @@ export const EditHeader = styled.div`
   margin-bottom: 30px;
   padding-bottom: 15px;
   border-bottom: 1px solid #e7dfdf;
+  padding-top: 25px;
 `;

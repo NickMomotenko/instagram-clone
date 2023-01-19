@@ -4,7 +4,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { profileEditRoutes } from "../../helpers/base-routes";
 
 import DefaultButton from "../../UI/DefaultButton";
-import { Block } from "../../UI/Layout";
 import Text from "../../UI/Text";
 
 import {
@@ -39,8 +38,6 @@ const Edit = () => {
       "/profile/edit",
       "/profile/edit/general",
       "/profile/edit/posts",
-      "/profile/edit/liked",
-      "/profile/edit/saved",
     ];
 
     if (pathArr.includes(pathName)) {
@@ -48,11 +45,23 @@ const Edit = () => {
     } else setIsEditActive(false);
   }, [pathName]);
 
+  React.useEffect(() => {
+    const wrapperBlock = editContentRef.current;
+
+    if (
+      pathName === "/profile/edit/general" ||
+      pathName === "/profile/edit/posts"
+    ) {
+      wrapperBlock.style.maxWidth = "767px";
+      wrapperBlock.style.minWidth = "767px";
+    }
+  }, [pathName]);
+
   return (
     <EditWrapp active={isEditActive}>
       <EditContent
         ref={editContentRef}
-        style={{ width: "55vw", overflowY: "auto", height: "100%" }}
+        style={{ overflowY: "auto", paddingTop: 0, maxHeight: "100%" }}
       >
         <EditHeader>
           <Text

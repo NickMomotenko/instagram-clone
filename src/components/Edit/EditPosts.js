@@ -5,9 +5,9 @@ import styled from "styled-components";
 
 import Post from "../../UI/Post";
 
-import EditItemEx from "./EditItemEx";
-
-const EditPostsWrapp = styled.div``;
+const EditPostsWrapp = styled.div`
+  column-count: 2;
+`;
 
 const EditPostItem = styled.div``;
 
@@ -17,12 +17,12 @@ const EditPosts = () => {
   const { posts: authUserPosts } = authUser;
 
   return (
-    <EditPostsWrapp>
+    <EditPostsWrapp as="ul">
       {authUserPosts?.map((post) => {
         const isMyPost = authUser.user?.id === post.user?.id;
 
         return (
-          <EditPostItem key={post.id}>
+          <EditPostItem key={post.id} as="li">
             <Post
               post={post}
               isMyPost={isMyPost}
