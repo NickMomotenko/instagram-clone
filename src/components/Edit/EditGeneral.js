@@ -15,7 +15,6 @@ import { useInput } from "../../hooks/useInput";
 
 import { baseRoutes } from "../../helpers/base-routes";
 import { InputLabel } from "../../UI/Input/styled";
-import { useDisplayedInputs } from "../../hooks/useDisplayedInputs";
 
 const inputs = [
   { placeholder: "Nickname", viewIndex: 2 },
@@ -36,53 +35,15 @@ const EditGeneral = () => {
   const job = useInput(user["job"], "job");
   const city = useInput(user["city"], "city");
 
-  const inputsArr = [fullname, nickname, description, job, city];
-
   const [isFullInputDisplay, setIsFullInputDisplay] = React.useState(false);
-  const [displayedInputs, setDisplayedInputs] = React.useState(
-    normalizeInputs(inputs).filter((input) => input.viewIndex === 2)
-  );
 
   const navigate = useNavigate();
 
   const moreButtonText = isFullInputDisplay ? "Close" : "More";
 
-  React.useEffect(() => {
-    if (!isFullInputDisplay) {
-      setDisplayedInputs(
-        normalizeInputs(inputs).filter((input) => input.viewIndex === 2)
-      );
-    } else setDisplayedInputs(normalizeInputs(inputs));
-  }, [isFullInputDisplay]);
-
-  React.useEffect(() => {
-    setDisplayedInputs(normalizeInputs(displayedInputs));
-  }, [
-    fullname.value,
-    nickname.value,
-    description.value,
-    job.value,
-    city.value,
-  ]);
-
   const onMoreButtonClick = () => {
     setIsFullInputDisplay(!isFullInputDisplay);
   };
-
-  function normalizeInputs(inputs) {
-    return inputs.map((input) => {
-      let item = [fullname, nickname, description, job, city].find(
-        (it) => it["name"] === input.placeholder.toLowerCase()
-      );
-
-      return {
-        ...input,
-        value: item?.value,
-        onChange: item?.onChange,
-        name: item?.name,
-      };
-    });
-  }
 
   const onCancelButton = () => {
     navigate(baseRoutes.profile);
@@ -111,31 +72,50 @@ const EditGeneral = () => {
           />
         </Block>
         <Block style={{ flex: 1, marginLeft: 30 }}>
-          {displayedInputs.map(
-            ({ placeholder, value, name, onChange }, ind) => {
-              return placeholder === "Description" ? (
-                <Block key={ind}>
-                  <InputLabel>{placeholder}</InputLabel>
-                  <Textarea
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                    style={{ marginBottom: 10, minHeight: 120 }}
-                  />
-                </Block>
-              ) : (
-                <Input
-                  key={ind}
-                  labelName={placeholder}
-                  //   placeholder={value}
-                  value={value}
-                  onChange={onChange}
-                  name={name}
-                  style={{ marginBottom: 10 }}
-                  noError
-                />
-              );
-            }
+          <Input
+            labelName="Nickname"
+            value={nickname.value}
+            onChange={nickname.onChange}
+            name={nickname.name}
+            style={{ marginBottom: 10 }}
+            noError
+          />
+          <Input
+            labelName="Fullname"
+            value={fullname.value}
+            onChange={fullname.onChange}
+            name={fullname.name}
+            style={{ marginBottom: 10 }}
+            noError
+          />
+          <Block>
+            <InputLabel>Description</InputLabel>
+            <Textarea
+              value={description.value}
+              onChange={description.onChange}
+              name={description.name}
+              style={{ marginBottom: 10, minHeight: 120 }}
+            />
+          </Block>
+          {isFullInputDisplay && (
+            <>
+              <Input
+                labelName="Job"
+                value={job.value}
+                onChange={job.onChange}
+                name={job.name}
+                style={{ marginBottom: 10 }}
+                noError
+              />
+              <Input
+                labelName="City"
+                value={city.value}
+                onChange={city.onChange}
+                name={city.name}
+                style={{ marginBottom: 10 }}
+                noError
+              />
+            </>
           )}
           <EditMore>
             <DefaultButton
