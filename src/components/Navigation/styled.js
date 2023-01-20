@@ -11,8 +11,8 @@ export const NavigationWrapp = styled.nav`
     isActive &&
     css`
       display: flex !important;
-      align-items:center;
-      justify-content:center;
+      align-items: center;
+      justify-content: center;
       position: fixed;
       top: 0;
       left: 0;
@@ -21,22 +21,21 @@ export const NavigationWrapp = styled.nav`
       z-index: 10;
       background: #fff;
 
-
-      ${NavigationList}{
-        flex-direction:column;
+      ${NavigationList} {
+        flex-direction: column;
       }
 
-      ${NavigationItem}{
-        margin-right:0;
+      ${NavigationItem} {
+        margin-right: 0;
         margin-bottom: 15px;
 
-        &:last-child{
+        &:last-child {
           margin-bottom: 0;
         }
       }
 
-      ${NavigationLink}{
-        font-size:20px;
+      ${NavigationLink} {
+        font-size: 20px;
       }
     `}
 `;
@@ -45,14 +44,23 @@ export const NavigationList = styled.ul`
   display: flex;
 `;
 
+export const NavigationLink = styled(Link)`
+  color: black;
+`;
+
 export const NavigationItem = styled.li`
   margin-right: 23px;
 
   &:last-child {
     margin-right: 0;
   }
-`;
 
-export const NavigationLink = styled(Link)`
-  color:black;
+  ${NavigationLink} {
+    ${(props) =>
+      props.isLogoutButton &&
+      css`
+        border: 1px solid black;
+        padding: 5px;
+      `}
+  }
 `;

@@ -4,7 +4,6 @@ import { Block, Row } from "../../UI/Layout";
 import Logo from "../Logo";
 
 export const HeaderWrapp = styled.header`
-  /* min-height: 55px; */
   background: #ffffff;
   border-bottom: 1px solid #f0f6fd;
   box-shadow: 0px 0px 30px rgba(231, 237, 243, 0.4);
@@ -49,5 +48,27 @@ export const HeaderAllUserItem = styled(Row)`
 
   &:last-child {
     margin-bottom: 0;
+  }
+`;
+
+export const HeaderLogoutButton = styled(Block)`
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`;
+
+export const HeaderSearchBar = styled(Block)`
+  position: "relative";
+
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`;
+
+export const HeaderSearchButton = styled.button`
+  visibility: hidden;
+
+  @media screen and (max-width: 480px) {
+    visibility: visible;
   }
 `;

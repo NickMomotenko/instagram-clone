@@ -9,7 +9,9 @@ import {
 
 import { baseRoutes } from "../../helpers/base-routes";
 
-const navigationList = [
+import { useWindowResize } from "../../hooks/useWindowResize";
+
+const list = [
   {
     id: 1,
     title: "Main",
@@ -23,16 +25,26 @@ const navigationList = [
 ];
 
 const Navigation = ({ isActive, onClick }) => {
+  const windowSize = useWindowResize();
+
+  const isMobileWidth = windowSize <= 480;
+
+  const navigationList = isMobileWidth
+    ? [...list, { id: 3, title: "Logout", link: "#" }]
+    : list;
+
   return (
     <NavigationWrapp isActive={isActive}>
       <NavigationList>
-        {navigationList.map(({ id, title, link }) => (
-          <NavigationItem key={id}>
-            <NavigationLink to={link} onClick={onClick}>
-              {title}
-            </NavigationLink>
-          </NavigationItem>
-        ))}
+        {navigationList.map(({ id, title, link }) => {
+          return (
+            <NavigationItem key={id} isLogoutButton={title === "Logout"}>
+              <NavigationLink to={link} onClick={onClick}>
+                {title}
+              </NavigationLink>
+            </NavigationItem>
+          );
+        })}
       </NavigationList>
     </NavigationWrapp>
   );

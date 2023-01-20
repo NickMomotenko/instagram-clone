@@ -2,7 +2,14 @@ import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { HeaderWrapp, HeaderAllUser, HeaderAllUserItem } from "./styled";
+import {
+  HeaderWrapp,
+  HeaderAllUser,
+  HeaderAllUserItem,
+  HeaderLogoutButton,
+  HeaderSearchBar,
+  HeaderSearchButton
+} from "./styled";
 
 import { allDbUsers } from "../../redux/mockData";
 
@@ -24,6 +31,7 @@ import searchIcon from "../../assets/icons/search.svg";
 import logoutIcon from "../../assets/icons/logout.png";
 
 import { LOGUT } from "../../redux/auth/types";
+import Icon from "../../UI/Icon";
 
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
@@ -62,7 +70,7 @@ const Header = () => {
             isActive={isBurgerActive.isActive}
             onClick={() => isBurgerActive.setIsActive(false)}
           />
-          <Block style={{ position: "relative" }}>
+          <HeaderSearchBar>
             <Input
               value={searchInput.value}
               onChange={searchInput.onChange}
@@ -91,16 +99,21 @@ const Header = () => {
                 )}
               </HeaderAllUser>
             )}
-          </Block>
+          </HeaderSearchBar>
           <Row center>
-            <LogoutButton
-              icon={logoutIcon}
-              onClick={(e) => {
-                e.preventDefault();
-                // logOut();
-                dispath({ type: LOGUT });
-              }}
-            />
+            <HeaderSearchButton>
+              <Icon url={searchIcon} fill="black" />
+            </HeaderSearchButton>
+            <HeaderLogoutButton>
+              <LogoutButton
+                icon={logoutIcon}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // logOut();
+                  dispath({ type: LOGUT });
+                }}
+              />
+            </HeaderLogoutButton>
             <Burger
               isActive={isBurgerActive.isActive}
               onClick={() =>
