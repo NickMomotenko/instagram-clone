@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   ProfileWrapp,
@@ -9,6 +9,8 @@ import {
   StorieButton,
   ProfileHeader,
   ProfileContent,
+  ProfileInfo,
+  ProfileStories,
 } from "./styled";
 
 import { Row, Block } from "../../UI/Layout";
@@ -20,7 +22,6 @@ import Posts from "../Posts";
 import Edit from "../Edit";
 
 import { baseRoutes, profileEditRoutes } from "../../helpers/base-routes";
-import EditGeneral from "../Edit/EditGeneral";
 
 const Profile = ({ popup }) => {
   const {
@@ -70,8 +71,8 @@ const Profile = ({ popup }) => {
             />
           </Block>
         </Row>
-        <Row>
-          <Block>
+        <ProfileContent>
+          <ProfileInfo>
             <Row style={{ marginBottom: 12 }}>
               <Avatar
                 size={60}
@@ -103,8 +104,8 @@ const Profile = ({ popup }) => {
                 onClick={createPost}
               />
             </Row>
-          </Block>
-          <Block style={{ marginLeft: 50 }}>
+          </ProfileInfo>
+          <ProfileStories>
             <Block>
               <Block style={{ textAlign: "left" }}>
                 <Text
@@ -136,10 +137,9 @@ const Profile = ({ popup }) => {
                 </Row>
               </Block>
             </Block>
-          </Block>
-        </Row>
+          </ProfileStories>
+        </ProfileContent>
       </ProfileHeader>
-      <ProfileContent>{/* {renderPostsOrText()} */}</ProfileContent>
       <Edit />
     </ProfileWrapp>
   );

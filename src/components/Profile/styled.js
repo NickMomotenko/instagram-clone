@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import Button from "../../UI/Button";
+import { Block, Row } from "../../UI/Layout";
 
 export const ProfileWrapp = styled.div``;
 
@@ -10,12 +11,35 @@ export const ProfileHeader = styled.div`
   width: 60%;
   border: 1px solid #ebf1fb;
   padding: 30px;
-  margin:0 auto;
+  margin: 0 auto;
 
   background-color: #fff;
+
+  @media screen and (max-width: 1000px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
-export const ProfileContent = styled.div``;
+export const ProfileContent = styled(Row)`
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+export const ProfileInfo = styled(Block)``;
+
+export const ProfileStories = styled(Block)`
+  margin-left: 50px;
+
+  @media screen and (max-width: 600px) {
+    margin-left: 0;
+    margin-top: 40px;
+  }
+`;
 
 export const GradientButton = styled(Button)`
   background: linear-gradient(
