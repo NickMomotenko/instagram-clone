@@ -37,7 +37,7 @@ export const EditGeneralButtons = styled.div`
   text-align: center;
   margin-top: 40px;
   padding-bottom: 25px;
-  background:#fff;
+  background: #fff;
 
   @media screen and (max-width: 480px) {
     display: flex;
@@ -100,4 +100,13 @@ export const EditHeader = styled.div`
   padding-bottom: 15px;
   border-bottom: 1px solid #e7dfdf;
   padding-top: 25px;
+`;
+
+export const EditExitButton = styled.button``;
+
+export const EditExitIcon = styled.img`
+  display: inline-block;
+
+  height: 15px;
+  width: 15px;
 `;

@@ -1,11 +1,6 @@
 import React from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { baseRoutes, profileEditRoutes } from "../../helpers/base-routes";
-
-import Text from "../../UI/Text";
-import DefaultButton from "../../UI/DefaultButton";
-
 import {
   EditWrapp,
   EditContent,
@@ -14,8 +9,18 @@ import {
   EditMain,
   EditHeader,
   EditOptionsButton,
+  EditExitIcon,
+  EditExitButton,
 } from "./styled";
-import { Block, Row } from "../../UI/Layout";
+
+import { baseRoutes, profileEditRoutes } from "../../helpers/base-routes";
+
+import Text from "../../UI/Text";
+import DefaultButton from "../../UI/DefaultButton";
+import Icon from "../../UI/Icon";
+import { Row } from "../../UI/Layout";
+
+import closeIcon from "../../assets/icons/close.png";
 
 const editOptions = [
   {
@@ -84,7 +89,9 @@ const Edit = () => {
         <EditHeader>
           <Row btw center style={{ marginBottom: 20 }}>
             <Text text="Edit profile" bold style={{ fontSize: 18 }} />
-            <DefaultButton text="Cancel" onClick={onCancelButton} />
+            <EditExitButton onClick={onCancelButton}>
+              <EditExitIcon src={closeIcon} />
+            </EditExitButton>
           </Row>
 
           <EditOptions as="ul">
