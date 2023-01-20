@@ -7,6 +7,10 @@ import Post from "../../UI/Post";
 
 const EditPostsWrapp = styled.div`
   column-count: 2;
+
+  @media screen and (max-width:670px){
+    column-count: 1;
+  }
 `;
 
 const EditPostItem = styled.div``;
