@@ -24,10 +24,12 @@ import closeIcon from "../../assets/icons/close.png";
 
 const editOptions = [
   {
+    id: 1,
     title: "General",
     path: `${profileEditRoutes.general}`,
   },
   {
+    id: 2,
     title: "My posts",
     path: `${profileEditRoutes.posts}`,
   },
@@ -95,8 +97,8 @@ const Edit = () => {
           </Row>
 
           <EditOptions as="ul">
-            {editOptions.map(({ title, path }, ind) => (
-              <EditOptionsItem key={ind} as="li">
+            {editOptions.map(({ title, path, id }) => (
+              <EditOptionsItem key={id} as="li">
                 <DefaultButton
                   text={title}
                   as={Link}

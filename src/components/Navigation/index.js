@@ -22,6 +22,11 @@ const list = [
     title: "Profile",
     link: baseRoutes.profile,
   },
+  {
+    id: 3,
+    title: "Direct",
+    link: baseRoutes.direct,
+  },
 ];
 
 const Navigation = ({ isActive, onClick }) => {
@@ -30,7 +35,7 @@ const Navigation = ({ isActive, onClick }) => {
   const isMobileWidth = windowSize <= 480;
 
   const navigationList = isMobileWidth
-    ? [...list, { id: 3, title: "Logout", link: "#" }]
+    ? [...list, { id: 4, title: "Logout", link: "#" }]
     : list;
 
   return (

@@ -38,7 +38,7 @@ const Direct = () => {
     setActiveIndex(index);
   }, [activeChat]);
 
-  const sendInput = useInput();
+  const sendInput = useInput({ initialValue: "" });
 
   const dispatch = useDispatch();
 

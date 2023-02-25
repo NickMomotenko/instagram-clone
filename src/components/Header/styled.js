@@ -38,6 +38,8 @@ export const HeaderAllUser = styled(Block)`
   top: 100%;
   margin-top: 7px;
   z-index: 5;
+
+  visibility: ${(props) => (props.isActive ? "visible" : "hidden")};
 `;
 
 export const HeaderAllUserItem = styled(Row)`
@@ -58,7 +60,7 @@ export const HeaderLogoutButton = styled(Block)`
 `;
 
 export const HeaderSearchBar = styled(Block)`
-  position: "relative";
+  position: relative;
 
   @media screen and (max-width: 480px) {
     display: none;

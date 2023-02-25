@@ -17,11 +17,11 @@ const Main = (props) => {
     <MainWrapp>
       <Header />
       <Container>
-        <Row style={{ justifyContent: "center", alignItems: "flex-start" }}>
+        {/* <Row style={{ justifyContent: "center", alignItems: "flex-start" }}> */}
           <Outlet />
-        </Row>
+        {/* </Row> */}
       </Container>
-      <Popup {...popup} />
+      {popup?.isActive && <Popup {...popup} />}
     </MainWrapp>
   );
 };

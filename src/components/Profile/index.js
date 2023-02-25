@@ -63,12 +63,6 @@ const Profile = ({ popup }) => {
                 borderColor: "#7751518a",
               }}
             />
-            <DefaultButton
-              as={Link}
-              to={baseRoutes.direct}
-              text="Direct"
-              style={{ marginLeft: 15 }}
-            />
           </Block>
         </Row>
         <ProfileContent>

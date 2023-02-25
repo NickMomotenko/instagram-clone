@@ -36,7 +36,7 @@ import Icon from "../../UI/Icon";
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
 
-  const searchInput = useInput({ initialValue: "test" });
+  const searchInput = useInput({ initialValue: "" });
   const isSearchBlock = useActive();
   const isBurgerActive = useActive();
 
@@ -80,22 +80,29 @@ const Header = () => {
               noError
             />
             {isSearchBlock.isActive && (
-              <HeaderAllUser as="ul">
-                {searchUsers?.map(
-                  ({ user: { avatar, fullname, city, id } }) => (
-                    <HeaderAllUserItem key={id} as="li">
-                      <Avatar
-                        size={25}
-                        textSize={13}
-                        avatar={avatar}
-                        fullname={fullname}
-                      />
-                      <Block style={{ marginLeft: 11, marginTop: -5 }}>
-                        <Text text={fullname} bold />
-                        <Text text={city} style={{ color: "#76777E" }} />
-                      </Block>
-                    </HeaderAllUserItem>
+              <HeaderAllUser
+                as={searchUsers.length !== 0 ? "ul" : "div"}
+                isActive={isSearchBlock.isActive}
+              >
+                {searchUsers.length !== 0 ? (
+                  searchUsers?.map(
+                    ({ user: { avatar, fullname, city, id } }) => (
+                      <HeaderAllUserItem key={id} as="li">
+                        <Avatar
+                          size={25}
+                          textSize={13}
+                          avatar={avatar}
+                          fullname={fullname}
+                        />
+                        <Block style={{ marginLeft: 11, marginTop: -5 }}>
+                          <Text text={fullname} bold />
+                          <Text text={city} style={{ color: "#76777E" }} />
+                        </Block>
+                      </HeaderAllUserItem>
+                    )
                   )
+                ) : (
+                  <Text text="Ничего не найдено!" />
                 )}
               </HeaderAllUser>
             )}
