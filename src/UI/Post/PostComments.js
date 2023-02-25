@@ -26,7 +26,7 @@ const PostComments = ({ post, isCommentsBarActive, userId, onClick }) => {
 
   const dispath = useDispatch();
 
-  const commentInput = useInput();
+  const commentInput = useInput({ initialValue: "test" });
 
   const { comments } = post;
 

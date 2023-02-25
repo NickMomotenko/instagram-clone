@@ -22,7 +22,9 @@ import { LOGIN } from "../../redux/auth/types";
 
 const LoginBlock = () => {
   let email = useInput({
-    validityFunctions: [checkUpperCase, checkValueLength],
+    option: {
+      validityFunctions: [checkUpperCase, checkValueLength],
+    },
   });
   let password = useInput();
 

@@ -29,11 +29,20 @@ const EditGeneral = () => {
   const { authUser } = useSelector((state) => state.authUser);
   const { user } = authUser;
 
-  const fullname = useInput(user["fullname"], "fullname");
-  const nickname = useInput(user["nickname"], "nickname");
-  const description = useInput(user["description"], "description");
-  const job = useInput(user["job"], "job");
-  const city = useInput(user["city"], "city");
+  const fullname = useInput({
+    initialValue: user["fullname"],
+    name: "fullname",
+  });
+  const nickname = useInput({
+    initialValue: user["nickname"],
+    name: "nickname",
+  });
+  const description = useInput({
+    initialValue: user["description"],
+    name: "description",
+  });
+  const job = useInput({ initialValue: user["job"], name: "job" });
+  const city = useInput({ initialValue: user["city"], name: "city" });
 
   const usedInputs = [fullname, nickname, description, job, city];
 

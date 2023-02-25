@@ -135,8 +135,8 @@ const Direct = () => {
               <Block style={{ marginTop: 20 }}>
                 <Row>
                   <Input
-                    value={sendInput.value}
-                    onChange={sendInput.onChange}
+                    value={sendInput?.value}
+                    onChange={sendInput?.onChange}
                     placeholder="Your message"
                     noError
                     style={{ flex: 1 }}
@@ -146,7 +146,7 @@ const Direct = () => {
                     onClick={() =>
                       handleSend({
                         chatId: activeChat?.id,
-                        text: sendInput.value,
+                        text: sendInput?.value,
                       })
                     }
                     style={{ marginLeft: 21 }}

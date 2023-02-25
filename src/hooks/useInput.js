@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import { checkValueLength } from "../helpers/validate-input";
 
-export const useInput = (initialValue = "", name, val = {}) => {
-  const { option, validityFunctions } = val;
+export const useInput = ({ initialValue = "", name = "test", option = {} }) => {
   const symbolLimit = option?.symbolLimit;
+  const validityFunctions = option?.validityFunctions;
 
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue ?? "");
   const [currentLimit, setCurrentLimit] = useState(symbolLimit);
   const [error, setError] = useState("");
   const [isValidity, setIsValidity] = useState(false);
@@ -14,7 +14,9 @@ export const useInput = (initialValue = "", name, val = {}) => {
   const ref = React.useRef(null);
 
   React.useEffect(() => {
-    symbolLimit && setCurrentLimit(symbolLimit - value.length);
+    if (value) {
+      symbolLimit && setCurrentLimit(symbolLimit - value?.length);
+    }
   }, [value]);
 
   const onChange = (e) => setValue(e.target.value);
@@ -46,6 +48,8 @@ export const useInput = (initialValue = "", name, val = {}) => {
 
   const clearValue = () => setValue("");
 
+  const refreshCurrentLimit = () => setCurrentLimit(symbolLimit);
+
   return {
     value,
     setValue,
@@ -53,6 +57,7 @@ export const useInput = (initialValue = "", name, val = {}) => {
     name,
     currentLimit,
     symbolLimit,
+    refreshCurrentLimit,
     error,
     setError,
     onChange,

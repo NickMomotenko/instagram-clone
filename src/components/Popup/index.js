@@ -20,7 +20,9 @@ const Popup = ({ isActive, setIsActive }) => {
     authUser: { user },
   } = useSelector((state) => state.authUser);
 
-  const postInput = useInput({ option: { symbolLimit: 255 } });
+  const postInput = useInput({
+    option: { symbolLimit: 255 },
+  });
 
   const isCreateButtonDisabled = postInput?.value.length === 0;
 
@@ -33,6 +35,7 @@ const Popup = ({ isActive, setIsActive }) => {
 
   const cancelClick = () => {
     postInput.clearValue();
+    postInput.refreshCurrentLimit();
     setIsActive(false);
   };
 

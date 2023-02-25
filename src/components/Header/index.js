@@ -8,7 +8,7 @@ import {
   HeaderAllUserItem,
   HeaderLogoutButton,
   HeaderSearchBar,
-  HeaderSearchButton
+  HeaderSearchButton,
 } from "./styled";
 
 import { allDbUsers } from "../../redux/mockData";
@@ -36,7 +36,7 @@ import Icon from "../../UI/Icon";
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
 
-  const searchInput = useInput();
+  const searchInput = useInput({ initialValue: "test" });
   const isSearchBlock = useActive();
   const isBurgerActive = useActive();
 
@@ -72,9 +72,9 @@ const Header = () => {
           />
           <HeaderSearchBar>
             <Input
-              value={searchInput.value}
-              onChange={searchInput.onChange}
-              onFocus={searchInput.onFocus}
+              value={searchInput?.value}
+              onChange={searchInput?.onChange}
+              onFocus={searchInput?.onFocus}
               placeholder="Search..."
               icon={searchIcon}
               noError
