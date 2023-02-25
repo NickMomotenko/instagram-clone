@@ -6,6 +6,8 @@ import {
   DirectWrapp,
   DirectContent,
   DirectContentSidebar,
+  DirectSidebarList,
+  DirectSidebarItem,
   DirectMessage,
   DirectMessageText,
 } from "./styles";
@@ -64,46 +66,48 @@ const Direct = () => {
         <DirectContent>
           <Text text="Chats" style={{ fontSize: 25, marginBottom: 25 }} bold />
           <Row style={{ width: "100%" }}>
-            <DirectContentSidebar as="ul" style={{ marginRight: 20 }}>
-              {messages?.map(({ id, user, data }) => (
-                <Row
-                  key={id}
-                  as="li"
-                  onClick={() => onChatItemClick(id)}
-                  style={{
-                    marginBottom: 20,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Avatar
-                    as="button"
-                    url={user?.avatar}
-                    fullname={user?.fullname}
-                    size={40}
-                    style={{ marginRight: 17, flexShrink: 0 }}
-                  />
-                  <Block
-                    style={{ marginTop: -5, width: "100%", maxWidth: "75%" }}
+            <DirectContentSidebar>
+              <DirectSidebarList>
+                {messages?.map(({ id, user, data }) => (
+                  <DirectSidebarItem
+                    key={id}
+                    onClick={() => onChatItemClick(id)}
+                    isActiveChat={activeChat?.id === id}
                   >
-                    <Text text={user?.fullname} bold />
-                    <Row btw center>
-                      <Text
-                        text={data[data.length - 1]?.text}
-                        style={{
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      />
-                      <Text
-                        text={data[data.length - 1]?.time}
-                        color="#76777E"
-                        style={{ fontSize: 10, fontWeight: 600, marginLeft: 9 }}
-                      />
-                    </Row>
-                  </Block>
-                </Row>
-              ))}
+                    <Avatar
+                      as="button"
+                      url={user?.avatar}
+                      fullname={user?.fullname}
+                      size={40}
+                      style={{ marginRight: 17, flexShrink: 0 }}
+                    />
+                    <Block
+                      style={{ marginTop: -5, width: "100%", maxWidth: "75%" }}
+                    >
+                      <Text text={user?.fullname} bold />
+                      <Row btw center>
+                        <Text
+                          text={data[data.length - 1]?.text}
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        />
+                        <Text
+                          text={data[data.length - 1]?.time}
+                          color="#2b2d3c"
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 600,
+                            marginLeft: 9,
+                          }}
+                        />
+                      </Row>
+                    </Block>
+                  </DirectSidebarItem>
+                ))}
+              </DirectSidebarList>
             </DirectContentSidebar>
             <DirectContentSidebar style={{ maxWidth: "100%", flex: 1 }}>
               <Block>
@@ -116,8 +120,10 @@ const Direct = () => {
                       }}
                     >
                       <Avatar
-                        url={activeChat?.user?.avatar}
-                        fullname={user?.fullname}
+                        url={isMe ? user?.avatar : activeChat?.user?.avatar}
+                        fullname={
+                          isMe ? user?.fullname : activeChat?.user?.fullname
+                        }
                         size={40}
                       />
                     </Block>

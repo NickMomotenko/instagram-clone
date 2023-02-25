@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+import { Row } from "../../UI/Layout";
+
 export const DirectWrapp = styled.div`
   height: 100%;
   width: 100%;
@@ -16,8 +18,20 @@ export const DirectContentSidebar = styled.div`
   padding: 15px;
   max-width: 280px;
   min-width: 280px;
+  margin-right: 20px;
 
   height: 100%;
+`;
+
+export const DirectSidebarList = styled.ul``;
+
+export const DirectSidebarItem = styled.li`
+  display: flex;
+  margin-bottom: 5px;
+  cursor: pointer;
+  background: ${(props) => (props.isActiveChat ? "#d8d8ff" : "transparent")};
+  padding: 14px;
+  border-radius: 30px;
 `;
 
 export const DirectMessage = styled.div`
