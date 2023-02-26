@@ -24,7 +24,7 @@ export const DirectWrapp = styled.div`
 
 export const DirectContent = styled.div``;
 
-export const DirectContentSidebar = styled.div`
+export const DirectContentBlockStyles = styled.div`
   background: #ffffff;
   border: 1px solid #f0f6fd;
   box-shadow: 0px 10px 40px rgb(222 230 237 / 40%);
@@ -36,10 +36,16 @@ export const DirectContentSidebar = styled.div`
 
   height: 100%;
 
-  min-height:40vh;
+  min-height: 40vh;
 
   max-height: 80vh;
   overflow-y: auto;
+`;
+
+export const DirectContentSidebar = styled(DirectContentBlockStyles)`
+  @media screen and (max-width:768px){
+    display:none;
+  }
 `;
 
 export const DirectSidebarList = styled.ul``;
@@ -106,7 +112,7 @@ export const DirectBottomBar = styled(Block)`
   padding: 15px;
 `;
 
-export const DirectBodyContent = styled(DirectContentSidebar)`
+export const DirectBodyContent = styled(DirectContentBlockStyles)`
   max-width: 100%;
   flex: 1;
   margin-right: 0;
@@ -114,5 +120,9 @@ export const DirectBodyContent = styled(DirectContentSidebar)`
   overflow-y: auto;
   padding: 0;
   padding-right: 10px;
-  min-height:auto;
+  min-height: auto;
+
+  @media screen and (max-width:768px){
+    margin:0 15px;
+  }
 `;
