@@ -42,6 +42,10 @@ export const useInput = ({ initialValue = "", name = "test", option = {} }) => {
 
   const onFocus = () => {};
 
+  const onKeyDown = (e) => {
+    console.log(e);
+  }
+ 
   // function getFocus() {
   //   ref?.current.focus();
   // }
@@ -62,6 +66,7 @@ export const useInput = ({ initialValue = "", name = "test", option = {} }) => {
     setError,
     onChange,
     onFocus,
+    onKeyDown,
     clearValue,
     checkValidity,
     isValidity,

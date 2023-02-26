@@ -10,6 +10,8 @@ import {
   DirectSidebarItem,
   DirectMessage,
   DirectMessageText,
+  DirectBottomBar,
+  DirectBodyContent,
 } from "./styles";
 
 import { Block, Row } from "../../UI/Layout";
@@ -27,7 +29,6 @@ import { ADD_MESSAGE } from "../../redux/direct/types";
 
 const Direct = () => {
   const { messages } = useSelector((state) => state.direct);
-
   const {
     authUser: { user },
   } = useSelector((state) => state.authUser);
@@ -35,10 +36,23 @@ const Direct = () => {
   const [activeChat, setActiveChat] = useState(messages[0]);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const messagesBodyRef = React.useRef(null);
+
+  React.useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    normalizeDirectContentBodyScroll();
+  }, []);
+
   React.useEffect(() => {
     const index = messages.indexOf(activeChat);
     setActiveIndex(index);
+    normalizeDirectContentBodyScroll();
   }, [activeChat]);
+
+  React.useEffect(() => {
+    normalizeDirectContentBodyScroll();
+  }, [messages]);
 
   const sendInput = useInput({ initialValue: "" });
 
@@ -58,6 +72,22 @@ const Direct = () => {
     dispatch({ type: ADD_MESSAGE, payload: { chatId, text } });
     sendInput.clearValue();
   };
+
+  const sendInputOnKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSend({
+        chatId: activeChat?.id,
+        text: sendInput?.value,
+      });
+    }
+  };
+
+  function normalizeDirectContentBodyScroll() {
+    messagesBodyRef?.current.scrollTo(
+      0,
+      messagesBodyRef?.current?.scrollHeight
+    );
+  }
 
   return (
     <DirectWrapp>
@@ -109,10 +139,10 @@ const Direct = () => {
                 ))}
               </DirectSidebarList>
             </DirectContentSidebar>
-            <DirectContentSidebar style={{ maxWidth: "100%", flex: 1 }}>
-              <Block>
+            <DirectBodyContent ref={messagesBodyRef}>
+              <Block as="ul" style={{ padding: 15 }}>
                 {messages[activeIndex]?.data.map(({ id, text, time, isMe }) => (
-                  <DirectMessage key={id} position={isMe}>
+                  <DirectMessage key={id} as="li" position={isMe}>
                     <Block
                       style={{
                         marginRight: isMe === false && 15,
@@ -138,11 +168,12 @@ const Direct = () => {
                   </DirectMessage>
                 ))}
               </Block>
-              <Block style={{ marginTop: 20 }}>
+              <DirectBottomBar>
                 <Row>
                   <Input
                     value={sendInput?.value}
                     onChange={sendInput?.onChange}
+                    onKeyDown={sendInputOnKeyDown}
                     placeholder="Your message"
                     noError
                     style={{ flex: 1 }}
@@ -158,8 +189,8 @@ const Direct = () => {
                     style={{ marginLeft: 21 }}
                   />
                 </Row>
-              </Block>
-            </DirectContentSidebar>
+              </DirectBottomBar>
+            </DirectBodyContent>
           </Row>
         </DirectContent>
       </Container>

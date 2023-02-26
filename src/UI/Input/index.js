@@ -13,6 +13,7 @@ const Input = React.forwardRef(
       error,
       onChange,
       onFocus,
+      onKeyDown,
       placeholder,
       name,
       icon,
@@ -32,6 +33,7 @@ const Input = React.forwardRef(
           value={value}
           type={type}
           onChange={(e) => onChange(e)}
+          onKeyDown={onKeyDown}
           style={{ borderBottomColor: error && `red` }}
           placeholder={placeholder}
           name={name}
