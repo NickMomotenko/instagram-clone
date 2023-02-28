@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import DefaultButton from "../../UI/DefaultButton";
 
 import { Block, Row } from "../../UI/Layout";
 
@@ -22,7 +23,11 @@ export const DirectWrapp = styled.div`
   }
 `;
 
-export const DirectContent = styled.div``;
+export const DirectContent = styled.div`
+  @media screen and (max-width: 768px) {
+    padding: 0 3%;
+  }
+`;
 
 export const DirectContentBlockStyles = styled.div`
   background: #ffffff;
@@ -43,8 +48,22 @@ export const DirectContentBlockStyles = styled.div`
 `;
 
 export const DirectContentSidebar = styled(DirectContentBlockStyles)`
-  @media screen and (max-width:768px){
-    display:none;
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    top: 0;
+    right: -100%;
+
+    z-index: 5;
+    margin-right: 0;
+    box-shadow: -20px 0 10px #f4f4f4;
+
+    transition: right 0.5s;
+
+    ${(props) =>
+      props.isGeneralChatActive &&
+      css`
+        right: 0;
+      `}
   }
 `;
 
@@ -99,6 +118,10 @@ export const DirectMessageText = styled.div`
       text-align: right;
       background-color: #c6bbf6;
     `}
+
+  @media screen and (max-width:480px) {
+    min-width: auto;
+  }
 `;
 
 export const DirectBottomBar = styled(Block)`
@@ -122,7 +145,23 @@ export const DirectBodyContent = styled(DirectContentBlockStyles)`
   padding-right: 10px;
   min-height: auto;
 
-  @media screen and (max-width:768px){
-    margin:0 15px;
+  @media screen and (max-width: 768px) {
+    transition: opacity 0.5s;
+
+    ${(props) =>
+      props.isGeneralChatActive &&
+      css`
+        opacity: 0.4;
+      `}
+  }
+`;
+
+export const AllChatButton = styled(DefaultButton)`
+  background: transparent;
+  color: rgba(119, 81, 81, 0.54);
+  border-color: rgba(119, 81, 81, 0.54);
+
+  @media screen and (min-width:768px){
+    display:none;
   }
 `;

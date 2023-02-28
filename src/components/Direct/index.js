@@ -12,6 +12,7 @@ import {
   DirectMessageText,
   DirectBottomBar,
   DirectBodyContent,
+  AllChatButton,
 } from "./styles";
 
 import { Block, Row } from "../../UI/Layout";
@@ -26,6 +27,7 @@ import Header from "../Header";
 import { useInput } from "../../hooks/useInput";
 
 import { ADD_MESSAGE } from "../../redux/direct/types";
+import { useWindowResize } from "../../hooks/useWindowResize";
 
 const Direct = () => {
   const { messages } = useSelector((state) => state.direct);
@@ -36,7 +38,11 @@ const Direct = () => {
   const [activeChat, setActiveChat] = useState(messages[0]);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const [isGeneralChatActive, setIsGeneralChatActive] = useState(false);
+
   const messagesBodyRef = React.useRef(null);
+
+  const isTabletWidth = useWindowResize() <= 768;
 
   React.useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -64,6 +70,8 @@ const Direct = () => {
     if (!searchableChat) return;
 
     setActiveChat(searchableChat);
+
+    if (isTabletWidth && isGeneralChatActive) setIsGeneralChatActive(false);
   };
 
   const handleSend = ({ chatId, text }) => {
@@ -94,9 +102,15 @@ const Direct = () => {
       <Header />
       <Container style={{ width: 1000 }}>
         <DirectContent>
-          <Text text="Chats" style={{ fontSize: 25, marginBottom: 25 }} bold />
-          <Row style={{ width: "100%" }}>
-            <DirectContentSidebar>
+          <Row center btw style={{ marginBottom: 25 }}>
+            <Text text="Chats" style={{ fontSize: 25 }} bold />
+            <AllChatButton
+              text="All chats"
+              onClick={() => setIsGeneralChatActive(!isGeneralChatActive)}
+            />
+          </Row>
+          <Row style={{ width: "100%", position: "relative" }}>
+            <DirectContentSidebar isGeneralChatActive={isGeneralChatActive}>
               <DirectSidebarList>
                 {messages?.map(({ id, user, data }) => (
                   <DirectSidebarItem
@@ -139,7 +153,10 @@ const Direct = () => {
                 ))}
               </DirectSidebarList>
             </DirectContentSidebar>
-            <DirectBodyContent ref={messagesBodyRef}>
+            <DirectBodyContent
+              ref={messagesBodyRef}
+              isGeneralChatActive={isGeneralChatActive}
+            >
               <Block as="ul" style={{ padding: 15 }}>
                 {messages[activeIndex]?.data.map(({ id, text, time, isMe }) => (
                   <DirectMessage key={id} as="li" position={isMe}>
