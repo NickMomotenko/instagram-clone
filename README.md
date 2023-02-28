@@ -35,13 +35,9 @@ PAGES
 
 	/profile - profile
 
-	/profile/edit/general - profile info
+	/profile/edit/general - edit profile info
 
-	/profile/edit/posts - user posts
-
-	/profile/edit/saved - user saved posts
-
-	/profile/edit/liked - user liked posts
+	/profile/edit/posts - edit user posts
 
 	/direct - Direct
 
