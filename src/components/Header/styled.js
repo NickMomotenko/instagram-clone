@@ -59,7 +59,7 @@ export const HeaderLogoutButton = styled(Block)`
   }
 `;
 
-export const HeaderSearchBar = styled(Block)`
+export const HeaderSearchBar = styled.div`
   position: relative;
 
   @media screen and (max-width: 480px) {

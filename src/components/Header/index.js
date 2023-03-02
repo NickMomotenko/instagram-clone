@@ -37,6 +37,7 @@ import Icon from "../../UI/Icon";
 
 import closeIcon from "../../assets/icons/close.png";
 import { useWindowResize } from "../../hooks/useWindowResize";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
@@ -49,7 +50,11 @@ const Header = () => {
 
   const isMobileSize = useWindowResize() <= 480;
 
+  const headerSearchPanelRef = React.useRef(null);
+
   const dispath = useDispatch();
+
+  useClickOutside(headerSearchPanelRef, () => onCrossButtonClick(false));
 
   React.useEffect(() => {
     searchInput?.value.length === 0
@@ -70,10 +75,10 @@ const Header = () => {
       : (document.body.style.overflow = "auto");
   }, [isBurgerActive.isActive]);
 
-  const onCrossButtonClick = (bool) => {
+  function onCrossButtonClick(bool) {
     searchInput.clearValue();
     isSearchLabelActive.setIsActive(bool);
-  };
+  }
 
   return (
     <HeaderWrapp>
@@ -84,7 +89,10 @@ const Header = () => {
             isActive={isBurgerActive.isActive}
             onClick={() => isBurgerActive.setIsActive(false)}
           />
-          <HeaderSearchBar isSearchLabelActive={isSearchLabelActive.isActive}>
+          <HeaderSearchBar
+            isSearchLabelActive={isSearchLabelActive.isActive}
+            ref={headerSearchPanelRef}
+          >
             <Row>
               <Input
                 value={searchInput?.value}
@@ -137,9 +145,7 @@ const Header = () => {
             )}
           </HeaderSearchBar>
           <Row center>
-            <HeaderSearchButton
-              onClick={() => onCrossButtonClick(true)}
-            >
+            <HeaderSearchButton onClick={() => onCrossButtonClick(true)}>
               <Icon url={searchIcon} fill="black" />
             </HeaderSearchButton>
             <HeaderLogoutButton>
