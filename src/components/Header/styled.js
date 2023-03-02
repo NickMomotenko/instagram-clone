@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Block, Row } from "../../UI/Layout";
 import Logo from "../Logo";
@@ -63,7 +63,29 @@ export const HeaderSearchBar = styled(Block)`
   position: relative;
 
   @media screen and (max-width: 480px) {
-    display: none;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    background: #fff;
+    padding: 8px 5%;
+    transition: 0.4s;
+
+    label {
+      flex: 1;
+    }
+
+    input {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    ${(props) =>
+      props.isSearchLabelActive &&
+      css`
+        top: 0;
+      `}
   }
 `;
 
@@ -73,4 +95,14 @@ export const HeaderSearchButton = styled.button`
   @media screen and (max-width: 480px) {
     visibility: visible;
   }
+`;
+
+export const HeaderInputCrossButton = styled.button`
+  margin-left: 15px;
+`;
+
+export const HeaderInputCrossButtonIcon = styled.img`
+  display: inline-block;
+  height: 15px;
+  width: 15px;
 `;

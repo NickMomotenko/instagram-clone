@@ -9,6 +9,8 @@ import {
   HeaderLogoutButton,
   HeaderSearchBar,
   HeaderSearchButton,
+  HeaderInputCrossButton,
+  HeaderInputCrossButtonIcon,
 } from "./styled";
 
 import { allDbUsers } from "../../redux/mockData";
@@ -33,12 +35,19 @@ import logoutIcon from "../../assets/icons/logout.png";
 import { LOGUT } from "../../redux/auth/types";
 import Icon from "../../UI/Icon";
 
+import closeIcon from "../../assets/icons/close.png";
+import { useWindowResize } from "../../hooks/useWindowResize";
+
 const Header = () => {
   const [searchUsers, setSearchUsers] = useState([]);
 
   const searchInput = useInput({ initialValue: "" });
+
   const isSearchBlock = useActive();
   const isBurgerActive = useActive();
+  const isSearchLabelActive = useActive();
+
+  const isMobileSize = useWindowResize() <= 480;
 
   const dispath = useDispatch();
 
@@ -61,6 +70,11 @@ const Header = () => {
       : (document.body.style.overflow = "auto");
   }, [isBurgerActive.isActive]);
 
+  const onCrossButtonClick = (bool) => {
+    searchInput.clearValue();
+    isSearchLabelActive.setIsActive(bool);
+  };
+
   return (
     <HeaderWrapp>
       <Container style={{ width: 1350 }}>
@@ -70,19 +84,34 @@ const Header = () => {
             isActive={isBurgerActive.isActive}
             onClick={() => isBurgerActive.setIsActive(false)}
           />
-          <HeaderSearchBar>
-            <Input
-              value={searchInput?.value}
-              onChange={searchInput?.onChange}
-              onFocus={searchInput?.onFocus}
-              placeholder="Search..."
-              icon={searchIcon}
-              noError
-            />
+          <HeaderSearchBar isSearchLabelActive={isSearchLabelActive.isActive}>
+            <Row>
+              <Input
+                value={searchInput?.value}
+                onChange={searchInput?.onChange}
+                onFocus={searchInput?.onFocus}
+                placeholder="Search..."
+                icon={searchIcon}
+                noError
+              />
+              {isMobileSize && (
+                <HeaderInputCrossButton
+                  onClick={() => onCrossButtonClick(false)}
+                >
+                  <HeaderInputCrossButtonIcon src={closeIcon} />
+                </HeaderInputCrossButton>
+              )}
+            </Row>
             {isSearchBlock.isActive && (
               <HeaderAllUser
                 as={searchUsers.length !== 0 ? "ul" : "div"}
                 isActive={isSearchBlock.isActive}
+                style={{
+                  left: isMobileSize && 0,
+                  right: isMobileSize && 0,
+                  margin: isMobileSize && "0 5%",
+                  width: isMobileSize && "auto",
+                }}
               >
                 {searchUsers.length !== 0 ? (
                   searchUsers?.map(
@@ -108,7 +137,9 @@ const Header = () => {
             )}
           </HeaderSearchBar>
           <Row center>
-            <HeaderSearchButton>
+            <HeaderSearchButton
+              onClick={() => onCrossButtonClick(true)}
+            >
               <Icon url={searchIcon} fill="black" />
             </HeaderSearchButton>
             <HeaderLogoutButton>
