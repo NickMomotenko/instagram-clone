@@ -23,10 +23,8 @@ const DirectSidebar = React.forwardRef(
     },
     ref
   ) => {
-    //   const directSidebarRef = React.useRef(null);
-
     return (
-      <DirectContentSidebar isGeneralChatActive={isGeneralChatActive} ref={ref}>
+      <DirectContentSidebar isGeneralChatActive={isGeneralChatActive}>
         <DirectSidebarList>
           {messages?.map(({ id, user, data }) => (
             <DirectSidebarItem

@@ -43,25 +43,8 @@ const Direct = () => {
   const [isGeneralChatActive, setIsGeneralChatActive] = useState(false);
 
   const messagesBodyRef = React.useRef(null);
-  const directSidebarRef = React.useRef(null);
 
   const isTabletWidth = useWindowResize() <= 768;
-
-  React.useEffect(() => {
-    document.addEventListener("click", handleClickOutsidePost);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutsidePost);
-    };
-  }, []);
-
-  const handleClickOutsidePost = (e) => {
-    if (directSidebarRef?.current?.contains(e.target)) {
-      return;
-    } else {
-      setIsGeneralChatActive(false);
-    }
-  };
 
   React.useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -135,7 +118,6 @@ const Direct = () => {
               onChatItemClick={onChatItemClick}
               setIsGeneralChatActive={setIsGeneralChatActive}
               isGeneralChatActive={isGeneralChatActive}
-              ref={directSidebarRef}
             />
             <DirectBodyContent
               ref={messagesBodyRef}
