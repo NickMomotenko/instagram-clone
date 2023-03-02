@@ -30,14 +30,12 @@ const CreateNewAccount = () => {
   const { step, stepRef, incrementStep, decrementStep } = useStepper({
     finishStep: 2,
   });
-  const email = useInput();
-  const password = useInput();
-  const nickname = useInput();
-  const info = useInput();
+  const email = useInput({ initialValue: "" });
+  const password = useInput({ initialValue: "" });
+  const nickname = useInput({ initialValue: "" });
+  const info = useInput({ initialValue: "" });
 
   const dispath = useDispatch();
-
-  // const { signUp } = useAuth();
 
   const { handleSubmit } = useForm(generateSubmitFunction());
 

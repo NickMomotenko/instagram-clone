@@ -14,7 +14,8 @@ import { authRoutes, baseRoutes } from "../../helpers/base-routes";
 import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const password = useInput();
+  const password = useInput({ initialValue: "" });
+  
   const { handleSubmit } = useForm(() =>
     console.log("forgot pass is ready to submit")
   );

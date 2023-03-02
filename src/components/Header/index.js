@@ -153,7 +153,6 @@ const Header = () => {
                 icon={logoutIcon}
                 onClick={(e) => {
                   e.preventDefault();
-                  // logOut();
                   dispath({ type: LOGUT });
                 }}
               />

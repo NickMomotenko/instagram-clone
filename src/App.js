@@ -40,11 +40,8 @@ const App = () => {
 
   React.useEffect(() => {
     if (isAuth) {
-      // navigate(`${baseRoutes.base}`);
-    } else {
-      // navigate(`${baseRoutes.direct}`);
-      // navigate(`${baseRoutes.profile}`);
-    }
+      navigate(`${baseRoutes.base}`);
+    } else navigate(`${baseRoutes.login}`);
   }, [isAuth]);
 
   // delay timer in sec
@@ -78,7 +75,7 @@ const App = () => {
             </Route>
           </Route>
         </Route>
-        {/* <Route path="*" element={<Navigate to={baseRoutes.login} replace />} /> */}
+        <Route path="*" element={<Navigate to={baseRoutes.login} replace />} />
       </Routes>
     </AppWrapp>
   );
