@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { baseRoutes } from "../../helpers/base-routes";
 import { LOGIN, LOGUT, SIGNUP, SET_LOCATION_PATH } from "./types";
 
 const initialState = {
@@ -25,7 +25,7 @@ export const authReducer = (state = initialState, action) => {
     }
 
     case LOGUT: {
-      return { ...state, isAuth: false };
+      return { ...state, locationPath: `${baseRoutes.login}`, isAuth: false };
     }
 
     case SIGNUP: {

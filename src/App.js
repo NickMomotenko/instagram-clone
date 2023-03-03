@@ -48,7 +48,7 @@ const App = () => {
 
   React.useEffect(() => {
     if (!isAuth) {
-      navigate(`${baseRoutes.login}`);
+      navigate(locationPath === "/auth" ? `${baseRoutes.login}` : locationPath);
     } else {
       navigate(locationPath === "/auth" ? `${baseRoutes.base} ` : locationPath);
     }
