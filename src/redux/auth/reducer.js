@@ -1,7 +1,9 @@
-import { LOGIN, LOGUT, SIGNUP } from "./types";
+import { useLocation } from "react-router-dom";
+import { LOGIN, LOGUT, SIGNUP, SET_LOCATION_PATH } from "./types";
 
 const initialState = {
   isAuth: false,
+  locationPath: window.location.pathname,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -28,6 +30,10 @@ export const authReducer = (state = initialState, action) => {
 
     case SIGNUP: {
       return state;
+    }
+
+    case SET_LOCATION_PATH: {
+      return { ...state, locationPath: action.payload };
     }
 
     default:
