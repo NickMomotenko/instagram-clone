@@ -1,7 +1,13 @@
 import React from "react";
 
 import styled from "styled-components";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import { useActive } from "./hooks/useActive";
 import { usePopup } from "./hooks/popup";
@@ -20,10 +26,11 @@ import ForgotPassword from "./components/LoginForm/ForgotPassword";
 import CreateNewAccount from "./components/LoginForm/CreateNewAccount";
 
 import { baseRoutes, authRoutes } from "./helpers/base-routes";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Edit from "./components/Edit";
 import EditGeneral from "./components/Edit/EditGeneral";
 import EditPosts from "./components/Edit/EditPosts";
+import { SET_LOCATION_PATH } from "./redux/auth/types";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -31,18 +38,25 @@ const AppWrapp = styled.div`
 `;
 
 const App = () => {
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, locationPath } = useSelector((state) => state.auth);
 
   const isPreloaderActive = useActive();
   const popup = usePopup();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (isAuth) {
-      navigate(`${baseRoutes.base}`);
-    } else navigate(`${baseRoutes.login}`);
-  }, [isAuth]);
+    if (!isAuth) {
+      navigate(`${baseRoutes.login}`);
+    } else {
+      navigate(locationPath === "/auth" ? `${baseRoutes.base} ` : locationPath);
+    }
+  }, [isAuth, locationPath]);
+
+  React.useEffect(() => {
+    dispatch({ type: SET_LOCATION_PATH, payload: window.location.pathname });
+  }, [window.location.pathname]);
 
   // delay timer in sec
   const delayTimer = 3;

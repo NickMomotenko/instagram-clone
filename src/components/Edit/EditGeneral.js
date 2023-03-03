@@ -157,7 +157,7 @@ const EditGeneral = () => {
                 onMoreButtonClick();
               }}
               text={moreButtonText}
-              bgColor="#f8fbff"
+              bgcolor="#f8fbff"
               style={{ color: "#6d747e", border: "1px solid #6d747e" }}
             />
           </EditMore>

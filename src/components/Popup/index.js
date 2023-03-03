@@ -55,14 +55,14 @@ const Popup = ({ isActive, setIsActive }) => {
             // type ????
             // type="image"
             text="Add photos"
-            bgColor="transparent"
+            bgcolor="transparent"
             style={{ border: "1px solid #9d6b6b", color: "#9d6b6b" }}
           />
           <DefaultButton
             // type ????
             // type="image"
             text="Add videos"
-            bgColor="transparent"
+            bgcolor="transparent"
             style={{
               border: "1px solid #525ab7",
               color: "#525ab7",
@@ -93,7 +93,7 @@ const Popup = ({ isActive, setIsActive }) => {
             <DefaultButton
               text="Cancel"
               fullWidth
-              bgColor="#0095f6"
+              bgcolor="#0095f6"
               onClick={cancelClick}
             />
           </Row>

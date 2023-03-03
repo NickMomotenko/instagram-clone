@@ -9,7 +9,7 @@ const DefaultButtonWrapp = styled.button`
   color: #fff;
   font-size: 14px;
   font-weight: 600;
-  display:inline-block;
+  display: inline-block;
 
   &:disabled {
     background-color: #eceaea;
@@ -23,9 +23,9 @@ const DefaultButtonWrapp = styled.button`
     `}
 
   ${(props) =>
-    props.bgColor &&
+    props.bgcolor &&
     css`
-      background-color: ${props.bgColor};
+      background-color: ${props.bgcolor};
     `}
 `;
 

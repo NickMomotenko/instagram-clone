@@ -34,7 +34,7 @@ const PostComments = ({ post, isCommentsBarActive, userId, onClick }) => {
   const noCommentsText = "No comments.. Be first ;)";
 
   const addButtonText = isChangeComment ? "Change" : "Add";
-  const bgColorAddButton = isChangeComment && "#b4384c";
+  const bgcolorAddButton = isChangeComment && "#b4384c";
 
   const findComment = (comment) => {
     const { text } = comment;
@@ -143,7 +143,7 @@ const PostComments = ({ post, isCommentsBarActive, userId, onClick }) => {
           />
           <DefaultButton
             text={addButtonText}
-            bgColor={bgColorAddButton}
+            bgcolor={bgcolorAddButton}
             onClick={addButtonClickFunction}
             style={{ marginLeft: 5, padding: "7px 15px" }}
           />

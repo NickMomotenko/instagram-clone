@@ -62,7 +62,7 @@ const LoginBlock = () => {
         text="Login"
         type="submit"
         fullWidth
-        bgColor="#0095f6"
+        bgcolor="#0095f6"
         style={{ marginTop: 15 }}
       />
       <Row center style={{ marginTop: 20 }}>
@@ -76,7 +76,7 @@ const LoginBlock = () => {
           as={Link}
           to={authRoutes.create}
           text="Create a new account"
-          bgColor="#0095f6"
+          bgcolor="#0095f6"
         />
       </LoginRow>
       <LoginRow style={{ marginTop: 10 }}>

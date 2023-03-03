@@ -44,7 +44,7 @@ const ForgotPassword = () => {
         <DefaultButton
           text="Send Login Link"
           fullWidth
-          bgColor="#0095f6"
+          bgcolor="#0095f6"
           style={{ marginTop: 15 }}
           type="submit"
         />

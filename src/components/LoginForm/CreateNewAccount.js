@@ -71,7 +71,7 @@ const CreateNewAccount = () => {
             text="Next"
             type="submit"
             fullWidth
-            bgColor="#0095f6"
+            bgcolor="#0095f6"
           />
         );
       case 2:
@@ -84,13 +84,13 @@ const CreateNewAccount = () => {
                 decrementStep();
               }}
               fullWidth
-              bgColor="#f60062"
+              bgcolor="#f60062"
             />
             <DefaultButton
               text="Next"
               type="submit"
               fullWidth
-              bgColor="#0095f6"
+              bgcolor="#0095f6"
               style={{ marginLeft: 15 }}
             />
           </>

@@ -1,9 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import storeData from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { PersistGate } from "redux-persist/integration/react";
 import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
@@ -11,10 +12,14 @@ import "./index.css";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
+const { store, persistor } = storeData();
+
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </BrowserRouter>
 );

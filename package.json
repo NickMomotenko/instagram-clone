@@ -16,6 +16,7 @@
     "react-svg": "^15.1.16",
     "react-swipeable": "^7.0.0",
     "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
