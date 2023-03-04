@@ -27,18 +27,17 @@ import Header from "../Header";
 import { useInput } from "../../hooks/useInput";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
-import { ADD_MESSAGE } from "../../redux/direct/types";
+import { ADD_MESSAGE, SET_ACTIVE_CHAT } from "../../redux/direct/types";
 import { useWindowResize } from "../../hooks/useWindowResize";
 import DirectSidebar from "./DirectSidebar";
 
 const Direct = () => {
-  const { messages } = useSelector((state) => state.direct);
+  const { messages, activeChatIndex, activeChat } = useSelector(
+    (state) => state.direct
+  );
   const {
     authUser: { user },
   } = useSelector((state) => state.authUser);
-
-  const [activeChat, setActiveChat] = useState(messages[0]);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const [isGeneralChatActive, setIsGeneralChatActive] = useState(false);
 
@@ -53,14 +52,8 @@ const Direct = () => {
   }, []);
 
   React.useEffect(() => {
-    const index = messages.indexOf(activeChat);
-    setActiveIndex(index);
     normalizeDirectContentBodyScroll();
-  }, [activeChat]);
-
-  React.useEffect(() => {
-    normalizeDirectContentBodyScroll();
-  }, [messages]);
+  }, [messages, activeChat]);
 
   const sendInput = useInput({ initialValue: "" });
 
@@ -71,24 +64,21 @@ const Direct = () => {
 
     if (!searchableChat) return;
 
-    setActiveChat(searchableChat);
+    dispatch({ type: SET_ACTIVE_CHAT, payload: searchableChat });
 
     if (isTabletWidth && isGeneralChatActive) setIsGeneralChatActive(false);
   };
 
-  const handleSend = ({ chatId, text }) => {
+  const handleSend = (text) => {
     if (!text) return;
 
-    dispatch({ type: ADD_MESSAGE, payload: { chatId, text } });
+    dispatch({ type: ADD_MESSAGE, payload: { chatId: activeChat?.id, text } });
     sendInput.clearValue();
   };
 
   const sendInputOnKeyDown = (e) => {
     if (e.keyCode === 13) {
-      handleSend({
-        chatId: activeChat?.id,
-        text: sendInput?.value,
-      });
+      handleSend(sendInput?.value);
     }
   };
 
@@ -124,32 +114,34 @@ const Direct = () => {
               isGeneralChatActive={isGeneralChatActive}
             >
               <Block as="ul" style={{ padding: 15 }}>
-                {messages[activeIndex]?.data.map(({ id, text, time, isMe }) => (
-                  <DirectMessage key={id} as="li" position={isMe}>
-                    <Block
-                      style={{
-                        marginRight: isMe === false && 15,
-                        marginLeft: isMe ? 15 : 0,
-                      }}
-                    >
-                      <Avatar
-                        url={isMe ? user?.avatar : activeChat?.user?.avatar}
-                        fullname={
-                          isMe ? user?.fullname : activeChat?.user?.fullname
-                        }
-                        size={40}
-                      />
-                    </Block>
-                    <DirectMessageText isMe={isMe}>
-                      <Text text={text} color="#fff" />
-                      <Text
-                        text={time}
-                        style={{ fontSize: 11, alignSelf: "flex-end" }}
-                        color="#fff"
-                      />
-                    </DirectMessageText>
-                  </DirectMessage>
-                ))}
+                {messages[activeChatIndex]?.data.map(
+                  ({ id, text, time, isMe }) => (
+                    <DirectMessage key={id} as="li" position={isMe}>
+                      <Block
+                        style={{
+                          marginRight: isMe === false && 15,
+                          marginLeft: isMe ? 15 : 0,
+                        }}
+                      >
+                        <Avatar
+                          url={isMe ? user?.avatar : activeChat?.user?.avatar}
+                          fullname={
+                            isMe ? user?.fullname : activeChat?.user?.fullname
+                          }
+                          size={40}
+                        />
+                      </Block>
+                      <DirectMessageText isMe={isMe}>
+                        <Text text={text} color="#fff" />
+                        <Text
+                          text={time}
+                          style={{ fontSize: 11, alignSelf: "flex-end" }}
+                          color="#fff"
+                        />
+                      </DirectMessageText>
+                    </DirectMessage>
+                  )
+                )}
               </Block>
               <DirectBottomBar>
                 <Row>
@@ -163,12 +155,7 @@ const Direct = () => {
                   />
                   <DefaultButton
                     text="Send"
-                    onClick={() =>
-                      handleSend({
-                        chatId: activeChat?.id,
-                        text: sendInput?.value,
-                      })
-                    }
+                    onClick={() => handleSend(sendInput?.value)}
                     style={{ marginLeft: 21 }}
                   />
                 </Row>

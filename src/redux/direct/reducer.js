@@ -1,9 +1,16 @@
 import { messagesDb } from "../../context/mockData";
 
-import { ADD_MESSAGE , DELETE_MESSAGE, CHANGE_MESSAGE } from "./types";
+import {
+  ADD_MESSAGE,
+  DELETE_MESSAGE,
+  CHANGE_MESSAGE,
+  SET_ACTIVE_CHAT,
+} from "./types";
 
 const initialState = {
   messages: messagesDb,
+  activeChatIndex: 0,
+  activeChat: messagesDb[0],
 };
 
 export const directReducer = (state = initialState, action) => {
@@ -38,9 +45,19 @@ export const directReducer = (state = initialState, action) => {
       return { ...state, messages: [...updatedData] };
     }
 
-    case DELETE_MESSAGE:{}
+    case DELETE_MESSAGE: {
+    }
 
-    case CHANGE_MESSAGE:{}
+    case CHANGE_MESSAGE: {
+    }
+
+    case SET_ACTIVE_CHAT: {
+      return {
+        ...state,
+        activeChat: action.payload,
+        activeChatIndex: state.messages.indexOf(action.payload),
+      };
+    }
 
     default:
       return state;
