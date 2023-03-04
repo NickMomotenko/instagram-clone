@@ -7,6 +7,7 @@ import { postsReducer } from "./posts/reducer";
 import { userReducer } from "./user/reducer";
 import { authReducer } from "./auth/reducer";
 import { directReducer } from "./direct/reducer";
+import { appReducer } from "./app/reducer";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 };
 
 const reducer = combineReducers({
+  app: appReducer,
   posts: postsReducer,
   authUser: userReducer,
   auth: authReducer,

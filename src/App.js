@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 
 import { useActive } from "./hooks/useActive";
-import { usePopup } from "./hooks/popup";
 
 import Login from "./pages/Login";
 import Main from "./pages/Main/Main";
@@ -20,17 +19,20 @@ import Preloader from "./pages/Preloader";
 import Profile from "./components/Profile";
 import Posts from "./components/Posts";
 import Direct from "./components/Direct";
-
 import LoginBlock from "./components/LoginForm/LoginBlock";
 import ForgotPassword from "./components/LoginForm/ForgotPassword";
 import CreateNewAccount from "./components/LoginForm/CreateNewAccount";
-
-import { baseRoutes, authRoutes } from "./helpers/base-routes";
-import { useDispatch, useSelector } from "react-redux";
 import Edit from "./components/Edit";
 import EditGeneral from "./components/Edit/EditGeneral";
 import EditPosts from "./components/Edit/EditPosts";
+
+import { baseRoutes, authRoutes } from "./helpers/base-routes";
+
+import { useDispatch, useSelector } from "react-redux";
+
+
 import { SET_LOCATION_PATH } from "./redux/auth/types";
+import { SET_PRELOADER_STATUS } from "./redux/app/types";
 
 const AppWrapp = styled.div`
   height: 100%;
@@ -39,9 +41,9 @@ const AppWrapp = styled.div`
 
 const App = () => {
   const { isAuth, locationPath } = useSelector((state) => state.auth);
+  const { isPreloaderActive } = useSelector((state) => state.app);
 
-  const isPreloaderActive = useActive();
-  const popup = usePopup();
+  const popup = useActive();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -62,19 +64,23 @@ const App = () => {
   const delayTimer = 3;
 
   React.useEffect(() => {
-    setTimeout(() => isPreloaderActive.setIsActive(true), delayTimer * 1000);
+    dispatch({ type: SET_PRELOADER_STATUS, payload: false });
+
+    setTimeout(() => {
+      dispatch({ type: SET_PRELOADER_STATUS, payload: true });
+    }, delayTimer * 1000);
   }, []);
 
   return (
     <AppWrapp>
-      {/* <Preloader isActive={isPreloaderActive.isActive} /> */}
+      {/* <Preloader isActive={isPreloaderActive} /> */}
 
       <Routes>
         <Route path={baseRoutes.stories} element={<Stories />} />
         <Route path={baseRoutes.direct} element={<Direct />} />
         <Route
           path={baseRoutes.login}
-          element={<Login isPreloaderActive={isPreloaderActive.isActive} />}
+          element={<Login isPreloaderActive={isPreloaderActive} />}
         >
           <Route path="" element={<LoginBlock />} />
           <Route path={authRoutes.create} element={<CreateNewAccount />} />
